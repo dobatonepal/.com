@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dobato Nepal — Site Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F0E8; --ink:#20241F; --ink-soft:#4A4F45;
+    --marigold:#D98B24; --marigold-deep:#B5701A;
+    --indigo:#2E3A55; --indigo-deep:#1D263A; --pine:#4F6B4E; --pine-soft:#DCE6D4;
+    --line:#D8D3C4; --white:#FBFAF6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Work Sans',-apple-system,sans-serif;line-height:1.55;}
+  h1,h2{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-0.01em;}
+  code{font-family:'IBM Plex Mono',monospace;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;font-size:0.9em;}
+  .wrap{max-width:800px;margin:0 auto;padding:0 24px 120px;}
+
+  .topbar{background:var(--indigo-deep);color:#fff;padding:36px 24px 40px;}
+  .topbar-inner{max-width:800px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .brand svg{flex-shrink:0;}
+  .brand span{font-family:Fraunces,serif;font-size:17px;font-weight:600;color:#C9A15A;letter-spacing:0.02em;}
+  .topbar h1{font-size:28px;margin:0 0 10px;color:#fff;}
+  .topbar p{color:#C7CCD8;font-size:14.5px;max-width:540px;margin:0;line-height:1.6;}
+
+  .instructions{background:#F3DFB8;border-radius:10px;padding:20px 22px;margin:-20px 0 32px;font-size:13.5px;color:#5a4315;
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);}
+  .instructions strong{display:block;margin-bottom:8px;font-size:14px;}
+  .instructions ol{margin:0;padding-left:20px;}
+  .instructions li{margin-bottom:5px;}
+
+  .card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:30px 28px;margin-top:22px;}
+  .card-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+  .card-head .num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--marigold-deep);font-weight:600;}
+  .card h2{font-size:19px;margin:0;}
+  .card > p.help{color:var(--ink-soft);font-size:13.5px;margin:6px 0 22px;line-height:1.55;}
+
+  label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  input[type=text], input[type=url], textarea, select{
+    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:6px;
+    font:inherit;font-size:14px;background:var(--white);margin-bottom:18px;color:var(--ink);
+  }
+  input:focus, textarea:focus, select:focus{outline:2px solid var(--indigo); outline-offset:1px; border-color:var(--indigo);}
+  textarea{resize:vertical;min-height:70px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+  .item{border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:14px;background:var(--paper);}
+  .item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .item-top span{font-size:11.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;}
+  .item-actions{display:flex;gap:4px;}
+  .item-actions button{background:var(--white);border:1px solid var(--line);border-radius:5px;cursor:pointer;
+    font-size:13px;width:28px;height:28px;color:var(--ink-soft);}
+  .item-actions button:hover{color:var(--ink);border-color:var(--ink-soft);}
+  .toggle-row{display:flex;align-items:center;gap:9px;margin-bottom:0;}
+  .toggle-row input{width:auto;margin:0;accent-color:var(--indigo-deep);}
+  .toggle-row label{margin:0;font-weight:500;font-size:13.5px;}
+
+  .add-btn{background:var(--white);border:1.5px dashed var(--line);border-radius:8px;padding:12px;width:100%;
+    text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all 0.15s;}
+  .add-btn:hover{border-color:var(--marigold);color:var(--marigold-deep);background:#FFFBF3;}
+
+  .publish-bar{position:sticky;bottom:0;background:var(--indigo-deep);padding:18px 24px;text-align:center;
+    box-shadow:0 -6px 24px rgba(0,0,0,0.18);}
+  .download-btn{background:var(--marigold);color:#221701;border:none;padding:15px 30px;border-radius:7px;
+    font:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+  .download-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+  .download-hint{color:#98A1B8;font-size:12.5px;margin-top:9px;}
+  .status{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:6px;display:none;max-width:420px;margin-left:auto;margin-right:auto;}
+  .status.ok{display:block;background:var(--pine-soft);color:var(--pine);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 26 26"><path d="M13 2 L13 24 M2 13 L24 13" stroke="#D98B24" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="13" r="4" fill="#D98B24"/></svg>
+      <span>DOBATO NEPAL</span>
+    </div>
+    <h1>Site Editor</h1>
+    <p>Update your homepage message, social links, articles, and videos — no sign-in, no code, nothing installed. Everything happens right here in this browser tab.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="instructions">
+    <strong>How publishing works</strong>
+    <ol>
+      <li>Make your edits below.</li>
+      <li>Click <strong>Download Updated Website</strong> — this saves a new <code>index.html</code> to your computer.</li>
+      <li>On GitHub, open your repository, delete the old <code>index.html</code>, and upload the new one.</li>
+      <li>Your site updates automatically within a minute or two.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">01</span><h2>Homepage Message</h2></div>
+    <p class="help">The headline and message people see first when they land on your site.</p>
+    <label for="f-eyebrow">Small label above the headline</label>
+    <input type="text" id="f-eyebrow">
+
+    <div class="row">
+      <div>
+        <label for="f-h1">Headline — line 1</label>
+        <input type="text" id="f-h1">
+      </div>
+      <div>
+        <label for="f-h2">Headline — line 2 (highlighted)</label>
+        <input type="text" id="f-h2">
+      </div>
+    </div>
+
+    <label for="f-sub">Subheading</label>
+    <textarea id="f-sub"></textarea>
+
+    <div class="row">
+      <div>
+        <label for="f-btn1">Main button text</label>
+        <input type="text" id="f-btn1">
+      </div>
+      <div>
+        <label for="f-btn2">Second button text</label>
+        <input type="text" id="f-btn2">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">02</span><h2>Articles &amp; Updates</h2></div>
+    <p class="help">Post work updates, articles, or daily notes. Each one appears as a card near the top of your homepage, newest first. This section stays hidden until you add at least one and turn it on.</p>
+    <div id="updates-list"></div>
+    <button class="add-btn" type="button" onclick="addUpdate()">+ Add an article or update</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">03</span><h2>Social Media</h2></div>
+    <p class="help">Pick a platform, paste your profile link, and turn it on. Use up/down arrows to set the order icons appear in your footer.</p>
+    <div id="social-list"></div>
+    <button class="add-btn" type="button" onclick="addSocial()">+ Add a social media link</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">04</span><h2>YouTube Videos &amp; Posts</h2></div>
+    <p class="help">Paste a link to a YouTube video, YouTube playlist, or a post from X, Instagram, Facebook, or TikTok — it embeds automatically. Hidden until you add at least one and turn it on.</p>
+    <div id="embed-list"></div>
+    <button class="add-btn" type="button" onclick="addEmbed()">+ Add a video or post</button>
+  </div>
+
+</div>
+
+<div class="publish-bar">
+  <button class="download-btn" onclick="downloadSite()">Download Updated Website</button>
+  <div class="download-hint">Saves a new index.html — upload it to GitHub to publish your changes.</div>
+  <div id="status" class="status"></div>
+</div>
+
+<script>
+const CONTENT = {
+  "site": {
+    "siteName": "Dobato Nepal",
+    "tagline": "Think Globally. Work Locally.",
+    "description": "Dobato Nepal brings global knowledge in education and health together with trusted local partners across Nepal — free, at the point of use.",
+    "url": "https://your-username.github.io/dobato-website/",
+    "language": "en",
+    "themeColor": "#1D263A",
+    "logoText": "Dobato Nepal",
+    "logoMeaning": "Dobato Nepal — दोबाटो — means the point where two roads meet.",
+    "contactEmail": "hello@example.org",
+    "socialLinks": [
+      {
+        "platform": "facebook",
+        "url": "",
+        "enabled": false
+      },
+      {
+        "platform": "instagram",
+        "url": "",
+        "enabled": false
+      },
+      {
+        "platform": "youtube",
+        "url": "",
+        "enabled": false
+      }
+    ],
+    "seo": {
+      "defaultTitle": "Dobato Nepal — Think Globally. Work Locally.",
+      "defaultDescription": "Free education and health guidance in Nepal, delivered through trusted local partners.",
+      "ogImage": "/assets/images/og-cover.jpg"
+    }
+  },
+  "nav": {
+    "links": [
+      {
+        "label": "Our Approach",
+        "href": "#approach"
+      },
+      {
+        "label": "Programs",
+        "href": "#programs"
+      },
+      {
+        "label": "Global Foundations",
+        "href": "#network"
+      },
+      {
+        "label": "Trust",
+        "href": "#trust"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      }
+    ],
+    "cta": {
+      "label": "Get Involved",
+      "href": "#involve"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Free education & health support · Nepal",
+      "headlineLine1": "This isn't our program.",
+      "headlineLine2": "It's yours.",
+      "subhead": "Dobato Nepal connects your family with teachers and health workers your community already trusts — real people, real answers, never a bill. Because that's simply what neighbours do for each other.",
+      "ctaPrimary": {
+        "label": "Bring Dobato Nepal to your community →",
+        "href": "#involve"
+      },
+      "ctaSecondary": {
+        "label": "See how it works",
+        "href": "#approach"
+      }
+    },
+    "stats": [
+      {
+        "number": "770,000",
+        "label": "children entirely outside formal schooling nationally — National Statistics Office"
+      },
+      {
+        "number": "9.5%",
+        "label": "of poverty-line households have home internet — NSO Living Standards Survey"
+      },
+      {
+        "number": "51,000+",
+        "label": "community health volunteers already working across Nepal's wards — Ministry of Health"
+      }
+    ],
+    "approach": {
+      "kicker": "Our Approach",
+      "title": "Global standards. Local hands.",
+      "intro": "Dobato Nepal isn't built around a single outside idea of what a village needs. It's built around a simple division of labour: we bring the knowledge that travels well, and local partners bring everything that has to stay local.",
+      "global": {
+        "label": "Think Globally",
+        "title": "What we bring from the wider world",
+        "items": [
+          "Structured learning materials aligned with recognised foundational-literacy and numeracy frameworks used in education systems worldwide",
+          "Health guidance and triage structured around internationally recognised primary-care and referral protocols",
+          "Lessons drawn from community health worker programs that have worked at scale in South Asia and beyond",
+          "Digital tools that keep the quality of guidance consistent, whether the first village or the fiftieth"
+        ]
+      },
+      "local": {
+        "label": "Work Locally",
+        "title": "What always stays in local hands",
+        "items": [
+          "Who delivers it — a health post, a teacher, a community volunteer your family already knows and trusts",
+          "The language, tone, and pace it's delivered in, set by the community, never dictated from outside",
+          "Which village or ward goes first — decided by need and readiness on the ground, not by convenience",
+          "Ownership of the outcome — the goal is a community that's stronger, not a community that depends on us"
+        ]
+      },
+      "quote": "The idea can come from anywhere. The trust has to come from home."
+    },
+    "problem": {
+      "kicker": "Why This Design",
+      "title": "The people who need this most are the hardest to reach with an outside solution.",
+      "intro": "Nepal's progress on access looks strong nationally — until you sort it by income and geography. That single fact shapes everything about how Dobato Nepal works.",
+      "cards": [
+        {
+          "label": "01 — REACH",
+          "big": "14%",
+          "caption": "household internet access in Karnali Province, versus 79.3% in Kathmandu — National Statistics Office, Living Standards Survey. The gap sits exactly where the need is highest."
+        },
+        {
+          "label": "02 — LEARNING",
+          "big": "28.1%",
+          "caption": "of school dropouts cite poor learning outcomes as the reason — the single largest cause, ahead of child labour or early marriage. NLSS 2024."
+        },
+        {
+          "label": "03 — EQUITY",
+          "big": "11% vs 22%",
+          "caption": "secondary-school completion rate for low-income children versus wealthier children — National Statistics Office."
+        }
+      ]
+    },
+    "model": {
+      "kicker": "How It Reaches A Household",
+      "title": "A trusted local partner first, technology second.",
+      "intro": "No app to download, no data plan required to start. A local partner already known to the community carries Dobato Nepal into homes that outside programs usually miss.",
+      "nodes": [
+        {
+          "letter": "D",
+          "title": "Dobato Nepal",
+          "description": "Structured learning plans and health-triage guidance, built to internationally informed standards and kept current centrally."
+        },
+        {
+          "letter": "P",
+          "title": "Local Partner",
+          "description": "A community health volunteer, teacher, or ward contact — already known and trusted — delivers it by voice, SMS, or in person."
+        },
+        {
+          "letter": "F",
+          "title": "Family",
+          "description": "Gets a straight answer, a next step, or a referral to a real clinic or school resource — no data connection required."
+        }
+      ],
+      "footnote": "The line we don't cross: Dobato Nepal does not diagnose or replace a doctor or teacher. Every health interaction ends in triage and a named referral, never a prescription. Every learning interaction supports a real classroom, never replaces one."
+    }
+  },
+  "programs": {
+    "kicker": "What We Run",
+    "title": "Two programs, each with one narrow, honest promise.",
+    "intro": "We'd rather do one thing well in one district than everything, thinly, everywhere.",
+    "items": [
+      {
+        "tag": "Education",
+        "style": "edu",
+        "title": "Learning Catch-Up",
+        "description": "For children who are enrolled but falling behind grade-level Nepali and math — the gap most programs miss, and government data shows is the single biggest driver of dropout.",
+        "bullets": [
+          "Weekly personalised practice sets, delivered through the local volunteer or teacher",
+          "Early dropout-risk signals shared directly with the school, not just collected as data",
+          "Designed to work entirely offline after a weekly sync — no student device required",
+          "Built around recognised foundational literacy and numeracy benchmarks, adapted to the local curriculum"
+        ],
+        "journey": [
+          "Teacher flags a child falling behind in class",
+          "Weekly practice set matched to that child's gap",
+          "Volunteer checks progress, reports back monthly"
+        ]
+      },
+      {
+        "tag": "Health",
+        "style": "health",
+        "title": "Ask Before It's Urgent",
+        "description": "A judgment-free way to ask a health question and know whether it's a home-care matter or a \"go now\" matter — before a small problem becomes an emergency.",
+        "bullets": [
+          "Voice or SMS triage line run through a trained community health volunteer",
+          "Direct referral to a named partner health post — the handoff is tracked, not just the call",
+          "Plain-language health literacy content, reviewed by a licensed clinician before release",
+          "Built around internationally recognised primary-care triage principles, adapted to what's actually available locally"
+        ],
+        "journey": [
+          "Family calls or messages the local volunteer",
+          "Volunteer runs a short triage conversation",
+          "Home-care guidance, or a direct referral to the health post"
+        ]
+      }
+    ]
+  },
+  "foundations": {
+    "kicker": "Global Foundations, Applied Locally",
+    "title": "We didn't invent this from nothing — we adapted what already works.",
+    "intro": "Dobato Nepal's program design draws on established, publicly documented approaches from education and public health — reshaped for Nepal's specific realities, not copied in from elsewhere.",
+    "cards": [
+      {
+        "label": "Education",
+        "title": "Foundational Learning Frameworks",
+        "description": "Grounded in widely used approaches to early literacy and numeracy assessment and remediation, adapted to Nepal's own curriculum and grade benchmarks."
+      },
+      {
+        "label": "Health",
+        "title": "Community Health Worker Models",
+        "description": "Informed by decades of evidence from community health worker programs across South Asia and Africa — and built to work alongside Nepal's own existing volunteer health network, not around it."
+      },
+      {
+        "label": "Delivery",
+        "title": "Low-Bandwidth, Human-First Design",
+        "description": "Designed for the connectivity Nepal's poorest households actually have — voice and SMS first — not the connectivity a head office assumes they have."
+      }
+    ]
+  },
+  "involve": {
+    "kicker": "Get Involved",
+    "title": "Three ways to be part of Dobato Nepal.",
+    "cards": [
+      {
+        "number": "1",
+        "title": "Partner Locally",
+        "description": "Run a health post, school, or community program? Become the trusted local partner Dobato Nepal works through in your area.",
+        "linkLabel": "Start a pilot conversation →",
+        "linkHref": "#"
+      },
+      {
+        "number": "2",
+        "title": "Support From Anywhere",
+        "description": "Based abroad or in the city? Diaspora and remote supporters help fund pilots and connect us with the right local contacts.",
+        "linkLabel": "See how to support →",
+        "linkHref": "#"
+      },
+      {
+        "number": "3",
+        "title": "Bring It To Your Family",
+        "description": "We work through one local partner at a time. Tell us your village or ward, and we'll let you know when Dobato Nepal reaches you.",
+        "linkLabel": "Check if we're near you →",
+        "linkHref": "#"
+      }
+    ],
+    "splitCta": {
+      "families": {
+        "title": "Need this for your family?",
+        "description": "We work through one local partner at a time. Tell us your village or ward, and we'll let you know if — or when — Dobato Nepal is there.",
+        "buttonLabel": "Check if we're near you",
+        "buttonHref": "#"
+      },
+      "partners": {
+        "title": "Run a school, clinic, or health post?",
+        "description": "We're looking for our first partners: one health post, one community school, one panel of volunteers. Pilot programs start small and stay local.",
+        "buttonLabel": "Start a pilot conversation",
+        "buttonHref": "#"
+      }
+    }
+  },
+  "trust": {
+    "kicker": "Trust & Transparency",
+    "title": "We'll tell you exactly what Dobato Nepal is — and isn't — registered as.",
+    "intro": "Free doesn't mean unaccountable. Every rupee, every partner, and every legal boundary we operate inside is public information.",
+    "points": [
+      "We do not diagnose, prescribe, or treat. All health guidance ends in a referral to a licensed provider.",
+      "No family is ever charged for a program listed here, now or later.",
+      "Every local partner is trained, verified, and reviewed — we publish who they are to the community they serve.",
+      "Every statistic on this site is sourced to a named Nepal government body — not estimated, not invented."
+    ],
+    "registrationStatus": [
+      {
+        "label": "Company registration (OCR)",
+        "status": "In progress"
+      },
+      {
+        "label": "Ward registration",
+        "status": "In progress"
+      },
+      {
+        "label": "PAN (IRD)",
+        "status": "In progress"
+      },
+      {
+        "label": "NGO registration (DAO)",
+        "status": "Planned"
+      },
+      {
+        "label": "Social Welfare Council",
+        "status": "Planned"
+      }
+    ]
+  },
+  "faq": {
+    "kicker": "Questions",
+    "title": "Common questions, answered plainly.",
+    "items": [
+      {
+        "question": "Is this really free, forever?",
+        "answer": "Yes, for the families and communities Dobato Nepal serves. It's funded through grants, donations, and partnerships — never through fees charged to the people using it."
+      },
+      {
+        "question": "How do you decide which village or ward comes first?",
+        "answer": "By need and by readiness — places with the largest documented gaps in access, where a trusted local partner already exists or is willing to take part. We deliberately start small and prove a program works before expanding."
+      },
+      {
+        "question": "How do you make sure health guidance is safe?",
+        "answer": "Every piece of health content is reviewed by a licensed clinician before it reaches a family, and every interaction is designed to end in a referral to a real health post — never a diagnosis or a prescription from us."
+      },
+      {
+        "question": "Can I support Dobato Nepal from outside Nepal?",
+        "answer": "Yes. Diaspora and international supporters can contribute funding or help connect us with local partners in specific districts — see \"Support From Anywhere\" above."
+      },
+      {
+        "question": "Who runs Dobato Nepal?",
+        "answer": "Dobato Nepal is a Nepal-based initiative currently completing its formal registration (see Trust & Transparency above). As we grow, our team, partners, and governance structure will be published here in full."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Dobato Nepal — दोबाटो — means the point where two paths meet. This is an early-stage initiative built and run from Nepal. We'll publish our first program outcomes here once our first community pilot is complete.",
+    "columns": [
+      {
+        "heading": "Explore",
+        "links": [
+          {
+            "label": "Our Approach",
+            "href": "#approach"
+          },
+          {
+            "label": "Programs",
+            "href": "#programs"
+          },
+          {
+            "label": "Global Foundations",
+            "href": "#network"
+          },
+          {
+            "label": "FAQ",
+            "href": "#faq"
+          }
+        ]
+      },
+      {
+        "heading": "Involved",
+        "links": [
+          {
+            "label": "Partner Locally",
+            "href": "#involve"
+          },
+          {
+            "label": "Support From Anywhere",
+            "href": "#involve"
+          },
+          {
+            "label": "Trust & Transparency",
+            "href": "#trust"
+          }
+        ]
+      }
+    ],
+    "bottomText": "All statistics sourced to named Nepal government bodies — see Trust & Transparency."
+  },
+  "embeds": {
+    "kicker": "From The Field",
+    "title": "See it, not just read about it.",
+    "intro": "Short updates, videos, and posts from the work as it happens. This section only appears once at least one item below is enabled — safe to leave empty.",
+    "items": []
+  },
+  "updates": {
+    "kicker": "Latest Work",
+    "title": "Updates from the ground.",
+    "intro": "Short notes on what's happening — pilots starting, partners joining, lessons learned. Posted as things happen, not on a schedule.",
+    "items": []
+  }
+};
+
+const PLATFORMS = ['facebook','instagram','x','linkedin','youtube','tiktok','threads','pinterest','reddit','telegram','discord'];
+const EMBED_TYPES = [
+  ['youtube-video','YouTube video'], ['youtube-playlist','YouTube playlist'],
+  ['x-post','X (Twitter) post'], ['instagram-post','Instagram post'],
+  ['facebook-post','Facebook post'], ['tiktok-video','TikTok video'],
+  ['linkedin-post','LinkedIn post'],
+];
+
+function escAttr(s) { return (s || "").replace(/"/g, "&quot;"); }
+
+document.getElementById('f-eyebrow').value = CONTENT.home.hero.eyebrow;
+document.getElementById('f-h1').value = CONTENT.home.hero.headlineLine1;
+document.getElementById('f-h2').value = CONTENT.home.hero.headlineLine2;
+document.getElementById('f-sub').value = CONTENT.home.hero.subhead;
+document.getElementById('f-btn1').value = CONTENT.home.hero.ctaPrimary.label;
+document.getElementById('f-btn2').value = CONTENT.home.hero.ctaSecondary.label;
+
+if (!CONTENT.updates) CONTENT.updates = { kicker: 'Latest Work', title: 'Updates from the ground.', intro: '', items: [] };
+function renderUpdates() {
+  const wrap = document.getElementById('updates-list');
+  wrap.innerHTML = '';
+  CONTENT.updates.items.forEach((u, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Article ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveUpdate(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.updates.items.length - 1 ? `<button type="button" onclick="moveUpdate(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeUpdate(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Title</label>
+          <input type="text" value="${escAttr(u.title)}" oninput="CONTENT.updates.items[${i}].title=this.value">
+        </div>
+        <div>
+          <label>Date (any format, e.g. August 2026)</label>
+          <input type="text" value="${escAttr(u.date)}" oninput="CONTENT.updates.items[${i}].date=this.value">
+        </div>
+      </div>
+      <label>Content</label>
+      <textarea oninput="CONTENT.updates.items[${i}].content=this.value">${(u.content || '').replace(/</g,'&lt;')}</textarea>
+      <label>Image link (optional, paste a URL to a photo)</label>
+      <input type="url" value="${escAttr(u.imageUrl)}" placeholder="https://..." oninput="CONTENT.updates.items[${i}].imageUrl=this.value">
+      <div class="toggle-row">
+        <input type="checkbox" id="update-en-${i}" ${u.enabled !== false ? 'checked' : ''} onchange="CONTENT.updates.items[${i}].enabled=this.checked">
+        <label for="update-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addUpdate() {
+  CONTENT.updates.items.unshift({ title: '', date: '', content: '', imageUrl: '', enabled: true });
+  renderUpdates();
+}
+function removeUpdate(i) { CONTENT.updates.items.splice(i, 1); renderUpdates(); }
+function moveUpdate(i, dir) {
+  const arr = CONTENT.updates.items;
+  [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
+  renderUpdates();
+}
+
+function renderSocial() {
+  const wrap = document.getElementById('social-list');
+  wrap.innerHTML = '';
+  CONTENT.site.socialLinks.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Link ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveSocial(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.site.socialLinks.length - 1 ? `<button type="button" onclick="moveSocial(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeSocial(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Platform</label>
+          <select onchange="CONTENT.site.socialLinks[${i}].platform=this.value">
+            ${PLATFORMS.map(p => `<option value="${p}" ${p === s.platform ? 'selected' : ''}>${p[0].toUpperCase() + p.slice(1)}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label>Profile link</label>
+          <input type="url" value="${escAttr(s.url)}" placeholder="https://..." oninput="CONTENT.site.socialLinks[${i}].url=this.value">
+        </div>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="social-en-${i}" ${s.enabled ? 'checked' : ''} onchange="CONTENT.site.socialLinks[${i}].enabled=this.checked">
+        <label for="social-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addSocial() {
+  CONTENT.site.socialLinks.push({ platform: 'facebook', url: '', enabled: true });
+  renderSocial();
+}
+function removeSocial(i) { CONTENT.site.socialLinks.splice(i, 1); renderSocial(); }
+function moveSocial(i, dir) {
+  const arr = CONTENT.site.socialLinks;
+  [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
+  renderSocial();
+}
+
+function renderEmbeds() {
+  const wrap = document.getElementById('embed-list');
+  wrap.innerHTML = '';
+  CONTENT.embeds.items.forEach((e, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Item ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveEmbed(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.embeds.items.length - 1 ? `<button type="button" onclick="moveEmbed(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeEmbed(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <label>Type</label>
+      <select onchange="CONTENT.embeds.items[${i}].type=this.value">
+        ${EMBED_TYPES.map(([v, l]) => `<option value="${v}" ${v === e.type ? 'selected' : ''}>${l}</option>`).join('')}
+      </select>
+      <label>Paste the link here</label>
+      <input type="url" value="${escAttr(e.url)}" placeholder="https://..." oninput="CONTENT.embeds.items[${i}].url=this.value">
+      <label>Caption (optional)</label>
+      <input type="text" value="${escAttr(e.caption)}" oninput="CONTENT.embeds.items[${i}].caption=this.value">
+      <div class="toggle-row">
+        <input type="checkbox" id="embed-en-${i}" ${e.enabled !== false ? 'checked' : ''} onchange="CONTENT.embeds.items[${i}].enabled=this.checked">
+        <label for="embed-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addEmbed() {
+  CONTENT.embeds.items.push({ type: 'youtube-video', url: '', caption: '', enabled: true });
+  renderEmbeds();
+}
+function removeEmbed(i) { CONTENT.embeds.items.splice(i, 1); renderEmbeds(); }
+function moveEmbed(i, dir) {
+  const arr = CONTENT.embeds.items;
+  [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
+  renderEmbeds();
+}
+
+renderUpdates();
+renderSocial();
+renderEmbeds();
+
+function downloadSite() {
+  CONTENT.home.hero.eyebrow = document.getElementById('f-eyebrow').value;
+  CONTENT.home.hero.headlineLine1 = document.getElementById('f-h1').value;
+  CONTENT.home.hero.headlineLine2 = document.getElementById('f-h2').value;
+  CONTENT.home.hero.subhead = document.getElementById('f-sub').value;
+  CONTENT.home.hero.ctaPrimary.label = document.getElementById('f-btn1').value;
+  CONTENT.home.hero.ctaSecondary.label = document.getElementById('f-btn2').value;
+
+  const html = buildFullSite(CONTENT);
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'index.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  const status = document.getElementById('status');
+  status.className = 'status ok';
+  status.textContent = 'Downloaded! Upload this index.html to your GitHub repo to publish it.';
+}
+</script>
+
+<script>
+/**
+ * markdown.js — a deliberately tiny, dependency-free markdown helper.
+ *
+ * Why hand-rolled instead of a package like `marked`: this project has a
+ * hard "zero paid infrastructure, build must run reliably in CI with no
+ * surprises" constraint. A ~60-line utility with no transitive dependencies
+ * has no supply-chain risk and nothing to go out of date. It supports the
+ * subset of markdown this site's content actually needs — bold, italic,
+ * links, paragraphs, and simple bullet lists — not the full spec.
+ */
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/** Inline formatting only: **bold**, *italic*, [text](https://url). */
+function inline(str) {
+  var safe = escapeHtml(str);
+  safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  safe = safe.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  safe = safe.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" rel="noopener">$1</a>');
+  return safe;
+}
+
+/** Block-level: paragraphs separated by blank lines, "- " bullet lists, "## " headings. */
+function toHtml(markdown) {
+  if (!markdown) return '';
+  var blocks = String(markdown).trim().split(/\n\s*\n/);
+  return blocks
+    .map(function (block) {
+      var lines = block.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+      if (lines.length === 0) return '';
+      if (lines[0].indexOf('## ') === 0) {
+        return '<h3>' + inline(lines[0].slice(3)) + '</h3>';
+      }
+      if (lines.every(function (l) { return l.indexOf('- ') === 0; })) {
+        return '<ul>' + lines.map(function (l) { return '<li>' + inline(l.slice(2)) + '</li>'; }).join('') + '</ul>';
+      }
+      return '<p>' + lines.map(inline).join('<br>') + '</p>';
+    })
+    .join('\n');
+}
+
+
+// Aliases used throughout the ported template/embed code (originally destructured imports)
+const esc = escapeHtml;
+const inlineMd = inline;
+/**
+ * icons.js — a small inline SVG icon set for the social platforms the
+ * Social Media Manager supports. Kept as plain data (not image files) so
+ * icons stay crisp at any size, inherit colour via currentColor, and add
+ * zero HTTP requests to the page.
+ *
+ * These are simplified, original glyph interpretations (not traced from
+ * any brand's official logo files) — enough to be instantly recognisable
+ * without redistributing anyone's trademarked artwork.
+ */
+const ICONS = {
+  facebook: '<path d="M14.5 8.5h2V5.7c-.35-.05-1.54-.15-2.94-.15-2.9 0-4.9 1.8-4.9 5.1v2.6H6.3v3.3h2.86V21h3.4v-4.45h2.75l.43-3.3h-3.18V11c0-.96.27-1.5 1.94-1.5z"/>',
+  instagram: '<rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16.6" cy="7.4" r="1.1"/>',
+  x: '<path d="M5 4l6.2 8.1L5.3 20h2.3l5-5.9 4 5.9H21l-6.5-8.6L20 4h-2.3l-4.6 5.4L9.2 4H5z"/>',
+  linkedin: '<rect x="4" y="4" width="16" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="8.2" cy="8.4" r="1.15"/><path d="M8.2 11v6.2M11.6 11v6.2M11.6 13.7c0-1.6 1-2.7 2.35-2.7 1.35 0 2.05 1 2.05 2.7v3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  youtube: '<rect x="3.5" y="6.5" width="17" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10.5 9.7l4.5 2.3-4.5 2.3z"/>',
+  tiktok: '<path d="M13.5 4v9.6a2.6 2.6 0 1 1-2.2-2.57v-2.1a4.7 4.7 0 1 0 4.2 4.67V9.4a5.6 5.6 0 0 0 3.3 1.06V8.4a3.6 3.6 0 0 1-3.3-3.6V4h-2z"/>',
+  threads: '<path d="M12 4.2c-4.4 0-6.9 3-6.9 7.8s2.5 7.8 6.9 7.8c3.6 0 5.8-1.9 6.3-4.6.4-2.1-.5-3.7-2.5-4.5-.2-2-1.5-3.2-3.6-3.2-1.6 0-2.8.7-3.4 1.9l1.6.8c.3-.6.9-1 1.8-1 1 0 1.6.5 1.8 1.5-2.5-.2-4.6.7-4.6 3 0 1.6 1.3 2.7 3.2 2.7 1.8 0 3-1 3.3-2.7.7.5 1 1.2.8 2.1-.3 1.6-1.7 2.6-4.2 2.6-3 0-4.9-2-4.9-6s1.9-6 4.9-6c1.9 0 3.3.8 4 2.3l1.7-.9c-1-2-3-3.6-5.7-3.6z"/>',
+  pinterest: '<circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.6 19c.4-1.6 1-4.2 1.4-5.8m0 0c-.4-.4-.6-1-.6-1.8 0-1.5 1-2.6 2.3-2.6 1 0 1.7.7 1.7 1.8 0 1.1-.7 2.7-1.1 4.2-.3 1.2.5 2.1 1.6 2.1 2 0 3.3-2.4 3.3-5.2 0-2.2-1.5-3.9-4.1-3.9-3 0-4.8 2.2-4.8 4.5 0 .8.3 1.4.7 1.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  reddit: '<circle cx="12" cy="13.2" r="6.3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="13.2" r="1"/><circle cx="15" cy="13.2" r="1"/><path d="M9 16.2c1 .8 4 .8 5 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12 6.9V4.6m0 0h2.3M17 8.4a1.3 1.3 0 1 0 0 2.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>',
+  telegram: '<path d="M4.5 12.3L18.8 6.4c.7-.3 1.3.2 1 .9l-2.4 11.2c-.2.9-.8 1.1-1.5.7l-3.6-2.7-1.9 1.9c-.2.2-.4.3-.7.2l.3-3.6 6.5-6.1c.3-.2 0-.4-.3-.2l-8 5.1-3.4-1.1c-.8-.2-.8-.8.2-1.4z"/>',
+  discord: '<path d="M8.5 6.8c2.3-.6 4.7-.6 7 0M7.2 8.6C5 12 4.4 15.2 4.7 17.6c1.5 1.1 3 1.7 4.4 1.9l.7-1.5M16.8 8.6c2.2 3.4 2.8 6.6 2.5 9-1.5 1.1-3 1.7-4.4 1.9l-.7-1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9.3" cy="14" r="1.15"/><circle cx="14.7" cy="14" r="1.15"/>',
+};
+
+/** Ordered list used to populate the admin dropdown, in a sensible default order. */
+const SOCIAL_PLATFORMS = [
+  { key: 'facebook', label: 'Facebook' },
+  { key: 'instagram', label: 'Instagram' },
+  { key: 'x', label: 'X (Twitter)' },
+  { key: 'linkedin', label: 'LinkedIn' },
+  { key: 'youtube', label: 'YouTube' },
+  { key: 'tiktok', label: 'TikTok' },
+  { key: 'threads', label: 'Threads' },
+  { key: 'pinterest', label: 'Pinterest' },
+  { key: 'reddit', label: 'Reddit' },
+  { key: 'telegram', label: 'Telegram' },
+  { key: 'discord', label: 'Discord' },
+];
+
+function iconSvg(platformKey, size) {
+  const s = size || 18;
+  const inner = ICONS[platformKey] || ICONS.x;
+  return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${inner}</svg>`;
+}
+
+/**
+ * embed-helpers.js — turns a plain URL the admin pastes into the correct
+ * embed markup per platform. This is what makes "paste a link" actually
+ * work with no third-party embed API or paid oEmbed service.
+ *
+ * Strategy per platform:
+ *   - YouTube (video/playlist): we can extract the ID ourselves and build
+ *     a plain <iframe> — no external script needed at all.
+ *   - X, Instagram, TikTok: these platforms only support embedding via
+ *     their own official, free, public widget scripts (widgets.js /
+ *     embed.js). We render the specific blockquote markup each of those
+ *     scripts expects; the script itself is loaded once in the page layout.
+ *   - Facebook: their public Page Plugin iframe embeds a post URL
+ *     directly with no app id required for basic public posts.
+ *   - LinkedIn: LinkedIn does not offer a general URL-to-embed path
+ *     without a post-specific URN, so we render a clean fallback card
+ *     that links out, clearly labelled as a link rather than a false
+ *     "embed" — documented in docs/CONTENT_SCHEMA.md.
+ */
+
+function extractYouTubeId(url) {
+  const patterns = [
+    /youtu\.be\/([a-zA-Z0-9_-]{6,})/,
+    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{6,})/,
+    /youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})/,
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{6,})/,
+  ];
+  for (const re of patterns) {
+    const m = url.match(re);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function extractYouTubePlaylistId(url) {
+  const m = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+  return m ? m[1] : null;
+}
+
+function renderEmbed(item) {
+  const { type, url, caption } = item;
+  const captionHtml = caption ? `<p class="embed-card__caption">${esc(caption)}</p>` : '';
+  let body = '';
+
+  if (type === 'youtube-video') {
+    const id = extractYouTubeId(url);
+    body = id
+      ? `<div class="embed-card__frame"><iframe src="https://www.youtube.com/embed/${id}" title="${esc(caption || 'YouTube video')}" loading="lazy" allowfullscreen></iframe></div>`
+      : embedError(url, 'Could not read a YouTube video ID from this URL.');
+  } else if (type === 'youtube-playlist') {
+    const id = extractYouTubePlaylistId(url);
+    body = id
+      ? `<div class="embed-card__frame"><iframe src="https://www.youtube.com/embed/videoseries?list=${id}" title="${esc(caption || 'YouTube playlist')}" loading="lazy" allowfullscreen></iframe></div>`
+      : embedError(url, 'Could not read a playlist ID from this URL.');
+  } else if (type === 'x-post') {
+    body = `<blockquote class="twitter-tweet"><a href="${esc(url)}"></a></blockquote>`;
+  } else if (type === 'instagram-post') {
+    body = `<blockquote class="instagram-media" data-instgrm-permalink="${esc(url)}" data-instgrm-version="14"></blockquote>`;
+  } else if (type === 'tiktok-video') {
+    body = `<blockquote class="tiktok-embed" cite="${esc(url)}"></blockquote>`;
+  } else if (type === 'facebook-post') {
+    body = `<div class="embed-card__frame embed-card__frame--tall"><iframe src="https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true" title="${esc(caption || 'Facebook post')}" loading="lazy"></iframe></div>`;
+  } else if (type === 'linkedin-post') {
+    body = `<a class="embed-card__fallback" href="${esc(url)}" target="_blank" rel="noopener">View this LinkedIn post ↗</a>`;
+  } else {
+    body = embedError(url, 'Unsupported embed type.');
+  }
+
+  return `<div class="embed-card" data-embed-type="${esc(type)}">${body}${captionHtml}</div>`;
+}
+
+function embedError(url, message) {
+  return `<p class="embed-card__error">${esc(message)} <a href="${esc(url)}" target="_blank" rel="noopener">Open link instead ↗</a></p>`;
+}
+
+/** Which external widget scripts need to load, based on which embed types are actually used. */
+function requiredScripts(items) {
+  const scripts = new Set();
+  items.forEach((item) => {
+    if (!item.enabled) return;
+    if (item.type === 'x-post') scripts.add('https://platform.twitter.com/widgets.js');
+    if (item.type === 'instagram-post') scripts.add('https://www.instagram.com/embed.js');
+    if (item.type === 'tiktok-video') scripts.add('https://www.tiktok.com/embed.js');
+  });
+  return Array.from(scripts);
+}
+
+const INLINE_CSS = `/*
+  Design Tokens — Dobato Design System
+  ------------------------------------
+  Single source of truth for colour, type, spacing, and motion.
+  Editing values here re-themes the entire site. Do not hardcode
+  colours or font sizes in component CSS — reference a token.
+*/
+:root {
+  /* Colour: brand */
+  --color-paper: #F2F0E8;
+  --color-ink: #20241F;
+  --color-ink-soft: #4A4F45;
+  --color-marigold: #D98B24;
+  --color-marigold-deep: #B5701A;
+  --color-indigo: #2E3A55;
+  --color-indigo-deep: #1D263A;
+  --color-pine: #4F6B4E;
+  --color-pine-soft: #DCE6D4;
+  --color-line: #D8D3C4;
+  --color-white: #FBFAF6;
+
+  /* Colour: semantic */
+  --color-bg: var(--color-paper);
+  --color-surface: var(--color-white);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-ink-soft);
+  --color-accent: var(--color-marigold);
+  --color-accent-deep: var(--color-marigold-deep);
+  --color-focus-ring: #2E7DD1;
+
+  /* Typography */
+  --font-display: Fraunces, 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Work Sans', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.85rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.6rem, 3.2vw, 2.4rem);
+  --text-3xl: clamp(2.2rem, 5vw, 3.6rem);
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 5.5rem;
+
+  /* Layout */
+  --max-width: 1140px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --border-width: 1px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 600ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}
+
+/* Base reset + accessibility defaults */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+img, svg { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+
+/* Visible, high-contrast focus ring for keyboard users — WCAG AA */
+:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip link for screen-reader / keyboard users */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-indigo-deep);
+  color: var(--color-white);
+  padding: 12px 18px;
+  z-index: 100;
+  border-radius: 0 0 4px 0;
+}
+.skip-link:focus { left: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+}
+
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-6); }
+
+/* Scroll-reveal (progressive enhancement — content is fully visible with JS disabled) */
+.reveal { opacity: 1; transform: none; }
+.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+              transform var(--duration-slow) var(--ease-standard);
+}
+.js-enabled .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   Dobato Component Library
+   Every rule below is scoped to a single, reusable component class.
+   Components consume tokens.css — never hardcode a colour or size here.
+   ========================================================================== */
+
+/* --- Nav --- */
+.nav { display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-5) var(--space-6); max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 20; }
+.nav__logo { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; }
+.nav__logo-mark { width: 24px; height: 24px; flex-shrink: 0; }
+.nav__links { display: flex; gap: 28px; font-size: var(--text-sm); color: var(--color-text-muted); }
+.nav__links a:hover, .nav__links a:focus-visible { color: var(--color-text); }
+.nav__cta { background: var(--color-indigo-deep); color: var(--color-white);
+  padding: 9px 17px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.nav__toggle { display: none; }
+
+@media (max-width: 820px) {
+  .nav__links { display: none; }
+  .nav__toggle { display: block; background: var(--color-indigo-deep); color: var(--color-white);
+    padding: 8px 12px; border-radius: var(--radius-sm); font-size: 13px; }
+  .nav__links.is-open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0;
+    background: var(--color-white); padding: var(--space-5) var(--space-6); gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+}
+
+/* --- Hero --- */
+.hero { position: relative; overflow: hidden; background: var(--color-indigo-deep); color: var(--color-white); padding: 76px var(--space-6) 0; }
+.hero__inner { max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 2; }
+.eyebrow { font-size: var(--text-xs); color: #C9A15A; text-transform: uppercase; letter-spacing: 0.14em;
+  display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-5); }
+.eyebrow::before { content: ''; width: 26px; height: 1px; background: #C9A15A; }
+.hero__title { font-size: var(--text-3xl); max-width: 760px; margin-bottom: var(--space-5); }
+.hero__title em { font-style: italic; color: #E4B15F; }
+.hero__subhead { font-size: var(--text-lg); color: #C7CCD8; max-width: 560px; margin-bottom: var(--space-8); }
+.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: var(--space-10); }
+.btn { padding: 13px 22px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px; transition: transform var(--duration-fast) var(--ease-standard),
+  filter var(--duration-fast) var(--ease-standard); }
+.btn:hover, .btn:focus-visible { transform: translateY(-1px); filter: brightness(1.05); }
+.btn--primary { background: var(--color-accent); color: #221701; }
+.btn--ghost { border: 1px solid #4B5670; color: var(--color-white); }
+.hero__terrace { position: absolute; left: 0; right: 0; bottom: 0; height: 140px; z-index: 1; opacity: 0.9; }
+
+.statstrip { background: var(--color-indigo); border-top: var(--border-width) solid #3A4562; padding: var(--space-6);
+  position: relative; z-index: 2; }
+.statstrip__grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.stat__num { font-family: var(--font-display); font-size: 26px; color: var(--color-white); }
+.stat__label { font-family: var(--font-mono); font-size: 12px; color: #98A1B8; margin-top: 4px; line-height: 1.4; }
+
+/* --- Section shell --- */
+.section { padding: 88px var(--space-6); }
+.section-head { max-width: 640px; margin-bottom: var(--space-8); }
+.section-head--center { margin-left: auto; margin-right: auto; text-align: center; }
+.kicker { font-size: var(--text-xs); color: var(--color-accent-deep); text-transform: uppercase;
+  letter-spacing: 0.12em; margin-bottom: var(--space-4); font-weight: 600; }
+.section-head h2 { font-size: var(--text-2xl); }
+.section-head p { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-base); }
+
+/* --- Approach (glocal) grid --- */
+.philosophy { background: var(--color-surface); border-top: var(--border-width) solid var(--color-line);
+  border-bottom: var(--border-width) solid var(--color-line); }
+.glocal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--color-line);
+  border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
+.glocal-col { background: var(--color-surface); padding: var(--space-8) var(--space-6); }
+.glocal-col h3 { font-size: var(--text-xl); margin-bottom: 6px; }
+.glocal-col__sub { font-size: 13px; color: var(--color-accent-deep); text-transform: uppercase;
+  letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--space-5); }
+.glocal-col--local .glocal-col__sub { color: var(--color-pine); }
+.glocal-col li { font-size: 14.5px; padding: 11px 0; border-top: var(--border-width) solid var(--color-line);
+  display: flex; gap: 10px; color: var(--color-text-muted); }
+.glocal-col li:first-of-type { border-top: none; }
+.glocal-col li::before { content: '—'; opacity: 0.5; flex-shrink: 0; }
+.glocal-quote { text-align: center; font-family: var(--font-display); font-style: italic; font-size: 18px;
+  color: var(--color-text-muted); margin: var(--space-6) 0 4px; }
+
+/* --- Problem stat cards --- */
+.problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-line);
+  border: var(--border-width) solid var(--color-line); }
+.problem-card { background: var(--color-surface); padding: var(--space-6); }
+.problem-card__label { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-accent-deep);
+  display: block; margin-bottom: var(--space-4); }
+.problem-card__big { font-family: var(--font-display); font-size: 36px; color: var(--color-indigo-deep); line-height: 1; }
+.problem-card__caption { font-size: 13.5px; color: var(--color-text-muted); margin-top: var(--space-3); line-height: 1.5; }
+
+/* --- Model diagram --- */
+.model { background: var(--color-surface); border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md); padding: var(--space-8); }
+.model__row { display: flex; align-items: stretch; }
+.model-node { flex: 1; padding: 0 18px; text-align: center; }
+.model-node__circle { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; margin: 0 auto var(--space-4); font-family: var(--font-display); font-size: 18px; }
+.model-node:nth-child(1) .model-node__circle { background: var(--color-indigo-deep); color: var(--color-white); }
+.model-node:nth-child(2) .model-node__circle { background: var(--color-pine-soft); color: var(--color-pine); border: 1.5px solid var(--color-pine); }
+.model-node:nth-child(3) .model-node__circle { background: #F3DFB8; color: var(--color-accent-deep); border: 1.5px solid var(--color-accent-deep); }
+.model-node h4 { font-size: 15px; margin-bottom: 8px; }
+.model-node p { font-size: 13px; color: var(--color-text-muted); }
+.model__connector { flex: 0 0 56px; display: flex; align-items: center; justify-content: center; padding-top: 30px; }
+.model__footnote { margin-top: var(--space-8); padding-top: var(--space-6); border-top: var(--border-width) solid var(--color-line);
+  font-size: 13.5px; color: var(--color-text-muted); }
+.model__footnote b { color: var(--color-text); }
+
+/* --- Programs --- */
+.programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.program-card { padding: var(--space-8); border-radius: var(--radius-md); }
+.program-card--edu { background: var(--color-indigo-deep); color: var(--color-white); }
+.program-card--health { background: var(--color-pine-soft); color: var(--color-indigo-deep); }
+.program-card__tag { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: var(--space-4); }
+.program-card--edu .program-card__tag { color: #C9A15A; }
+.program-card--health .program-card__tag { color: var(--color-pine); }
+.program-card h3 { font-size: 23px; margin-bottom: var(--space-3); }
+.program-card__desc { font-size: 14px; }
+.program-card--edu .program-card__desc { color: #C7CCD8; }
+.program-card--health .program-card__desc { color: var(--color-text-muted); }
+.program-card ul { margin-top: var(--space-5); }
+.program-card li { font-size: 13.5px; padding: 9px 0; border-top: 1px solid rgba(0,0,0,0.08); display: flex; gap: 9px; }
+.program-card--edu li { border-top: 1px solid rgba(255,255,255,0.12); }
+.program-card li::before { content: '—'; opacity: 0.5; flex-shrink: 0; }
+.journey { margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px dashed rgba(0,0,0,0.15); }
+.program-card--edu .journey { border-top: 1px dashed rgba(255,255,255,0.2); }
+.journey__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--space-3); opacity: 0.75; }
+.journey__steps { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+
+/* --- Foundations --- */
+.foundations { background: var(--color-indigo-deep); color: var(--color-white); }
+.found-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #3A4562;
+  border: var(--border-width) solid #3A4562; border-radius: var(--radius-md); overflow: hidden; margin-top: var(--space-2); }
+.found-card { background: #242E45; padding: var(--space-6); }
+.found-card__label { font-family: var(--font-mono); font-size: 11px; color: #C9A15A; text-transform: uppercase; letter-spacing: 0.06em; }
+.found-card h4 { font-size: 15.5px; margin: var(--space-3) 0 8px; }
+.found-card p { font-size: 13px; color: #B7BFD1; }
+
+/* --- Involve --- */
+.involve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+.involve-card { background: var(--color-surface); border: var(--border-width) solid var(--color-line);
+  border-radius: var(--radius-md); padding: var(--space-6); }
+.involve-card__icon { width: 38px; height: 38px; border-radius: 50%; background: var(--color-pine-soft);
+  display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-5);
+  color: var(--color-pine); font-family: var(--font-display); font-size: 16px; }
+.involve-card h4 { font-size: 16.5px; margin-bottom: var(--space-3); }
+.involve-card p { font-size: 13.5px; color: var(--color-text-muted); margin-bottom: var(--space-5); }
+.involve-card__link { font-size: 13px; font-weight: 600; color: var(--color-indigo-deep);
+  border-bottom: 1.5px solid var(--color-accent); padding-bottom: 2px; }
+
+/* --- Trust --- */
+.trust { background: var(--color-surface); border-top: var(--border-width) solid var(--color-line); }
+.trust-grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-10); align-items: start; }
+.trust h2 { font-size: var(--text-2xl); margin-bottom: var(--space-5); }
+.trust p { color: var(--color-text-muted); font-size: 15.5px; margin-bottom: var(--space-4); }
+.trust-list { margin-top: var(--space-6); }
+.trust-item { display: flex; gap: 13px; padding: var(--space-4) 0; border-top: var(--border-width) solid var(--color-line); }
+.trust-item:last-child { border-bottom: var(--border-width) solid var(--color-line); }
+.trust-item__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-deep); margin-top: 8px; flex-shrink: 0; }
+.trust-item p { color: var(--color-text-muted); font-size: 14px; margin: 0; }
+.status-card { background: var(--color-indigo-deep); color: var(--color-white); border-radius: var(--radius-md); padding: var(--space-6); }
+.status-card__label { font-family: var(--font-mono); font-size: 11.5px; color: #98A1B8; text-transform: uppercase; letter-spacing: 0.08em; }
+.status-row { display: flex; justify-content: space-between; padding: 11px 0; border-top: 1px solid #3A4562; font-size: 13px; }
+.status-row:first-of-type { border-top: none; padding-top: 14px; }
+.status-row__pending { color: #E4B15F; }
+.status-row__done { color: #8EBB92; }
+
+/* --- FAQ (accessible accordion) --- */
+.faq-list { max-width: 760px; }
+.faq-item { border-bottom: var(--border-width) solid var(--color-line); }
+.faq-item__question { width: 100%; text-align: left; padding: var(--space-5) 0; font-size: 15.5px; font-weight: 600;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.faq-item__question .icon { transition: transform var(--duration-fast) var(--ease-standard); flex-shrink: 0; }
+.faq-item[open] .faq-item__question .icon { transform: rotate(45deg); }
+.faq-item__answer { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; padding-bottom: var(--space-5); }
+
+/* --- Split CTA --- */
+.split { display: grid; grid-template-columns: 1fr 1fr; }
+.split-panel { padding: 64px 46px; }
+.split-panel--families { background: #F3DFB8; color: var(--color-indigo-deep); }
+.split-panel--partners { background: var(--color-pine-soft); color: var(--color-indigo-deep); }
+.split-panel h3 { font-size: 23px; margin-bottom: var(--space-3); }
+.split-panel p { font-size: 14.5px; color: var(--color-text-muted); margin-bottom: var(--space-6); max-width: 400px; }
+.split-btn { background: var(--color-indigo-deep); color: var(--color-white); padding: 12px 20px;
+  border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600; display: inline-block; }
+
+/* --- Social icons --- */
+.social-icons { display: flex; gap: 10px; margin-top: var(--space-5); }
+.social-icons__link { width: 34px; height: 34px; border-radius: 50%; background: var(--color-paper);
+  border: var(--border-width) solid var(--color-line); display: flex; align-items: center; justify-content: center;
+  color: var(--color-ink-soft); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+.social-icons__link:hover, .social-icons__link:focus-visible { background: var(--color-indigo-deep); color: var(--color-white); }
+
+/* --- Embedded content cards --- */
+.embed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-6); }
+.embed-card { background: var(--color-surface); border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
+.embed-card__frame { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+.embed-card__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.embed-card__frame--tall { aspect-ratio: 4 / 5; }
+.embed-card__caption { font-size: 13px; color: var(--color-text-muted); padding: var(--space-4); }
+.embed-card__error { font-size: 13px; color: #B23A3A; padding: var(--space-4); }
+.embed-card__fallback { display: block; padding: var(--space-6); text-align: center; font-weight: 600; font-size: 14px; color: var(--color-indigo-deep); }
+
+/* --- Footer --- */
+.site-footer { padding: 52px var(--space-6) 40px; border-top: var(--border-width) solid var(--color-line); background: var(--color-surface); }
+.site-footer__inner { max-width: var(--max-width); margin: 0 auto; }
+.site-footer__top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-8); margin-bottom: var(--space-8); }
+.site-footer__tagline { font-size: 13px; color: var(--color-text-muted); max-width: 380px; }
+.site-footer__cols { display: flex; gap: 56px; flex-wrap: wrap; }
+.site-footer__cols h5 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+.site-footer__cols a { display: block; font-size: 13.5px; padding: 5px 0; color: var(--color-text); }
+.site-footer__cols a:hover { color: var(--color-accent-deep); }
+.site-footer__bottom { padding-top: var(--space-5); border-top: var(--border-width) solid var(--color-line); font-size: 12px; color: var(--color-text-muted); }
+
+@media (max-width: 820px) {
+  .problem-grid, .programs-grid, .trust-grid, .split, .glocal-grid, .found-grid, .involve-grid { grid-template-columns: 1fr; }
+  .model__row { flex-direction: column; gap: 22px; }
+  .model__connector { display: none; }
+  .statstrip__grid { grid-template-columns: 1fr; gap: 14px; }
+  .site-footer__cols { gap: 32px; }
+}
+
+/* --- Updates / Articles --- */
+.updates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
+.update-card { background: var(--color-white); border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
+.update-card__image { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.update-card__body { padding: var(--space-5); }
+.update-card__date { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-accent-deep); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.update-card__title { font-size: 17px; margin-bottom: 8px; }
+.update-card__content { font-size: 13.5px; color: var(--color-text-muted); line-height: 1.6; }
+.update-card__content p { margin-bottom: 8px; }
+`;
+const INLINE_JS = `/**
+ * Dobato — public site behaviour.
+ * Zero dependencies, progressive enhancement only: every feature here
+ * degrades gracefully if JS fails to load (nav links still work, FAQ
+ * items are native <details>, content is visible without animation).
+ */
+(function () {
+  'use strict';
+
+  // Flag JS as available so CSS can opt in to reveal animations.
+  document.documentElement.classList.add('js-enabled');
+
+  // --- Mobile nav toggle ---------------------------------------------
+  var toggle = document.querySelector('[data-nav-toggle]');
+  var links = document.querySelector('[data-nav-links]');
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // --- Scroll-reveal ----------------------------------------------------
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealEls.forEach(function (el) { observer.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+`;
+
+/**
+ * templates.js — reusable HTML component functions.
+ *
+ * Every function takes plain JS objects (parsed straight from content/*.json)
+ * and returns an HTML string. Keeping these as small, named, single-purpose
+ * functions (rather than one giant template) is what makes the site
+ * maintainable: adding a new section to the homepage means writing one new
+ * function here and one new line in build.js, not editing a monolith.
+ *
+ * All user-supplied text goes through esc()/inlineMd() before it reaches
+ * the page — content is admin-edited via the CMS, but we still never trust
+ * it blindly, the same way you wouldn't trust unescaped input in any app.
+ */
+
+function socialIcons(socialLinks) {
+  const enabled = (socialLinks || []).filter((s) => s.enabled && s.url);
+  if (enabled.length === 0) return '';
+  const items = enabled
+    .map(
+      (s) =>
+        `<a href="${esc(s.url)}" class="social-icons__link" target="_blank" rel="noopener" aria-label="${esc(s.platform)}">${iconSvg(s.platform, 18)}</a>`
+    )
+    .join('');
+  return `<div class="social-icons">${items}</div>`;
+}
+
+function embeds(e) {
+  const enabledItems = (e.items || []).filter((i) => i.enabled !== false && i.url);
+  if (enabledItems.length === 0) return '';
+  const cards = enabledItems.map(renderEmbed).join('');
+  return `
+<section class="section" id="media" style="background:var(--color-white);border-top:1px solid var(--color-line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(e.kicker)}</div>
+      <h2>${esc(e.title)}</h2>
+      <p>${esc(e.intro)}</p>
+    </div>
+    <div class="embed-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+function nav(navData) {
+  const links = navData.links
+    .map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`)
+    .join('');
+  return `
+<nav class="nav">
+  <a class="nav__logo" href="#top">
+    <svg class="nav__logo-mark" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 L13 24 M2 13 L24 13" stroke="#D98B24" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="13" r="4" fill="#D98B24"/></svg>
+    <span>${esc(navData.logoText || 'Dobato Nepal')}</span>
+  </a>
+  <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>
+  <ul class="nav__links" id="primary-nav" data-nav-links>${links}</ul>
+  <a href="${esc(navData.cta.href)}" class="nav__cta">${esc(navData.cta.label)}</a>
+</nav>`;
+}
+
+function hero(hero, stats) {
+  const statHtml = stats
+    .map(
+      (s) => `<div><div class="stat__num">${esc(s.number)}</div><div class="stat__label">${esc(s.label)}</div></div>`
+    )
+    .join('');
+  return `
+<section class="hero" id="top">
+  <div class="hero__inner">
+    <div class="eyebrow">${esc(hero.eyebrow)}</div>
+    <h1 class="hero__title">${esc(hero.headlineLine1)}<br><em>${esc(hero.headlineLine2)}</em></h1>
+    <p class="hero__subhead">${esc(hero.subhead)}</p>
+    <div class="hero__ctas">
+      <a href="${esc(hero.ctaPrimary.href)}" class="btn btn--primary">${esc(hero.ctaPrimary.label)}</a>
+      <a href="${esc(hero.ctaSecondary.href)}" class="btn btn--ghost">${esc(hero.ctaSecondary.label)}</a>
+    </div>
+  </div>
+  <svg class="hero__terrace" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,150 L0,95 L120,80 L240,100 L360,70 L480,90 L600,55 L720,85 L840,60 L960,95 L1080,75 L1200,100 L1200,150 Z" fill="#252F47"/>
+    <path d="M0,150 L0,120 L150,110 L300,125 L450,105 L600,118 L750,100 L900,122 L1050,108 L1200,120 L1200,150 Z" fill="#1D263A"/>
+  </svg>
+  <div class="statstrip"><div class="statstrip__grid">${statHtml}</div></div>
+</section>`;
+}
+
+function approach(a) {
+  const list = (items) => items.map((i) => `<li>${esc(i)}</li>`).join('');
+  return `
+<section class="philosophy section" id="approach">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <div class="kicker">${esc(a.kicker)}</div>
+      <h2>${esc(a.title)}</h2>
+      <p>${esc(a.intro)}</p>
+    </div>
+    <div class="glocal-grid reveal">
+      <div class="glocal-col">
+        <div class="glocal-col__sub">${esc(a.global.label)}</div>
+        <h3>${esc(a.global.title)}</h3>
+        <ul>${list(a.global.items)}</ul>
+      </div>
+      <div class="glocal-col glocal-col--local">
+        <div class="glocal-col__sub">${esc(a.local.label)}</div>
+        <h3>${esc(a.local.title)}</h3>
+        <ul>${list(a.local.items)}</ul>
+      </div>
+    </div>
+    <p class="glocal-quote reveal">&ldquo;${esc(a.quote)}&rdquo;</p>
+  </div>
+</section>`;
+}
+
+function problem(p) {
+  const cards = p.cards
+    .map(
+      (c) => `
+    <div class="problem-card">
+      <span class="problem-card__label">${esc(c.label)}</span>
+      <div class="problem-card__big">${esc(c.big)}</div>
+      <div class="problem-card__caption">${esc(c.caption)}</div>
+    </div>`
+    )
+    .join('');
+  return `
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(p.kicker)}</div>
+      <h2>${esc(p.title)}</h2>
+      <p>${esc(p.intro)}</p>
+    </div>
+    <div class="problem-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+function model(m) {
+  const arrow = `<div class="model__connector"><svg viewBox="0 0 60 20" aria-hidden="true"><line x1="0" y1="10" x2="52" y2="10" stroke="#B7B09A" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M46,4 L54,10 L46,16" fill="none" stroke="#B7B09A" stroke-width="1.5"/></svg></div>`;
+  const nodes = m.nodes
+    .map(
+      (n, i) => `
+    <div class="model-node">
+      <div class="model-node__circle">${esc(n.letter)}</div>
+      <h4>${esc(n.title)}</h4>
+      <p>${esc(n.description)}</p>
+    </div>${i < m.nodes.length - 1 ? arrow : ''}`
+    )
+    .join('');
+  return `
+<section class="section" id="model" style="background:var(--color-surface);border-top:1px solid var(--color-line);border-bottom:1px solid var(--color-line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(m.kicker)}</div>
+      <h2>${esc(m.title)}</h2>
+      <p>${esc(m.intro)}</p>
+    </div>
+    <div class="model reveal">
+      <div class="model__row">${nodes}</div>
+      <div class="model__footnote"><b>${esc(m.footnote.split(':')[0])}:</b>${esc(m.footnote.split(':').slice(1).join(':'))}</div>
+    </div>
+  </div>
+</section>`;
+}
+
+function programs(p) {
+  const items = p.items
+    .map(
+      (prog) => `
+    <div class="program-card program-card--${esc(prog.style)}">
+      <div class="program-card__tag">${esc(prog.tag)}</div>
+      <h3>${esc(prog.title)}</h3>
+      <p class="program-card__desc">${esc(prog.description)}</p>
+      <ul>${prog.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+      <div class="journey">
+        <div class="journey__label">A typical journey</div>
+        <div class="journey__steps">${prog.journey.map((s, i) => `<span>${i + 1}. ${esc(s)}</span>`).join('')}</div>
+      </div>
+    </div>`
+    )
+    .join('');
+  return `
+<section class="section" id="programs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(p.kicker)}</div>
+      <h2>${esc(p.title)}</h2>
+      <p>${esc(p.intro)}</p>
+    </div>
+    <div class="programs-grid reveal">${items}</div>
+  </div>
+</section>`;
+}
+
+function foundations(f) {
+  const cards = f.cards
+    .map(
+      (c) => `
+    <div class="found-card">
+      <span class="found-card__label">${esc(c.label)}</span>
+      <h4>${esc(c.title)}</h4>
+      <p>${esc(c.description)}</p>
+    </div>`
+    )
+    .join('');
+  return `
+<section class="foundations section" id="network">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker" style="color:#C9A15A;">${esc(f.kicker)}</div>
+      <h2>${esc(f.title)}</h2>
+      <p style="color:#C7CCD8;">${esc(f.intro)}</p>
+    </div>
+    <div class="found-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+function involve(inv) {
+  const cards = inv.cards
+    .map(
+      (c) => `
+    <div class="involve-card">
+      <div class="involve-card__icon">${esc(c.number)}</div>
+      <h4>${esc(c.title)}</h4>
+      <p>${esc(c.description)}</p>
+      <a href="${esc(c.linkHref)}" class="involve-card__link">${esc(c.linkLabel)}</a>
+    </div>`
+    )
+    .join('');
+  return `
+<section class="section" id="involve">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <div class="kicker">${esc(inv.kicker)}</div>
+      <h2>${esc(inv.title)}</h2>
+    </div>
+    <div class="involve-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+function trust(t) {
+  const points = t.points.map((p) => `<div class="trust-item"><div class="trust-item__dot"></div><p>${esc(p)}</p></div>`).join('');
+  const status = t.registrationStatus
+    .map(
+      (r) =>
+        `<div class="status-row"><span>${esc(r.label)}</span><span class="status-row__${r.status === 'Done' ? 'done' : 'pending'}">${esc(r.status)}</span></div>`
+    )
+    .join('');
+  return `
+<section class="trust section" id="trust">
+  <div class="wrap trust-grid">
+    <div class="reveal">
+      <div class="kicker">${esc(t.kicker)}</div>
+      <h2>${esc(t.title)}</h2>
+      <p>${esc(t.intro)}</p>
+      <div class="trust-list">${points}</div>
+    </div>
+    <div class="status-card reveal">
+      <div class="status-card__label">Registration status</div>
+      ${status}
+    </div>
+  </div>
+</section>`;
+}
+
+function faq(f) {
+  const items = f.items
+    .map(
+      (item, i) => `
+    <details class="faq-item" ${i === 0 ? 'open' : ''}>
+      <summary class="faq-item__question">${esc(item.question)}<span class="icon" aria-hidden="true">+</span></summary>
+      <div class="faq-item__answer">${inlineMd(item.answer)}</div>
+    </details>`
+    )
+    .join('');
+  return `
+<section class="section" id="faq" style="background:var(--color-paper);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(f.kicker)}</div>
+      <h2>${esc(f.title)}</h2>
+    </div>
+    <div class="faq-list reveal">${items}</div>
+  </div>
+</section>`;
+}
+
+function splitCta(s) {
+  return `
+<section class="split" style="padding:0;">
+  <div class="split-panel split-panel--families">
+    <h3>${esc(s.families.title)}</h3>
+    <p>${esc(s.families.description)}</p>
+    <a href="${esc(s.families.buttonHref)}" class="split-btn">${esc(s.families.buttonLabel)}</a>
+  </div>
+  <div class="split-panel split-panel--partners">
+    <h3>${esc(s.partners.title)}</h3>
+    <p>${esc(s.partners.description)}</p>
+    <a href="${esc(s.partners.buttonHref)}" class="split-btn">${esc(s.partners.buttonLabel)}</a>
+  </div>
+</section>`;
+}
+
+function footer(f, siteData) {
+  const cols = f.columns
+    .map(
+      (col) => `
+    <div class="footer-col">
+      <h5>${esc(col.heading)}</h5>
+      ${col.links.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('')}
+    </div>`
+    )
+    .join('');
+  return `
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__top">
+      <div>
+        <a class="nav__logo" href="#top" style="margin-bottom:14px;">
+          <svg class="nav__logo-mark" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 L13 24 M2 13 L24 13" stroke="#B5701A" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="13" r="4" fill="#B5701A"/></svg>
+          <span>${esc(siteData.siteName)}</span>
+        </a>
+        <p class="site-footer__tagline">${esc(f.tagline)}</p>
+        ${socialIcons(siteData.socialLinks)}
+      </div>
+      <div class="site-footer__cols">${cols}</div>
+    </div>
+    <div class="site-footer__bottom">&copy; ${esc(siteData.siteName)}. ${esc(f.bottomText)}</div>
+  </div>
+</footer>`;
+}
+
+/** Full HTML document shell: head, meta/SEO, and the assembled body. */
+function layout({ site, bodyHtml, embedScripts = [] }) {
+  const embedScriptTags = embedScripts.map((src) => `<script async src="${esc(src)}"><\/script>`).join('\n');
+  return `<!DOCTYPE html>
+<html lang="${esc(site.language || 'en')}">
+<head>
+<meta charset="UTF-8">
+<title>${esc(site.seo.defaultTitle)}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="${esc(site.seo.defaultDescription)}">
+<meta name="theme-color" content="${esc(site.themeColor)}">
+<link rel="canonical" href="${esc(site.url)}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(site.seo.defaultTitle)}">
+<meta property="og:description" content="${esc(site.seo.defaultDescription)}">
+<meta property="og:image" content="${esc(site.seo.ogImage)}">
+<meta property="og:url" content="${esc(site.url)}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 26 26\'%3E%3Cpath d=\'M13 2 L13 24 M2 13 L24 13\' stroke=\'%23D98B24\' stroke-width=\'2.4\' stroke-linecap=\'round\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'4.5\' fill=\'%231D263A\'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+${INLINE_CSS}
+</style>
+${embedScriptTags}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+${bodyHtml}
+<script>${INLINE_JS}<\/script>
+</body>
+</html>`;
+}
+
+
+function updatesSection(u) {
+  const enabledItems = (u.items || []).filter((i) => i.enabled !== false && i.title);
+  if (enabledItems.length === 0) return '';
+  const cards = enabledItems
+    .map(
+      (item) => `
+    <article class="update-card">
+      ${item.imageUrl ? `<img class="update-card__image" src="${esc(item.imageUrl)}" alt="" loading="lazy">` : ''}
+      <div class="update-card__body">
+        ${item.date ? `<div class="update-card__date">${esc(item.date)}</div>` : ''}
+        <h3 class="update-card__title">${esc(item.title)}</h3>
+        <div class="update-card__content">${toHtml(item.content || '')}</div>
+      </div>
+    </article>`
+    )
+    .join('');
+  return `
+<section class="section" id="updates" style="background:var(--color-paper);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(u.kicker)}</div>
+      <h2>${esc(u.title)}</h2>
+      <p>${esc(u.intro)}</p>
+    </div>
+    <div class="updates-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+function buildFullSite(content) {
+  const bodyHtml = [
+    nav({ ...content.nav, logoText: content.site.logoText }),
+    '<main id="main">',
+    hero(content.home.hero, content.home.stats),
+    updatesSection(content.updates),
+    approach(content.home.approach),
+    problem(content.home.problem),
+    model(content.home.model),
+    programs(content.programs),
+    foundations(content.foundations),
+    involve(content.involve),
+    embeds(content.embeds),
+    trust(content.trust),
+    faq(content.faq),
+    splitCta(content.involve.splitCta),
+    '</main>',
+    footer(content.footer, content.site),
+  ].join('\n');
+  const embedScripts = requiredScripts(content.embeds.items || []);
+  return layout({ site: content.site, bodyHtml, embedScripts });
+}
+
+</script>
+
+</body>
+</html>
