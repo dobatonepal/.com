@@ -131,21 +131,67 @@
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">02</span><h2>Articles &amp; Updates</h2></div>
+    <div class="card-head"><span class="num">02</span><h2>Contact Info</h2></div>
+    <p class="help">Shown in a dedicated Contact section and used for the phone/email buttons visitors see. This is how people reach you to donate, volunteer, or partner — no forms, no portal.</p>
+    <div class="row">
+      <div>
+        <label for="f-phone">Phone number</label>
+        <input type="text" id="f-phone" placeholder="+977-...">
+      </div>
+      <div>
+        <label for="f-email">Email address</label>
+        <input type="text" id="f-email" placeholder="you@example.org">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">03</span><h2>Critical Alerts</h2></div>
+    <p class="help">Post a real, current risk you're aware of — flooding, landslide, heavy rain, or other emergency. Honest by design: this is a board you update yourself, not an automated feed. It always links out to Nepal's official BIPAD Portal and NDRRMA for live monitoring.</p>
+    <div id="alerts-list"></div>
+    <button class="add-btn" type="button" onclick="addAlert()">+ Add a critical alert</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">04</span><h2>Emergency Hotlines</h2></div>
+    <p class="help">Pre-filled with numbers we cross-checked against multiple official sources. Double-check before publishing, and update anything that's changed — you're the one keeping this accurate for your users.</p>
+    <div id="hotlines-national-list"></div>
+    <button class="add-btn" type="button" onclick="addHotline('national')" style="margin-bottom:20px;">+ Add a national number</button>
+    <p class="help" style="margin-top:0;"><strong>District &amp; local numbers</strong> — health posts, local police, ward offices, anything specific to one area.</p>
+    <div id="hotlines-district-list"></div>
+    <button class="add-btn" type="button" onclick="addHotline('district')">+ Add a district/local number</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">05</span><h2>Verified Local Contacts</h2></div>
+    <p class="help">Health posts, schools, cooperatives, and community volunteers you've personally verified. Only add contacts you've actually confirmed yourself.</p>
+    <div id="directory-list"></div>
+    <button class="add-btn" type="button" onclick="addContact()">+ Add a verified contact</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">06</span><h2>Community Events</h2></div>
+    <p class="help">Health camps, education expos, and other events — especially ones that are free or low-cost for people who can't otherwise access them.</p>
+    <div id="events-list"></div>
+    <button class="add-btn" type="button" onclick="addEvent()">+ Add an event</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">07</span><h2>Articles &amp; Updates</h2></div>
     <p class="help">Post work updates, articles, or daily notes. Each one appears as a card near the top of your homepage, newest first. This section stays hidden until you add at least one and turn it on.</p>
     <div id="updates-list"></div>
     <button class="add-btn" type="button" onclick="addUpdate()">+ Add an article or update</button>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">03</span><h2>Social Media</h2></div>
+    <div class="card-head"><span class="num">08</span><h2>Social Media</h2></div>
     <p class="help">Pick a platform, paste your profile link, and turn it on. Use up/down arrows to set the order icons appear in your footer.</p>
     <div id="social-list"></div>
     <button class="add-btn" type="button" onclick="addSocial()">+ Add a social media link</button>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">04</span><h2>YouTube Videos &amp; Posts</h2></div>
+    <div class="card-head"><span class="num">09</span><h2>YouTube Videos &amp; Posts</h2></div>
     <p class="help">Paste a link to a YouTube video, YouTube playlist, or a post from X, Instagram, Facebook, or TikTok — it embeds automatically. Hidden until you add at least one and turn it on.</p>
     <div id="embed-list"></div>
     <button class="add-btn" type="button" onclick="addEmbed()">+ Add a video or post</button>
@@ -192,7 +238,8 @@ const CONTENT = {
       "defaultTitle": "Dobato Nepal — Think Globally. Work Locally.",
       "defaultDescription": "Free education and health guidance in Nepal, delivered through trusted local partners.",
       "ogImage": "/assets/images/og-cover.jpg"
-    }
+    },
+    "contactPhone": ""
   },
   "nav": {
     "links": [
@@ -400,9 +447,9 @@ const CONTENT = {
       {
         "number": "2",
         "title": "Support From Anywhere",
-        "description": "Based abroad or in the city? Diaspora and remote supporters help fund pilots and connect us with the right local contacts.",
-        "linkLabel": "See how to support →",
-        "linkHref": "#"
+        "description": "Want to donate, sponsor a program, or just help from a distance? Contact us directly — phone, email, or social media, listed below. We'll talk it through openly and let you know exactly where it goes.",
+        "linkLabel": "See our contact details ↓",
+        "linkHref": "#contact"
       },
       {
         "number": "3",
@@ -439,7 +486,7 @@ const CONTENT = {
     ],
     "registrationStatus": [
       {
-        "label": "Company registration (OCR)",
+        "label": "Company registration (Office of Company Registrar)",
         "status": "In progress"
       },
       {
@@ -449,14 +496,6 @@ const CONTENT = {
       {
         "label": "PAN (IRD)",
         "status": "In progress"
-      },
-      {
-        "label": "NGO registration (DAO)",
-        "status": "Planned"
-      },
-      {
-        "label": "Social Welfare Council",
-        "status": "Planned"
       }
     ]
   },
@@ -466,7 +505,8 @@ const CONTENT = {
     "items": [
       {
         "question": "Is this really free, forever?",
-        "answer": "Yes, for the families and communities Dobato Nepal serves. It's funded through grants, donations, and partnerships — never through fees charged to the people using it."
+        "answer": "Yes, for the families and communities we serve — that never changes. We're a startup, not a charity, and we're upfront about how we sustain that: through our own operations, direct partnerships, and support from people who reach out to us directly. If you'd like to fund or sponsor a specific program, contact us by phone, email, or social media and we'll talk it through openly.",
+        "content": null
       },
       {
         "question": "How do you decide which village or ward comes first?",
@@ -477,12 +517,12 @@ const CONTENT = {
         "answer": "Every piece of health content is reviewed by a licensed clinician before it reaches a family, and every interaction is designed to end in a referral to a real health post — never a diagnosis or a prescription from us."
       },
       {
-        "question": "Can I support Dobato Nepal from outside Nepal?",
-        "answer": "Yes. Diaspora and international supporters can contribute funding or help connect us with local partners in specific districts — see \"Support From Anywhere\" above."
+        "question": "Can I donate, volunteer, or partner with you?",
+        "answer": "Yes to all three. We don't run a donation portal or a formal volunteer application — instead, contact us directly by phone, email, or social media (see the Contact section below), tell us what you have in mind, and we'll figure out the best way to work together. We're transparent about how any contribution is used."
       },
       {
         "question": "Who runs Dobato Nepal?",
-        "answer": "Dobato Nepal is a Nepal-based initiative currently completing its formal registration (see Trust & Transparency above). As we grow, our team, partners, and governance structure will be published here in full."
+        "answer": "Dobato Nepal is a startup, built and run from Nepal, currently completing its formal business registration (see Trust & Governance below). We're growing from the community level toward a national and eventually global platform, one verified district at a time."
       }
     ]
   },
@@ -490,7 +530,7 @@ const CONTENT = {
     "tagline": "Dobato Nepal — दोबाटो — means the point where two paths meet. This is an early-stage initiative built and run from Nepal. We'll publish our first program outcomes here once our first community pilot is complete.",
     "columns": [
       {
-        "heading": "Explore",
+        "heading": "Quick Navigation",
         "links": [
           {
             "label": "Our Approach",
@@ -501,8 +541,16 @@ const CONTENT = {
             "href": "#programs"
           },
           {
-            "label": "Global Foundations",
-            "href": "#network"
+            "label": "Emergency Hotlines",
+            "href": "#hotlines"
+          },
+          {
+            "label": "Critical Alerts",
+            "href": "#alerts"
+          },
+          {
+            "label": "Community Events",
+            "href": "#events"
           },
           {
             "label": "FAQ",
@@ -511,24 +559,24 @@ const CONTENT = {
         ]
       },
       {
-        "heading": "Involved",
+        "heading": "Transparency & Governance",
         "links": [
           {
-            "label": "Partner Locally",
-            "href": "#involve"
-          },
-          {
-            "label": "Support From Anywhere",
-            "href": "#involve"
-          },
-          {
-            "label": "Trust & Transparency",
+            "label": "Trust & Registration Status",
             "href": "#trust"
+          },
+          {
+            "label": "How We Verify Information",
+            "href": "#approach"
+          },
+          {
+            "label": "Contact Us Directly",
+            "href": "#contact"
           }
         ]
       }
     ],
-    "bottomText": "All statistics sourced to named Nepal government bodies — see Trust & Transparency."
+    "bottomText": "A startup built from the community level up. All statistics sourced to named Nepal government bodies — see Trust & Governance."
   },
   "embeds": {
     "kicker": "From The Field",
@@ -540,6 +588,71 @@ const CONTENT = {
     "kicker": "Latest Work",
     "title": "Updates from the ground.",
     "intro": "Short notes on what's happening — pilots starting, partners joining, lessons learned. Posted as things happen, not on a schedule.",
+    "items": []
+  },
+  "hotlines": {
+    "kicker": "Emergency Services",
+    "title": "Verified National & District Emergency Hotlines",
+    "intro": "Cross-checked against multiple official and independent sources, including the U.S. Embassy Nepal's public safety page and Nepal's disaster authority. Numbers can change — if in doubt, dial 100 as the universal fallback, and always follow official guidance over anything listed here.",
+    "national": [
+      {
+        "label": "Police",
+        "number": "100"
+      },
+      {
+        "label": "Fire Brigade",
+        "number": "101"
+      },
+      {
+        "label": "Ambulance",
+        "number": "102"
+      },
+      {
+        "label": "Traffic Police",
+        "number": "103"
+      },
+      {
+        "label": "Disaster & Rescue (NDRRMA)",
+        "number": "1234"
+      },
+      {
+        "label": "Tourist Police",
+        "number": "1144"
+      },
+      {
+        "label": "Child Helpline",
+        "number": "1098"
+      }
+    ],
+    "sourceNote": "National numbers verified against the U.S. Embassy in Nepal, Nepal Disaster Risk Reduction and Management Authority (NDRRMA) public advisories, and independent cross-checks — last reviewed August 2026.",
+    "district": []
+  },
+  "verifiedContacts": {
+    "kicker": "Local Directory",
+    "title": "Direct, verified contacts across your district.",
+    "intro": "Health posts, schools, cooperatives, and community volunteers we've personally verified. This list grows as we confirm each contact ourselves — nothing here is scraped or automated.",
+    "items": []
+  },
+  "alerts": {
+    "kicker": "Community Safety",
+    "title": "Critical Alerts",
+    "intro": "Posted by our team when we become aware of a real, current risk — flooding, landslides, heavy rainfall, or other emergencies. This is a manually maintained board, not an automated live feed. For real-time official monitoring, always check Nepal's BIPAD Portal or NDRRMA directly.",
+    "officialLinks": [
+      {
+        "label": "BIPAD Portal (live disaster monitoring)",
+        "url": "https://bipadportal.gov.np"
+      },
+      {
+        "label": "NDRRMA (national disaster authority)",
+        "url": "https://ndrrma.gov.np/en"
+      }
+    ],
+    "items": []
+  },
+  "events": {
+    "kicker": "What's Coming Up",
+    "title": "Community Events",
+    "intro": "Health camps, education expos, and other events that are free or low-cost for people who can't otherwise access them.",
     "items": []
   }
 };
@@ -560,6 +673,8 @@ document.getElementById('f-h2').value = CONTENT.home.hero.headlineLine2;
 document.getElementById('f-sub').value = CONTENT.home.hero.subhead;
 document.getElementById('f-btn1').value = CONTENT.home.hero.ctaPrimary.label;
 document.getElementById('f-btn2').value = CONTENT.home.hero.ctaSecondary.label;
+document.getElementById('f-phone').value = CONTENT.site.contactPhone || '';
+document.getElementById('f-email').value = CONTENT.site.contactEmail || '';
 
 if (!CONTENT.updates) CONTENT.updates = { kicker: 'Latest Work', title: 'Updates from the ground.', intro: '', items: [] };
 function renderUpdates() {
@@ -695,6 +810,189 @@ function moveEmbed(i, dir) {
   renderEmbeds();
 }
 
+const SEVERITY_TYPES = [['flood','Flood'],['landslide','Landslide'],['rain','Heavy Rain'],['other','Other Emergency']];
+const CONTACT_TYPES = [['Health Post','Health Post'],['School','School'],['Cooperative','Cooperative'],['Community Volunteer','Community Volunteer'],['Other','Other']];
+
+// ---- Critical Alerts ----
+if (!CONTENT.alerts) CONTENT.alerts = { kicker: 'Community Safety', title: 'Critical Alerts', intro: '', officialLinks: [], items: [] };
+function renderAlerts() {
+  const wrap = document.getElementById('alerts-list');
+  wrap.innerHTML = '';
+  CONTENT.alerts.items.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Alert ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveAlert(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.alerts.items.length - 1 ? `<button type="button" onclick="moveAlert(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeAlert(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Type</label>
+          <select onchange="CONTENT.alerts.items[${i}].severity=this.value">
+            ${SEVERITY_TYPES.map(([v,l]) => `<option value="${v}" ${v===a.severity?'selected':''}>${l}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label>Region / District</label>
+          <input type="text" value="${escAttr(a.region)}" oninput="CONTENT.alerts.items[${i}].region=this.value">
+        </div>
+      </div>
+      <label>Title</label>
+      <input type="text" value="${escAttr(a.title)}" oninput="CONTENT.alerts.items[${i}].title=this.value">
+      <label>Description</label>
+      <textarea oninput="CONTENT.alerts.items[${i}].description=this.value">${(a.description||'').replace(/</g,'&lt;')}</textarea>
+      <label>Date</label>
+      <input type="text" value="${escAttr(a.date)}" placeholder="e.g. August 2, 2026" oninput="CONTENT.alerts.items[${i}].date=this.value">
+      <div class="toggle-row">
+        <input type="checkbox" id="alert-en-${i}" ${a.enabled!==false?'checked':''} onchange="CONTENT.alerts.items[${i}].enabled=this.checked">
+        <label for="alert-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addAlert() { CONTENT.alerts.items.unshift({ severity:'flood', region:'', title:'', description:'', date:'', enabled:true }); renderAlerts(); }
+function removeAlert(i) { CONTENT.alerts.items.splice(i,1); renderAlerts(); }
+function moveAlert(i,dir) { const a=CONTENT.alerts.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderAlerts(); }
+
+// ---- Emergency Hotlines (national + district) ----
+if (!CONTENT.hotlines) CONTENT.hotlines = { kicker:'Emergency Services', title:'Verified National & District Emergency Hotlines', intro:'', sourceNote:'', national:[], district:[] };
+function renderHotlines(kind) {
+  const wrap = document.getElementById(kind === 'national' ? 'hotlines-national-list' : 'hotlines-district-list');
+  const list = CONTENT.hotlines[kind];
+  wrap.innerHTML = '';
+  list.forEach((h, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>${kind === 'national' ? 'Number' : 'Local number'} ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveHotline('${kind}',${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < list.length - 1 ? `<button type="button" onclick="moveHotline('${kind}',${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeHotline('${kind}',${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Label</label>
+          <input type="text" value="${escAttr(h.label)}" oninput="CONTENT.hotlines['${kind}'][${i}].label=this.value">
+        </div>
+        <div>
+          <label>Number</label>
+          <input type="text" value="${escAttr(h.number)}" oninput="CONTENT.hotlines['${kind}'][${i}].number=this.value">
+        </div>
+      </div>
+      ${kind === 'district' ? `<label>District</label><input type="text" value="${escAttr(h.district)}" oninput="CONTENT.hotlines['${kind}'][${i}].district=this.value">
+      <div class="toggle-row"><input type="checkbox" id="hotline-en-${i}" ${h.enabled!==false?'checked':''} onchange="CONTENT.hotlines['${kind}'][${i}].enabled=this.checked"><label for="hotline-en-${i}">Show this on my live site</label></div>` : ''}`;
+    wrap.appendChild(div);
+  });
+}
+function addHotline(kind) {
+  const item = kind === 'national' ? { label:'', number:'' } : { label:'', number:'', district:'', enabled:true };
+  CONTENT.hotlines[kind].unshift(item);
+  renderHotlines(kind);
+}
+function removeHotline(kind, i) { CONTENT.hotlines[kind].splice(i,1); renderHotlines(kind); }
+function moveHotline(kind, i, dir) { const a=CONTENT.hotlines[kind]; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderHotlines(kind); }
+
+// ---- Verified Local Contacts ----
+if (!CONTENT.verifiedContacts) CONTENT.verifiedContacts = { kicker:'Local Directory', title:'Direct, verified contacts across your district.', intro:'', items:[] };
+function renderContacts() {
+  const wrap = document.getElementById('directory-list');
+  wrap.innerHTML = '';
+  CONTENT.verifiedContacts.items.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Contact ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveContact(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.verifiedContacts.items.length - 1 ? `<button type="button" onclick="moveContact(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeContact(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Type</label>
+          <select onchange="CONTENT.verifiedContacts.items[${i}].type=this.value">
+            ${CONTACT_TYPES.map(([v,l]) => `<option value="${v}" ${v===c.type?'selected':''}>${l}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label>District</label>
+          <input type="text" value="${escAttr(c.district)}" oninput="CONTENT.verifiedContacts.items[${i}].district=this.value">
+        </div>
+      </div>
+      <label>Name</label>
+      <input type="text" value="${escAttr(c.name)}" oninput="CONTENT.verifiedContacts.items[${i}].name=this.value">
+      <label>Phone</label>
+      <input type="text" value="${escAttr(c.phone)}" oninput="CONTENT.verifiedContacts.items[${i}].phone=this.value">
+      <label>Notes (optional)</label>
+      <input type="text" value="${escAttr(c.notes)}" oninput="CONTENT.verifiedContacts.items[${i}].notes=this.value">
+      <div class="toggle-row">
+        <input type="checkbox" id="contact-en-${i}" ${c.enabled!==false?'checked':''} onchange="CONTENT.verifiedContacts.items[${i}].enabled=this.checked">
+        <label for="contact-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addContact() { CONTENT.verifiedContacts.items.unshift({ type:'Health Post', district:'', name:'', phone:'', notes:'', enabled:true }); renderContacts(); }
+function removeContact(i) { CONTENT.verifiedContacts.items.splice(i,1); renderContacts(); }
+function moveContact(i,dir) { const a=CONTENT.verifiedContacts.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderContacts(); }
+
+// ---- Community Events ----
+if (!CONTENT.events) CONTENT.events = { kicker:"What's Coming Up", title:'Community Events', intro:'', items:[] };
+function renderEvents() {
+  const wrap = document.getElementById('events-list');
+  wrap.innerHTML = '';
+  CONTENT.events.items.forEach((e, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Event ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveEvent(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.events.items.length - 1 ? `<button type="button" onclick="moveEvent(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeEvent(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Title</label>
+          <input type="text" value="${escAttr(e.title)}" oninput="CONTENT.events.items[${i}].title=this.value">
+        </div>
+        <div>
+          <label>Date</label>
+          <input type="text" value="${escAttr(e.date)}" placeholder="e.g. August 15, 2026" oninput="CONTENT.events.items[${i}].date=this.value">
+        </div>
+      </div>
+      <label>Location</label>
+      <input type="text" value="${escAttr(e.location)}" oninput="CONTENT.events.items[${i}].location=this.value">
+      <label>Description</label>
+      <textarea oninput="CONTENT.events.items[${i}].description=this.value">${(e.description||'').replace(/</g,'&lt;')}</textarea>
+      <div class="toggle-row">
+        <input type="checkbox" id="event-en-${i}" ${e.enabled!==false?'checked':''} onchange="CONTENT.events.items[${i}].enabled=this.checked">
+        <label for="event-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+  });
+}
+function addEvent() { CONTENT.events.items.unshift({ title:'', date:'', location:'', description:'', enabled:true }); renderEvents(); }
+function removeEvent(i) { CONTENT.events.items.splice(i,1); renderEvents(); }
+function moveEvent(i,dir) { const a=CONTENT.events.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderEvents(); }
+
+renderAlerts();
+renderHotlines('national');
+renderHotlines('district');
+renderContacts();
+renderEvents();
 renderUpdates();
 renderSocial();
 renderEmbeds();
@@ -706,6 +1004,8 @@ function downloadSite() {
   CONTENT.home.hero.subhead = document.getElementById('f-sub').value;
   CONTENT.home.hero.ctaPrimary.label = document.getElementById('f-btn1').value;
   CONTENT.home.hero.ctaSecondary.label = document.getElementById('f-btn2').value;
+  CONTENT.site.contactPhone = document.getElementById('f-phone').value;
+  CONTENT.site.contactEmail = document.getElementById('f-email').value;
 
   const html = buildFullSite(CONTENT);
   const blob = new Blob([html], { type: 'text/html' });
@@ -1243,6 +1543,63 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .embed-card__error { font-size: 13px; color: #B23A3A; padding: var(--space-4); }
 .embed-card__fallback { display: block; padding: var(--space-6); text-align: center; font-weight: 600; font-size: 14px; color: var(--color-indigo-deep); }
 
+
+/* --- Critical Alerts --- */
+.official-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
+.official-link { font-size: 12.5px; font-weight: 600; color: var(--color-indigo-deep); border-bottom: 1.5px solid var(--color-marigold); padding-bottom: 2px; }
+.alerts-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
+.alerts-list { display: flex; flex-direction: column; gap: 14px; }
+.alert-card { border-radius: 8px; padding: 20px 22px; border: 1px solid var(--color-line); background: var(--color-white); border-left: 5px solid var(--color-ink-soft); }
+.alert-card--flood { border-left-color: #2E6FA3; }
+.alert-card--landslide { border-left-color: #8A5A2E; }
+.alert-card--rain { border-left-color: #4F6B4E; }
+.alert-card--other { border-left-color: var(--color-marigold-deep); }
+.alert-card--none { border-left-color: var(--color-line); color: var(--color-ink-soft); font-size: 14px; font-style: italic; }
+.alert-card__tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--color-ink-soft); margin-bottom: 8px; }
+.alert-card h4 { font-size: 16.5px; margin-bottom: 6px; }
+.alert-card__meta { font-size: 12px; color: var(--color-ink-soft); margin-bottom: 10px; }
+.alert-card p { font-size: 13.5px; color: var(--color-ink-soft); }
+.emergency-panel { background: var(--color-indigo-deep); border-radius: 8px; padding: 22px; color: #fff; position: sticky; top: 16px; }
+.emergency-panel__label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: #C9A15A; font-weight: 700; margin-bottom: 14px; }
+.mini-hotline { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #3A4562; font-size: 13.5px; }
+.mini-hotline:first-of-type { border-top: none; }
+.mini-hotline strong { font-family: var(--font-mono); }
+.emergency-panel__more { display: block; margin-top: 14px; font-size: 12.5px; color: #E4B15F; font-weight: 600; }
+
+/* --- Emergency Hotlines directory --- */
+.hotline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.hotline-card { background: var(--color-white); border: 1px solid var(--color-line); border-radius: 8px; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; }
+.hotline-card__label { font-size: 13.5px; font-weight: 600; }
+.hotline-card__number { font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--color-indigo-deep); }
+.hotline-subhead { font-family: var(--font-display); font-size: 18px; margin: 32px 0 16px; }
+.hotline-source { font-size: 12px; color: var(--color-ink-soft); margin-top: 20px; font-style: italic; }
+
+/* --- Verified contacts directory --- */
+.contact-directory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.contact-directory-card { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 8px; padding: 18px; }
+.contact-directory-card__type { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-marigold-deep); margin-bottom: 8px; }
+.contact-directory-card h4 { font-size: 15.5px; margin-bottom: 4px; }
+.contact-directory-card__district { font-size: 12.5px; color: var(--color-ink-soft); margin-bottom: 8px; }
+.contact-directory-card__phone { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--color-indigo-deep); margin-bottom: 6px; }
+.contact-directory-card p { font-size: 13px; color: var(--color-ink-soft); }
+
+/* --- Community events --- */
+.events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.event-card { background: var(--color-white); border: 1px solid var(--color-line); border-radius: 8px; padding: 20px; }
+.event-card__date { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-marigold-deep); text-transform: uppercase; margin-bottom: 8px; }
+.event-card h4 { font-size: 16px; margin-bottom: 4px; }
+.event-card__location { font-size: 12.5px; color: var(--color-ink-soft); margin-bottom: 10px; }
+.event-card p { font-size: 13.5px; color: var(--color-ink-soft); }
+
+/* --- Contact section --- */
+.contact-section { background: var(--color-indigo-deep); padding: 88px 32px; }
+.contact-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.contact-pill { background: #242E45; border: 1px solid #3A4562; border-radius: 10px; padding: 18px 28px; text-align: center; min-width: 200px; }
+.contact-pill strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #C9A15A; margin-bottom: 6px; }
+.contact-pill span { font-size: 16px; color: #fff; font-weight: 600; }
+.contact-social { display: flex; justify-content: center; margin-top: 24px; }
+.contact-social .social-icons { margin-top: 0; }
+
 /* --- Footer --- */
 .site-footer { padding: 52px var(--space-6) 40px; border-top: var(--border-width) solid var(--color-line); background: var(--color-surface); }
 .site-footer__inner { max-width: var(--max-width); margin: 0 auto; }
@@ -1717,21 +2074,163 @@ function updatesSection(u) {
 </section>`;
 }
 
+/* --- Critical Alerts (manually curated, honestly labeled — not a live feed) --- */
+function alertsSection(a, hotlines) {
+  const active = (a.items || []).filter((i) => i.enabled !== false && i.title);
+  const officialLinks = (a.officialLinks || [])
+    .map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener" class="official-link">${esc(l.label)} ↗</a>`)
+    .join('');
+  const emergencyNums = (hotlines.national || [])
+    .slice(0, 4)
+    .map((n) => `<div class="mini-hotline"><span>${esc(n.label)}</span><strong>${esc(n.number)}</strong></div>`)
+    .join('');
+
+  const alertCards = active.length
+    ? active.map((item) => `
+      <div class="alert-card alert-card--${esc(item.severity || 'other')}">
+        <div class="alert-card__tag">${esc((item.severity || 'other').toUpperCase())}</div>
+        <h4>${esc(item.title)}</h4>
+        <div class="alert-card__meta">${esc(item.region || '')}${item.date ? ' · ' + esc(item.date) : ''}</div>
+        <p>${esc(item.description || '')}</p>
+      </div>`).join('')
+    : `<div class="alert-card alert-card--none">No active alerts posted by our team right now. This is not a guarantee nothing is happening — check the official links for live monitoring.</div>`;
+
+  return `
+<section class="section" id="alerts" style="background:var(--color-white);border-top:1px solid var(--color-line);border-bottom:1px solid var(--color-line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(a.kicker)}</div>
+      <h2>${esc(a.title)}</h2>
+      <p>${esc(a.intro)}</p>
+      <div class="official-links">${officialLinks}</div>
+    </div>
+    <div class="alerts-layout reveal">
+      <div class="alerts-list">${alertCards}</div>
+      <aside class="emergency-panel">
+        <div class="emergency-panel__label">Emergency Contacts</div>
+        ${emergencyNums}
+        <a href="#hotlines" class="emergency-panel__more">See all hotlines ↓</a>
+      </aside>
+    </div>
+  </div>
+</section>`;
+}
+
+/* --- Emergency Hotlines directory --- */
+function hotlinesSection(h) {
+  const nationalCards = (h.national || [])
+    .map((n) => `<div class="hotline-card"><span class="hotline-card__label">${esc(n.label)}</span><span class="hotline-card__number">${esc(n.number)}</span></div>`)
+    .join('');
+  const districtItems = (h.district || []).filter((d) => d.enabled !== false && d.label);
+  const districtCards = districtItems
+    .map((n) => `<div class="hotline-card hotline-card--district"><span class="hotline-card__label">${esc(n.label)}${n.district ? ' — ' + esc(n.district) : ''}</span><span class="hotline-card__number">${esc(n.number)}</span></div>`)
+    .join('');
+
+  return `
+<section class="section" id="hotlines">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(h.kicker)}</div>
+      <h2>${esc(h.title)}</h2>
+      <p>${esc(h.intro)}</p>
+    </div>
+    <div class="hotline-grid reveal">${nationalCards}</div>
+    ${districtItems.length ? `<h3 class="hotline-subhead">District &amp; Local Numbers</h3><div class="hotline-grid reveal">${districtCards}</div>` : ''}
+    <p class="hotline-source">${esc(h.sourceNote)}</p>
+  </div>
+</section>`;
+}
+
+/* --- Verified Local Contacts directory --- */
+function verifiedContactsSection(v) {
+  const active = (v.items || []).filter((i) => i.enabled !== false && i.name);
+  if (active.length === 0) return '';
+  const cards = active.map((c) => `
+    <div class="contact-directory-card">
+      <div class="contact-directory-card__type">${esc(c.type || 'Contact')}</div>
+      <h4>${esc(c.name)}</h4>
+      <div class="contact-directory-card__district">${esc(c.district || '')}</div>
+      ${c.phone ? `<div class="contact-directory-card__phone">${esc(c.phone)}</div>` : ''}
+      ${c.notes ? `<p>${esc(c.notes)}</p>` : ''}
+    </div>`).join('');
+  return `
+<section class="section" id="directory" style="background:var(--color-white);border-top:1px solid var(--color-line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(v.kicker)}</div>
+      <h2>${esc(v.title)}</h2>
+      <p>${esc(v.intro)}</p>
+    </div>
+    <div class="contact-directory-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+/* --- Community Events --- */
+function eventsSection(e) {
+  const active = (e.items || []).filter((i) => i.enabled !== false && i.title);
+  if (active.length === 0) return '';
+  const cards = active.map((ev) => `
+    <div class="event-card">
+      <div class="event-card__date">${esc(ev.date || '')}</div>
+      <h4>${esc(ev.title)}</h4>
+      <div class="event-card__location">${esc(ev.location || '')}</div>
+      <p>${esc(ev.description || '')}</p>
+    </div>`).join('');
+  return `
+<section class="section" id="events">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(e.kicker)}</div>
+      <h2>${esc(e.title)}</h2>
+      <p>${esc(e.intro)}</p>
+    </div>
+    <div class="events-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
+/* --- Contact section (donate/volunteer/partner, all via direct contact) --- */
+function contactSection(site) {
+  const enabledSocial = (site.socialLinks || []).filter((s) => s.enabled && s.url);
+  const socialHtml = enabledSocial.length ? socialIcons(site.socialLinks) : '';
+  return `
+<section class="contact-section" id="contact">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal" style="margin-bottom:32px;">
+      <div class="kicker" style="color:#C9A15A;">Get In Touch</div>
+      <h2 style="color:#fff;">Want to donate, volunteer, or partner with us?</h2>
+      <p style="color:#C7CCD8;">We keep this simple and direct. Reach out below, tell us what you have in mind, and we'll respond honestly — including exactly where any contribution goes.</p>
+    </div>
+    <div class="contact-grid reveal">
+      ${site.contactPhone ? `<a href="tel:${esc(site.contactPhone)}" class="contact-pill"><strong>Call</strong><span>${esc(site.contactPhone)}</span></a>` : ''}
+      ${site.contactEmail ? `<a href="mailto:${esc(site.contactEmail)}" class="contact-pill"><strong>Email</strong><span>${esc(site.contactEmail)}</span></a>` : ''}
+    </div>
+    ${socialHtml ? `<div class="contact-social">${socialHtml}</div>` : ''}
+  </div>
+</section>`;
+}
+
 function buildFullSite(content) {
   const bodyHtml = [
     nav({ ...content.nav, logoText: content.site.logoText }),
     '<main id="main">',
     hero(content.home.hero, content.home.stats),
+    alertsSection(content.alerts, content.hotlines),
     updatesSection(content.updates),
+    hotlinesSection(content.hotlines),
     approach(content.home.approach),
     problem(content.home.problem),
     model(content.home.model),
     programs(content.programs),
     foundations(content.foundations),
+    verifiedContactsSection(content.verifiedContacts),
+    eventsSection(content.events),
     involve(content.involve),
     embeds(content.embeds),
     trust(content.trust),
     faq(content.faq),
+    contactSection(content.site),
     splitCta(content.involve.splitCta),
     '</main>',
     footer(content.footer, content.site),
