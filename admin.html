@@ -63,6 +63,10 @@
     text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all 0.15s;}
   .add-btn:hover{border-color:var(--marigold);color:var(--marigold-deep);background:#FFFBF3;}
 
+  input[type=file]{width:100%;padding:9px 10px;border:1px dashed var(--line);border-radius:6px;font-size:13px;background:var(--paper);margin-bottom:10px;cursor:pointer;}
+  .media-preview{margin-bottom:8px;}
+  .media-preview__thumb{max-width:220px;max-height:150px;border-radius:6px;object-fit:cover;display:block;border:1px solid var(--line);}
+
   .publish-bar{position:sticky;bottom:0;background:var(--indigo-deep);padding:18px 24px;text-align:center;
     box-shadow:0 -6px 24px rgba(0,0,0,0.18);}
   .download-btn{background:var(--marigold);color:#221701;border:none;padding:15px 30px;border-radius:7px;
@@ -131,7 +135,60 @@
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">02</span><h2>Contact Info</h2></div>
+    <div class="card-head"><span class="num">02</span><h2>About Section</h2></div>
+    <p class="help">Your story, what you do, what you believe, and your vision — shown right after the homepage message, before anything else. This is usually the first place people go to understand what Dobato Nepal actually is.</p>
+
+    <label for="ab-title">Section title</label>
+    <input type="text" id="ab-title">
+    <label for="ab-intro">Tagline under the title</label>
+    <input type="text" id="ab-intro">
+    <label for="ab-image-file">Photo or video (optional)</label>
+    <input type="file" id="ab-image-file" accept="image/*,video/*"
+      onchange="handleMediaFile(this, (data, label) => { CONTENT.about.image = data; document.getElementById('ab-image-status').textContent = label; renderMediaPreview('ab-image-preview', data); })">
+    <div id="ab-image-preview" class="media-preview"></div>
+    <div id="ab-image-status" class="field__help"></div>
+    <button type="button" class="btn-secondary" onclick="CONTENT.about.image=''; document.getElementById('ab-image-status').textContent=''; renderMediaPreview('ab-image-preview','');">Remove photo/video</button>
+    <label for="ab-story">The story (crossroads narrative)</label>
+    <textarea id="ab-story" style="min-height:110px;"></textarea>
+
+    <label for="ab-pathways-intro">"What We Do" intro line</label>
+    <textarea id="ab-pathways-intro"></textarea>
+    <div id="pathways-list"></div>
+    <button class="add-btn" type="button" onclick="addPathway()" style="margin-bottom:20px;">+ Add a pathway</button>
+
+    <label for="ab-belief">"What We Believe" paragraph</label>
+    <textarea id="ab-belief" style="min-height:90px;"></textarea>
+
+    <label>"How Dobato Works" — 5 steps, in order</label>
+    <div id="process-steps-list"></div>
+    <button class="add-btn" type="button" onclick="addProcessStep()" style="margin-bottom:20px;">+ Add a step</button>
+
+    <label for="ab-vision">Vision paragraph</label>
+    <textarea id="ab-vision" style="min-height:90px;"></textarea>
+    <label for="ab-vision-quote">Closing vision line</label>
+    <input type="text" id="ab-vision-quote">
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">03</span><h2>Our Work</h2></div>
+    <p class="help">Show people what you've actually done — real work, with a photo or short video and a title. Upload straight from your phone or computer, no linking required. Photos are automatically resized so they don't slow your page down. Appears in the top menu as "Our Work", right after Programs. Hidden on your live site until you add at least one item with both a photo/video and a title, and turn it on.</p>
+    <div id="work-list"></div>
+    <button class="add-btn" type="button" onclick="addWork()">+ Add a piece of work</button>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">04</span><h2>Our Services</h2></div>
+    <p class="help">How you fund the free community work. Shown after "Global Foundations" on the live page. Keep each one short and professional — this isn't a checklist, it's a plain explanation of your revenue model.</p>
+    <label for="sv-intro">Intro paragraph</label>
+    <textarea id="sv-intro" style="min-height:80px;"></textarea>
+    <div id="services-list"></div>
+    <button class="add-btn" type="button" onclick="addService()" style="margin-bottom:20px;">+ Add a service</button>
+    <label for="sv-closing">Closing line</label>
+    <input type="text" id="sv-closing">
+  </div>
+
+  <div class="card">
+    <div class="card-head"><span class="num">05</span><h2>Contact Info</h2></div>
     <p class="help">Shown in a dedicated Contact section and used for the phone/email buttons visitors see. This is how people reach you to donate, volunteer, or partner — no forms, no portal.</p>
     <div class="row">
       <div>
@@ -146,35 +203,35 @@
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">03</span><h2>Verified Local Contacts</h2></div>
+    <div class="card-head"><span class="num">06</span><h2>Verified Local Contacts</h2></div>
     <p class="help">Health posts, schools, cooperatives, and community volunteers you've personally verified. Only add contacts you've actually confirmed yourself.</p>
     <div id="directory-list"></div>
     <button class="add-btn" type="button" onclick="addContact()">+ Add a verified contact</button>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">04</span><h2>Community Events</h2></div>
+    <div class="card-head"><span class="num">07</span><h2>Community Events</h2></div>
     <p class="help">Health camps, education expos, and other events — especially ones that are free or low-cost for people who can't otherwise access them.</p>
     <div id="events-list"></div>
     <button class="add-btn" type="button" onclick="addEvent()">+ Add an event</button>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">05</span><h2>Articles &amp; Updates</h2></div>
+    <div class="card-head"><span class="num">08</span><h2>Articles &amp; Updates</h2></div>
     <p class="help">Post work updates, articles, or daily notes. Each one appears as a card near the top of your homepage, newest first. This section stays hidden until you add at least one and turn it on.</p>
     <div id="updates-list"></div>
     <button class="add-btn" type="button" onclick="addUpdate()">+ Add an article or update</button>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">06</span><h2>Social Media</h2></div>
+    <div class="card-head"><span class="num">09</span><h2>Social Media</h2></div>
     <p class="help">Pick a platform, paste your profile link, and turn it on. Use up/down arrows to set the order icons appear in your footer.</p>
     <div id="social-list"></div>
     <button class="add-btn" type="button" onclick="addSocial()">+ Add a social media link</button>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="num">07</span><h2>YouTube Videos &amp; Posts</h2></div>
+    <div class="card-head"><span class="num">10</span><h2>YouTube Videos &amp; Posts</h2></div>
     <p class="help">Paste a link to a YouTube video, YouTube playlist, or a post from X, Instagram, Facebook, or TikTok — it embeds automatically. Hidden until you add at least one and turn it on.</p>
     <div id="embed-list"></div>
     <button class="add-btn" type="button" onclick="addEmbed()">+ Add a video or post</button>
@@ -243,6 +300,10 @@ const CONTENT = {
       {
         "label": "Programs",
         "href": "#programs"
+      },
+      {
+        "label": "Our Work",
+        "href": "#work"
       },
       {
         "label": "Global Foundations",
@@ -476,20 +537,6 @@ const CONTENT = {
       "No family is ever charged for a program listed here, now or later.",
       "Every local partner is trained, verified, and reviewed — we publish who they are to the community they serve.",
       "Every statistic on this site is sourced to a named Nepal government body — not estimated, not invented."
-    ],
-    "registrationStatus": [
-      {
-        "label": "Company registration (Office of Company Registrar)",
-        "status": "In progress"
-      },
-      {
-        "label": "Ward registration",
-        "status": "In progress"
-      },
-      {
-        "label": "PAN (IRD)",
-        "status": "In progress"
-      }
     ]
   },
   "faq": {
@@ -498,7 +545,7 @@ const CONTENT = {
     "items": [
       {
         "question": "Is this really free, forever?",
-        "answer": "Yes, for the families and communities we serve — that never changes. We're a startup, not a charity, and we're upfront about how we sustain that: through our own operations, direct partnerships, and support from people who reach out to us directly. If you'd like to fund or sponsor a specific program, contact us by phone, email, or social media and we'll talk it through openly.",
+        "answer": "Yes, for the families and communities we serve — that never changes. We're a community-centered platform, not a charity, and we're upfront about how we sustain that: through our own professional services (see \"How We Sustain This Work\" above), direct partnerships, and support from people who reach out to us directly. If you'd like to fund or sponsor a specific program, contact us by phone, email, or social media and we'll talk it through openly.",
         "content": null
       },
       {
@@ -515,12 +562,12 @@ const CONTENT = {
       },
       {
         "question": "Who runs Dobato Nepal?",
-        "answer": "Dobato Nepal is a startup, built and run from Nepal, currently completing its formal business registration (see Trust & Governance below). We're growing from the community level toward a national and eventually global platform, one verified district at a time."
+        "answer": "Dobato Nepal is a community-centered platform connecting people to education, health, and social support — built and run from Nepal, currently completing its formal business registration (see Trust & Governance below). We're growing from the community level toward a national and eventually global platform, one verified district at a time."
       }
     ]
   },
   "footer": {
-    "tagline": "Dobato Nepal — दोबाटो — means the point where two paths meet. This is an early-stage initiative built and run from Nepal. We'll publish our first program outcomes here once our first community pilot is complete.",
+    "tagline": "An early-stage initiative built and run from Nepal. We'll publish our first program outcomes here once our first community pilot is complete.",
     "columns": [
       {
         "heading": "Quick Navigation",
@@ -532,6 +579,10 @@ const CONTENT = {
           {
             "label": "Programs",
             "href": "#programs"
+          },
+          {
+            "label": "Our Work",
+            "href": "#work"
           },
           {
             "label": "Community Events",
@@ -639,6 +690,80 @@ const CONTENT = {
     "title": "Community Events",
     "intro": "Health camps, education expos, and other events that are free or low-cost for people who can't otherwise access them.",
     "items": []
+  },
+  "about": {
+    "kicker": "About Dobato Nepal",
+    "title": "Where learning, care, and community meet.",
+    "intro": "Connecting people to the right knowledge, support, and opportunities to move forward.",
+    "story": "Every life reaches a crossroads. A student deciding what to learn. A family looking for the right support. A community trying to stay healthy. A person facing a difficult moment and simply needing someone to stand beside them. Dobato Nepal exists for those moments. In Nepali, दोबाटो (Dobato) means a crossroads — a place where paths meet and a new direction can begin. That's what we're building: a trusted connection between people and the education, guidance, health support, and social care they need to move forward.",
+    "pathwaysKicker": "What We Do",
+    "pathwaysIntro": "We work at the community level, because meaningful change begins close to people — where their real needs, challenges, families, and aspirations are understood. Our work spans four interconnected areas.",
+    "pathways": [
+      {
+        "title": "Education",
+        "description": "Creating opportunities to learn beyond traditional classrooms, develop practical skills, and build better futures."
+      },
+      {
+        "title": "Education Support",
+        "description": "Helping students, families, educators, and institutions navigate learning, academic decisions, career pathways, and the next step forward."
+      },
+      {
+        "title": "Community Health",
+        "description": "Bringing health education, prevention, wellness, and accessible community-based support closer to everyday life."
+      },
+      {
+        "title": "Social Support",
+        "description": "Standing alongside individuals and families who need guidance, advocacy, welfare support, or a helping hand through difficult moments."
+      }
+    ],
+    "beliefKicker": "What We Believe",
+    "belief": "We don't believe meaningful change comes from simply delivering a service. It comes from building trust, understanding the community, and creating solutions people can actually use and own. That's why we listen first, work with local people and institutions, adapt to the needs of each community, and build for lasting impact — not a quick fix.",
+    "processKicker": "How Dobato Works",
+    "processSteps": [
+      "Listen",
+      "Connect",
+      "Support",
+      "Empower",
+      "Sustain"
+    ],
+    "visionKicker": "The Vision",
+    "vision": "Today, our roots are firmly in Nepal. Tomorrow, our vision reaches beyond it. We're building a model that can grow across communities, provinces, and eventually borders — while keeping the same principle at its center.",
+    "visionQuote": "People first. Community first. Impact that lasts.",
+    "image": ""
+  },
+  "services": {
+    "kicker": "How We Sustain This Work",
+    "title": "One platform, two tracks.",
+    "intro": "Our community programs are free, and always will be. Alongside them, Dobato Nepal also works as a registered professional services company — revenue from this work is what makes the free side possible. Here's what that looks like, in plain terms.",
+    "items": [
+      {
+        "title": "Media & Storytelling",
+        "description": "Digital content, video production, and community reporting — built for organizations who want to reach people the way we do: directly, honestly, and without corporate polish."
+      },
+      {
+        "title": "Education & Learning Services",
+        "description": "Structured learning support, guidance, and educational content for schools, institutions, and organizations investing in their communities."
+      },
+      {
+        "title": "Health Guidance & Awareness",
+        "description": "Non-clinical health information and awareness work for partners building healthier communities — never a substitute for medical care."
+      },
+      {
+        "title": "Social & Community Advisory",
+        "description": "Helping organizations connect authentically with the communities they serve, using the same trust-first approach behind our own programs."
+      },
+      {
+        "title": "Research & Professional Consulting",
+        "description": "Applied research and advisory work on education, health, and community topics, for partners who need real answers grounded in real communities."
+      }
+    ],
+    "closing": "Every service we offer is registered and transparent, and connects back to the same mission: people first, community first, impact that lasts."
+  },
+  "work": {
+    "kicker": "Our Work",
+    "title": "What we've done.",
+    "intro": "A look at the work already underway — real programs, real communities, real people. This section stays hidden until at least one item below is added and turned on.",
+    "items": []
   }
 };
 
@@ -652,6 +777,97 @@ const EMBED_TYPES = [
 
 function escAttr(s) { return (s || "").replace(/"/g, "&quot;"); }
 
+/* ==================== Direct file upload (photos & videos) ====================
+   No server, no storage account — files are read straight off your device and
+   embedded into the page itself. Images are automatically resized/compressed
+   so a 12MP phone photo doesn't bloat the page. Videos can't be compressed
+   this way (that needs real transcoding), so large videos get a warning —
+   a short clip is fine, but a multi-minute video will make your page heavy
+   to load. For long videos, uploading to YouTube and pasting the link (in
+   "Embedded Content") is the better option. */
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/** Resizes+recompresses an image data URL via canvas so uploads from a phone
+ *  camera (often 3-10MB) become a few hundred KB, regardless of source size. */
+function compressImageDataUrl(dataUrl, maxDim, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+        else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = reject;
+    img.src = dataUrl;
+  });
+}
+
+function isVideoFile(file) { return file.type.startsWith('video/'); }
+function isVideoSrc(src) {
+  if (!src) return false;
+  if (src.startsWith('data:video')) return true;
+  return /\.(mp4|webm|mov|ogg|m4v)(\?|#|$)/i.test(src);
+}
+
+function renderMediaPreview(elId, src) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  if (!src) { el.innerHTML = ''; return; }
+  el.innerHTML = isVideoSrc(src)
+    ? `<video src="${src}" controls class="media-preview__thumb"></video>`
+    : `<img src="${src}" class="media-preview__thumb">`;
+}
+
+/** Wires up a <input type="file"> to read, (for images) compress, and hand
+ *  the final data URL to onDone(dataUrl, statusLabel). Shows size warnings
+ *  for large videos since those can't be compressed client-side. */
+async function handleMediaFile(inputEl, onDone) {
+  const file = inputEl.files && inputEl.files[0];
+  if (!file) return;
+  const MB = 1024 * 1024;
+
+  if (isVideoFile(file)) {
+    if (file.size > 60 * MB) {
+      alert(`This video is ${formatBytes(file.size)} — too large to embed directly. Please use a shorter clip (under ~60MB), or add it via "Embedded Content" with a YouTube link instead.`);
+      inputEl.value = '';
+      return;
+    }
+    if (file.size > 8 * MB) {
+      const proceed = confirm(`This video is ${formatBytes(file.size)}. Large videos make your page slow to load, especially on mobile. Continue anyway?`);
+      if (!proceed) { inputEl.value = ''; return; }
+    }
+    const dataUrl = await readFileAsDataURL(file);
+    onDone(dataUrl, `${file.name} — ${formatBytes(file.size)} (video)`);
+  } else {
+    const raw = await readFileAsDataURL(file);
+    const compressed = await compressImageDataUrl(raw, 1600, 0.82);
+    const approxBytes = Math.round(compressed.length * 0.75);
+    onDone(compressed, `${file.name} — ${formatBytes(approxBytes)} after compression`);
+  }
+  inputEl.value = '';
+}
+/* ================================================================ */
+
 document.getElementById('f-eyebrow').value = CONTENT.home.hero.eyebrow;
 document.getElementById('f-h1').value = CONTENT.home.hero.headlineLine1;
 document.getElementById('f-h2').value = CONTENT.home.hero.headlineLine2;
@@ -660,6 +876,130 @@ document.getElementById('f-btn1').value = CONTENT.home.hero.ctaPrimary.label;
 document.getElementById('f-btn2').value = CONTENT.home.hero.ctaSecondary.label;
 document.getElementById('f-phone').value = CONTENT.site.contactPhone || '';
 document.getElementById('f-email').value = CONTENT.site.contactEmail || '';
+
+// ---- About Section ----
+document.getElementById('ab-title').value = CONTENT.about.title;
+document.getElementById('ab-intro').value = CONTENT.about.intro;
+document.getElementById('ab-story').value = CONTENT.about.story;
+document.getElementById('ab-pathways-intro').value = CONTENT.about.pathwaysIntro;
+document.getElementById('ab-belief').value = CONTENT.about.belief;
+document.getElementById('ab-vision').value = CONTENT.about.vision;
+document.getElementById('ab-vision-quote').value = CONTENT.about.visionQuote;
+renderMediaPreview('ab-image-preview', CONTENT.about.image);
+if (CONTENT.about.image) document.getElementById('ab-image-status').textContent = 'Current file saved';
+
+function renderPathways() {
+  const wrap = document.getElementById('pathways-list');
+  wrap.innerHTML = '';
+  CONTENT.about.pathways.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Pathway ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="movePathway(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.about.pathways.length - 1 ? `<button type="button" onclick="movePathway(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removePathway(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <label>Title</label>
+      <input type="text" value="${escAttr(p.title)}" oninput="CONTENT.about.pathways[${i}].title=this.value">
+      <label>Description</label>
+      <textarea oninput="CONTENT.about.pathways[${i}].description=this.value">${(p.description||'').replace(/</g,'&lt;')}</textarea>`;
+    wrap.appendChild(div);
+  });
+}
+function addPathway() { CONTENT.about.pathways.push({ title:'', description:'' }); renderPathways(); }
+function removePathway(i) { CONTENT.about.pathways.splice(i,1); renderPathways(); }
+function movePathway(i,dir) { const a=CONTENT.about.pathways; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderPathways(); }
+
+// ---- Our Work (portfolio gallery) ----
+if (!CONTENT.work) CONTENT.work = { kicker: 'Our Work', title: "What we've done.", intro: '', items: [] };
+function renderWork() {
+  const wrap = document.getElementById('work-list');
+  wrap.innerHTML = '';
+  CONTENT.work.items.forEach((w, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Work item ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveWork(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.work.items.length - 1 ? `<button type="button" onclick="moveWork(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeWork(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <label>Photo or video</label>
+      <input type="file" accept="image/*,video/*"
+        onchange="handleMediaFile(this, (data, label) => { CONTENT.work.items[${i}].image=data; document.getElementById('work-status-${i}').textContent=label; renderMediaPreview('work-preview-${i}', data); })">
+      <div id="work-preview-${i}" class="media-preview"></div>
+      <div id="work-status-${i}" class="field__help">${w.image ? 'Current file saved' : ''}</div>
+      ${w.image ? `<button type="button" class="btn-secondary" onclick="CONTENT.work.items[${i}].image=''; document.getElementById('work-status-${i}').textContent=''; renderMediaPreview('work-preview-${i}','');">Remove photo/video</button>` : ''}
+      <label>Title</label>
+      <input type="text" value="${escAttr(w.title)}" oninput="CONTENT.work.items[${i}].title=this.value">
+      <label>Short description (optional)</label>
+      <input type="text" value="${escAttr(w.description)}" oninput="CONTENT.work.items[${i}].description=this.value">
+      <div class="toggle-row">
+        <input type="checkbox" id="work-en-${i}" ${w.enabled !== false ? 'checked' : ''} onchange="CONTENT.work.items[${i}].enabled=this.checked">
+        <label for="work-en-${i}">Show this on my live site</label>
+      </div>`;
+    wrap.appendChild(div);
+    renderMediaPreview(`work-preview-${i}`, w.image);
+  });
+}
+function addWork() { CONTENT.work.items.unshift({ image:'', title:'', description:'', enabled:true }); renderWork(); }
+function removeWork(i) { CONTENT.work.items.splice(i,1); renderWork(); }
+function moveWork(i,dir) { const a=CONTENT.work.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderWork(); }
+renderWork();
+
+function renderProcessSteps() {
+  const wrap = document.getElementById('process-steps-list');
+  wrap.innerHTML = '';
+  CONTENT.about.processSteps.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'list-editor__row';
+    row.innerHTML = `<input type="text" value="${escAttr(s)}" oninput="CONTENT.about.processSteps[${i}]=this.value">
+      <button type="button" class="btn-icon" onclick="removeProcessStep(${i})" title="Remove">X</button>`;
+    wrap.appendChild(row);
+  });
+}
+function addProcessStep() { CONTENT.about.processSteps.push(''); renderProcessSteps(); }
+function removeProcessStep(i) { CONTENT.about.processSteps.splice(i,1); renderProcessSteps(); }
+
+renderPathways();
+renderProcessSteps();
+
+// ---- Our Services ----
+document.getElementById('sv-intro').value = CONTENT.services.intro;
+document.getElementById('sv-closing').value = CONTENT.services.closing;
+function renderServices() {
+  const wrap = document.getElementById('services-list');
+  wrap.innerHTML = '';
+  CONTENT.services.items.forEach((sv, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top">
+        <span>Service ${i + 1}</span>
+        <div class="item-actions">
+          ${i > 0 ? `<button type="button" onclick="moveService(${i},-1)" title="Move up">Up</button>` : ''}
+          ${i < CONTENT.services.items.length - 1 ? `<button type="button" onclick="moveService(${i},1)" title="Move down">Down</button>` : ''}
+          <button type="button" onclick="removeService(${i})" title="Remove">X</button>
+        </div>
+      </div>
+      <label>Title</label>
+      <input type="text" value="${escAttr(sv.title)}" oninput="CONTENT.services.items[${i}].title=this.value">
+      <label>Description</label>
+      <textarea oninput="CONTENT.services.items[${i}].description=this.value">${(sv.description||'').replace(/</g,'&lt;')}</textarea>`;
+    wrap.appendChild(div);
+  });
+}
+function addService() { CONTENT.services.items.push({ title:'', description:'' }); renderServices(); }
+function removeService(i) { CONTENT.services.items.splice(i,1); renderServices(); }
+function moveService(i,dir) { const a=CONTENT.services.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderServices(); }
+renderServices();
 
 if (!CONTENT.updates) CONTENT.updates = { kicker: 'Latest Work', title: 'Updates from the ground.', intro: '', items: [] };
 function renderUpdates() {
@@ -901,6 +1241,15 @@ function downloadSite() {
   CONTENT.home.hero.ctaSecondary.label = document.getElementById('f-btn2').value;
   CONTENT.site.contactPhone = document.getElementById('f-phone').value;
   CONTENT.site.contactEmail = document.getElementById('f-email').value;
+  CONTENT.about.title = document.getElementById('ab-title').value;
+  CONTENT.about.intro = document.getElementById('ab-intro').value;
+  CONTENT.about.story = document.getElementById('ab-story').value;
+  CONTENT.about.pathwaysIntro = document.getElementById('ab-pathways-intro').value;
+  CONTENT.about.belief = document.getElementById('ab-belief').value;
+  CONTENT.about.vision = document.getElementById('ab-vision').value;
+  CONTENT.about.visionQuote = document.getElementById('ab-vision-quote').value;
+  CONTENT.services.intro = document.getElementById('sv-intro').value;
+  CONTENT.services.closing = document.getElementById('sv-closing').value;
 
   const html = buildFullSite(CONTENT);
   const blob = new Blob([html], { type: 'text/html' });
@@ -1387,7 +1736,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 
 /* --- Trust --- */
 .trust { background: var(--color-surface); border-top: var(--border-width) solid var(--color-line); }
-.trust-grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-10); align-items: start; }
+.trust-grid--single { max-width: 720px; margin: 0 auto; }
 .trust h2 { font-size: var(--text-2xl); margin-bottom: var(--space-5); }
 .trust p { color: var(--color-text-muted); font-size: 15.5px; margin-bottom: var(--space-4); }
 .trust-list { margin-top: var(--space-6); }
@@ -1395,12 +1744,6 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .trust-item:last-child { border-bottom: var(--border-width) solid var(--color-line); }
 .trust-item__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-deep); margin-top: 8px; flex-shrink: 0; }
 .trust-item p { color: var(--color-text-muted); font-size: 14px; margin: 0; }
-.status-card { background: var(--color-indigo-deep); color: var(--color-white); border-radius: var(--radius-md); padding: var(--space-6); }
-.status-card__label { font-family: var(--font-mono); font-size: 11.5px; color: #98A1B8; text-transform: uppercase; letter-spacing: 0.08em; }
-.status-row { display: flex; justify-content: space-between; padding: 11px 0; border-top: 1px solid #3A4562; font-size: 13px; }
-.status-row:first-of-type { border-top: none; padding-top: 14px; }
-.status-row__pending { color: #E4B15F; }
-.status-row__done { color: #8EBB92; }
 
 /* --- FAQ (accessible accordion) --- */
 .faq-list { max-width: 760px; }
@@ -1495,6 +1838,62 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .contact-social { display: flex; justify-content: center; margin-top: 24px; }
 .contact-social .social-icons { margin-top: 0; }
 
+/* --- About Dobato Nepal --- */
+.about-section { background: var(--color-white); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+.about-story { max-width: 720px; margin: 0 auto 56px; text-align: center; font-family: var(--font-display); font-size: 19px;
+  line-height: 1.6; color: var(--color-ink); }
+.about-block { max-width: 900px; margin: 0 auto 48px; }
+.about-block .kicker { text-align: center; margin-bottom: 12px; }
+.about-block__intro { text-align: center; max-width: 640px; margin: 0 auto 32px; color: var(--color-text-muted); font-size: 15px; }
+.pathway-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--color-line); border: 1px solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
+.pathway-card { background: var(--color-white); padding: 26px 22px; }
+.pathway-card h4 { font-family: var(--font-display); font-size: 16.5px; margin-bottom: 10px; color: var(--color-indigo-deep); }
+.pathway-card p { font-size: 13px; color: var(--color-text-muted); line-height: 1.55; }
+
+.belief-panel { max-width: 780px; margin: 0 auto 56px; background: var(--color-pine-soft); border-left: 4px solid var(--color-pine);
+  border-radius: 0 8px 8px 0; padding: 28px 32px; }
+.belief-panel p { font-size: 15.5px; color: var(--color-ink); line-height: 1.65; margin-top: 4px; }
+
+.process-strip { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
+.process-step { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 90px; }
+.process-step__num { width: 40px; height: 40px; border-radius: 50%; background: var(--color-indigo-deep); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; }
+.process-step__label { font-size: 13px; font-weight: 600; text-align: center; }
+.process-connector { width: 40px; flex-shrink: 0; }
+.process-connector svg { width: 100%; }
+
+.vision-block { max-width: 680px; margin: 0 auto; text-align: center; background: var(--color-indigo-deep); border-radius: 10px; padding: 40px 36px; }
+.vision-block .kicker { text-align: center; }
+.vision-block p { color: #C7CCD8; font-size: 15px; line-height: 1.65; }
+.vision-block__quote { font-family: var(--font-display); font-style: italic; font-size: 19px; color: #fff; margin-top: 18px; }
+
+@media (max-width: 820px) {
+  .pathway-grid { grid-template-columns: 1fr 1fr; }
+  .process-strip { flex-direction: column; }
+  .process-connector { transform: rotate(90deg); width: 30px; margin: 4px 0; }
+}
+
+/* --- Services --- */
+.services-section { background: var(--color-paper); }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 32px; }
+.service-card { background: var(--color-white); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 24px 22px; }
+.service-card h4 { font-family: var(--font-display); font-size: 16px; margin-bottom: 10px; color: var(--color-indigo-deep); }
+.service-card p { font-size: 13px; color: var(--color-text-muted); line-height: 1.55; }
+.services-closing { text-align: center; max-width: 620px; margin: 0 auto; font-size: 13.5px; color: var(--color-text-muted); font-style: italic; }
+
+/* --- About image (optional) --- */
+.about-image { max-width: 780px; margin: 0 auto 48px; border-radius: 10px; overflow: hidden; }
+.about-image img, .about-image video { width: 100%; display: block; max-height: 420px; object-fit: cover; }
+
+/* --- Our Work (portfolio gallery) --- */
+.work-section { background: var(--color-white); border-top: 1px solid var(--color-line); }
+.work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.work-card { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; margin: 0; }
+.work-card img, .work-card video { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.work-card figcaption { padding: 16px 18px; }
+.work-card h4 { font-family: var(--font-display); font-size: 15.5px; margin-bottom: 6px; color: var(--color-indigo-deep); }
+.work-card p { font-size: 12.5px; color: var(--color-text-muted); line-height: 1.5; }
+
 /* --- Footer --- */
 .site-footer { padding: 52px var(--space-6) 40px; border-top: var(--border-width) solid var(--color-line); background: var(--color-surface); }
 .site-footer__inner { max-width: var(--max-width); margin: 0 auto; }
@@ -1507,7 +1906,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .site-footer__bottom { padding-top: var(--space-5); border-top: var(--border-width) solid var(--color-line); font-size: 12px; color: var(--color-text-muted); }
 
 @media (max-width: 820px) {
-  .problem-grid, .programs-grid, .trust-grid, .split, .glocal-grid, .found-grid, .involve-grid { grid-template-columns: 1fr; }
+  .problem-grid, .programs-grid, .split, .glocal-grid, .found-grid, .involve-grid { grid-template-columns: 1fr; }
   .model__row { flex-direction: column; gap: 22px; }
   .model__connector { display: none; }
   .statstrip__grid { grid-template-columns: 1fr; gap: 14px; }
@@ -1826,24 +2225,14 @@ function involve(inv) {
 
 function trust(t) {
   const points = t.points.map((p) => `<div class="trust-item"><div class="trust-item__dot"></div><p>${esc(p)}</p></div>`).join('');
-  const status = t.registrationStatus
-    .map(
-      (r) =>
-        `<div class="status-row"><span>${esc(r.label)}</span><span class="status-row__${r.status === 'Done' ? 'done' : 'pending'}">${esc(r.status)}</span></div>`
-    )
-    .join('');
   return `
 <section class="trust section" id="trust">
-  <div class="wrap trust-grid">
+  <div class="wrap trust-grid--single">
     <div class="reveal">
       <div class="kicker">${esc(t.kicker)}</div>
       <h2>${esc(t.title)}</h2>
       <p>${esc(t.intro)}</p>
       <div class="trust-list">${points}</div>
-    </div>
-    <div class="status-card reveal">
-      <div class="status-card__label">Registration status</div>
-      ${status}
     </div>
   </div>
 </section>`;
@@ -2117,17 +2506,147 @@ function contactSection(site) {
 </section>`;
 }
 
+/* --- About Dobato Nepal --- */
+/** Detects whether a media value (data URI or URL) is a video, so the
+ *  right tag (<video> vs <img>) gets used. Works for both uploaded
+ *  data: URIs and pasted links ending in a common video extension. */
+function isVideoMedia(src) {
+  if (!src) return false;
+  if (src.startsWith('data:video')) return true;
+  return /\.(mp4|webm|mov|ogg|m4v)(\?|#|$)/i.test(src);
+}
+
+function aboutSection(a) {
+  const pathwayCards = (a.pathways || [])
+    .map((p) => `
+    <div class="pathway-card">
+      <h4>${esc(p.title)}</h4>
+      <p>${esc(p.description)}</p>
+    </div>`)
+    .join('');
+
+  const steps = a.processSteps || [];
+  const connector = `<div class="process-connector" aria-hidden="true"><svg viewBox="0 0 40 16"><line x1="0" y1="8" x2="34" y2="8" stroke="#B7B09A" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M29,3 L36,8 L29,13" fill="none" stroke="#B7B09A" stroke-width="1.5"/></svg></div>`;
+  const processSteps = steps
+    .map((s, i) => `
+    <div class="process-step">
+      <div class="process-step__num">${i + 1}</div>
+      <div class="process-step__label">${esc(s)}</div>
+    </div>${i < steps.length - 1 ? connector : ''}`)
+    .join('');
+
+  const aboutImage = a.image
+    ? isVideoMedia(a.image)
+      ? `<div class="about-image reveal"><video src="${esc(a.image)}" controls playsinline preload="metadata"></video></div>`
+      : `<div class="about-image reveal"><img src="${esc(a.image)}" alt="" loading="lazy"></div>`
+    : '';
+
+  return `
+<section class="about-section section" id="about">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal">
+      <div class="kicker">${esc(a.kicker)}</div>
+      <h2>${esc(a.title)}</h2>
+      <p>${esc(a.intro)}</p>
+    </div>
+    ${aboutImage}
+
+    <p class="about-story reveal">${esc(a.story)}</p>
+
+    <div class="about-block reveal">
+      <div class="kicker">${esc(a.pathwaysKicker)}</div>
+      <p class="about-block__intro">${esc(a.pathwaysIntro)}</p>
+      <div class="pathway-grid">${pathwayCards}</div>
+    </div>
+
+    <div class="belief-panel reveal">
+      <div class="kicker" style="color:var(--color-pine);">${esc(a.beliefKicker)}</div>
+      <p>${esc(a.belief)}</p>
+    </div>
+
+    <div class="about-block reveal">
+      <div class="kicker" style="text-align:center;">${esc(a.processKicker)}</div>
+      <div class="process-strip">${processSteps}</div>
+    </div>
+
+    <div class="vision-block reveal">
+      <div class="kicker" style="color:#C9A15A;">${esc(a.visionKicker)}</div>
+      <p>${esc(a.vision)}</p>
+      <p class="vision-block__quote">${esc(a.visionQuote)}</p>
+    </div>
+  </div>
+</section>`;
+}
+
+/* --- Services (how the free programs are funded) --- */
+function servicesSection(s) {
+  const cards = (s.items || [])
+    .map((item) => `
+    <div class="service-card">
+      <h4>${esc(item.title)}</h4>
+      <p>${esc(item.description)}</p>
+    </div>`)
+    .join('');
+  return `
+<section class="services-section section" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(s.kicker)}</div>
+      <h2>${esc(s.title)}</h2>
+      <p>${esc(s.intro)}</p>
+    </div>
+    <div class="service-grid reveal">${cards}</div>
+    <p class="services-closing reveal">${esc(s.closing)}</p>
+  </div>
+</section>`;
+}
+
+/* --- Our Work (portfolio gallery: image + title) --- */
+function workSection(w) {
+  const active = (w.items || []).filter((i) => i.enabled !== false && i.image && i.title);
+  if (active.length === 0) return '';
+  const cards = active
+    .map((item) => {
+      const media = isVideoMedia(item.image)
+        ? `<video src="${esc(item.image)}" controls playsinline preload="metadata"></video>`
+        : `<img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy">`;
+      return `
+    <figure class="work-card">
+      ${media}
+      <figcaption>
+        <h4>${esc(item.title)}</h4>
+        ${item.description ? `<p>${esc(item.description)}</p>` : ''}
+      </figcaption>
+    </figure>`;
+    })
+    .join('');
+  return `
+<section class="work-section section" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">${esc(w.kicker)}</div>
+      <h2>${esc(w.title)}</h2>
+      <p>${esc(w.intro)}</p>
+    </div>
+    <div class="work-grid reveal">${cards}</div>
+  </div>
+</section>`;
+}
+
 function buildFullSite(content) {
   const bodyHtml = [
     nav({ ...content.nav, logoText: content.site.logoText }),
     '<main id="main">',
     hero(content.home.hero, content.home.stats),
+    aboutSection(content.about),
     updatesSection(content.updates),
     approach(content.home.approach),
     problem(content.home.problem),
     model(content.home.model),
     programs(content.programs),
+    workSection(content.work),
     foundations(content.foundations),
+    servicesSection(content.services),
     verifiedContactsSection(content.verifiedContacts),
     eventsSection(content.events),
     involve(content.involve),
