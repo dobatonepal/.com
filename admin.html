@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Dobato Nepal — Site Editor</title>
+<title>Dobato Nepal Private Limited — Site Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F2F0E8; --ink:#20241F; --ink-soft:#4A4F45;
-    --marigold:#D98B24; --marigold-deep:#B5701A;
-    --indigo:#2E3A55; --indigo-deep:#1D263A; --pine:#4F6B4E; --pine-soft:#DCE6D4;
+    --paper:#F2F0E8; --ink:#1D2019; --ink-soft:#565B52;
+    --accent:#B5701A; --accent-deep:#8F5813;
+    --indigo:#2E3A55; --indigo-deep:#1D263A;
     --line:#D8D3C4; --white:#FBFAF6;
   }
   *{box-sizing:border-box;}
@@ -19,74 +19,62 @@
   code{font-family:'IBM Plex Mono',monospace;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;font-size:0.9em;}
   .wrap{max-width:800px;margin:0 auto;padding:0 24px 120px;}
 
-  .topbar{background:var(--indigo-deep);color:#fff;padding:36px 24px 40px;}
+  .topbar{background:var(--indigo-deep);color:#fff;padding:32px 24px 36px;}
   .topbar-inner{max-width:800px;margin:0 auto;}
-  .brand{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
-  .brand svg{flex-shrink:0;}
-  .brand span{font-family:Fraunces,serif;font-size:17px;font-weight:600;color:#C9A15A;letter-spacing:0.02em;}
-  .topbar h1{font-size:28px;margin:0 0 10px;color:#fff;}
-  .topbar p{color:#C7CCD8;font-size:14.5px;max-width:540px;margin:0;line-height:1.6;}
+  .brand{font-family:Fraunces,serif;font-size:15px;font-weight:600;color:#C9A15A;letter-spacing:0.02em;margin-bottom:16px;}
+  .topbar h1{font-size:24px;margin:0 0 8px;color:#fff;}
+  .topbar p{color:#C7CCD8;font-size:13.5px;max-width:540px;margin:0;line-height:1.6;}
 
-  .instructions{background:#F3DFB8;border-radius:10px;padding:20px 22px;margin:-20px 0 32px;font-size:13.5px;color:#5a4315;
-    box-shadow:0 6px 20px rgba(0,0,0,0.08);}
-  .instructions strong{display:block;margin-bottom:8px;font-size:14px;}
-  .instructions ol{margin:0;padding-left:20px;}
-  .instructions li{margin-bottom:5px;}
+  .instructions{background:#F3DFB8;border-radius:8px;padding:18px 20px;margin:-16px 0 28px;font-size:13px;color:#5a4315;box-shadow:0 6px 20px rgba(0,0,0,0.08);}
+  .instructions strong{display:block;margin-bottom:6px;font-size:13.5px;}
+  .instructions ol{margin:0;padding-left:18px;}
+  .instructions li{margin-bottom:4px;}
 
-  .card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:30px 28px;margin-top:22px;}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:26px 26px;margin-top:20px;}
   .card-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
-  .card-head .num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--marigold-deep);font-weight:600;}
-  .card h2{font-size:19px;margin:0;}
-  .card > p.help{color:var(--ink-soft);font-size:13.5px;margin:6px 0 22px;line-height:1.55;}
+  .card-head .num{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--accent-deep);font-weight:600;}
+  .card h2{font-size:17px;margin:0;}
+  .card > p.help{color:var(--ink-soft);font-size:13px;margin:6px 0 18px;line-height:1.5;}
 
-  label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
-  input[type=text], input[type=url], textarea, select{
-    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:6px;
-    font:inherit;font-size:14px;background:var(--white);margin-bottom:18px;color:var(--ink);
+  label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px;color:var(--ink);}
+  input[type=text],input[type=url],input[type=email],textarea,select{
+    width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:5px;
+    font:inherit;font-size:13.5px;background:var(--white);margin-bottom:16px;color:var(--ink);
   }
-  input:focus, textarea:focus, select:focus{outline:2px solid var(--indigo); outline-offset:1px; border-color:var(--indigo);}
-  textarea{resize:vertical;min-height:70px;}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--indigo);outline-offset:1px;border-color:var(--indigo);}
+  textarea{resize:vertical;min-height:64px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
-  .item{border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:14px;background:var(--paper);}
-  .item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-  .item-top span{font-size:11.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;}
+  .item{border:1px solid var(--line);border-radius:7px;padding:16px;margin-bottom:12px;background:var(--paper);}
+  .item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .item-top span{font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
   .item-actions{display:flex;gap:4px;}
-  .item-actions button{background:var(--white);border:1px solid var(--line);border-radius:5px;cursor:pointer;
-    font-size:13px;width:28px;height:28px;color:var(--ink-soft);}
+  .item-actions button{background:var(--white);border:1px solid var(--line);border-radius:5px;cursor:pointer;font-size:12px;width:26px;height:26px;color:var(--ink-soft);}
   .item-actions button:hover{color:var(--ink);border-color:var(--ink-soft);}
-  .toggle-row{display:flex;align-items:center;gap:9px;margin-bottom:0;}
-  .toggle-row input{width:auto;margin:0;accent-color:var(--indigo-deep);}
-  .toggle-row label{margin:0;font-weight:500;font-size:13.5px;}
 
-  .add-btn{background:var(--white);border:1.5px dashed var(--line);border-radius:8px;padding:12px;width:100%;
-    text-align:center;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all 0.15s;}
-  .add-btn:hover{border-color:var(--marigold);color:var(--marigold-deep);background:#FFFBF3;}
+  .list-editor__row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+  .list-editor__row input{flex:1;margin-bottom:0;}
+  .btn-icon{background:var(--white);border:1px solid var(--line);border-radius:5px;cursor:pointer;font-size:12px;width:28px;height:28px;color:var(--ink-soft);flex-shrink:0;}
 
-  input[type=file]{width:100%;padding:9px 10px;border:1px dashed var(--line);border-radius:6px;font-size:13px;background:var(--paper);margin-bottom:10px;cursor:pointer;}
-  .media-preview{margin-bottom:8px;}
-  .media-preview__thumb{max-width:220px;max-height:150px;border-radius:6px;object-fit:cover;display:block;border:1px solid var(--line);}
+  .add-btn{background:var(--white);border:1.5px dashed var(--line);border-radius:7px;padding:10px;width:100%;text-align:center;font-size:12.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;}
+  .add-btn:hover{border-color:var(--accent);color:var(--accent-deep);background:#FFFBF3;}
 
-  .publish-bar{position:sticky;bottom:0;background:var(--indigo-deep);padding:18px 24px;text-align:center;
-    box-shadow:0 -6px 24px rgba(0,0,0,0.18);}
-  .download-btn{background:var(--marigold);color:#221701;border:none;padding:15px 30px;border-radius:7px;
-    font:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
-  .download-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
-  .download-hint{color:#98A1B8;font-size:12.5px;margin-top:9px;}
-  .status{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:6px;display:none;max-width:420px;margin-left:auto;margin-right:auto;}
-  .status.ok{display:block;background:var(--pine-soft);color:var(--pine);}
+  .publish-bar{position:sticky;bottom:0;background:var(--indigo-deep);padding:16px 24px;text-align:center;box-shadow:0 -6px 24px rgba(0,0,0,0.18);}
+  .download-btn{background:var(--accent);color:#221701;border:none;padding:14px 28px;border-radius:6px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;}
+  .download-btn:hover{filter:brightness(1.06);}
+  .download-hint{color:#98A1B8;font-size:12px;margin-top:8px;}
+  .status{font-size:12.5px;margin-top:9px;padding:9px 13px;border-radius:5px;display:none;max-width:420px;margin-left:auto;margin-right:auto;}
+  .status.ok{display:block;background:#DCE6D4;color:#4F6B4E;}
+  .legal-warning{background:#F3D2D2;border:1px solid #E0A8A8;color:#8A2E2E;border-radius:6px;padding:14px 16px;font-size:12.5px;margin-bottom:20px;line-height:1.5;}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="brand">
-      <svg width="22" height="22" viewBox="0 0 26 26"><path d="M13 2 L13 24 M2 13 L24 13" stroke="#D98B24" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="13" r="4" fill="#D98B24"/></svg>
-      <span>DOBATO NEPAL</span>
-    </div>
+    <div class="brand">DOBATO NEPAL PRIVATE LIMITED</div>
     <h1>Site Editor</h1>
-    <p>Update your homepage message, social links, articles, and videos — no sign-in, no code, nothing installed. Everything happens right here in this browser tab.</p>
+    <p>Edit your commercial site content — services, programs, legal facts, FAQ, contact. No sign-in, no code, nothing installed.</p>
   </div>
 </div>
 
@@ -96,145 +84,143 @@
     <strong>How publishing works</strong>
     <ol>
       <li>Make your edits below.</li>
-      <li>Click <strong>Download Updated Website</strong> — this saves a new <code>index.html</code> to your computer.</li>
-      <li>On GitHub, open your repository, delete the old <code>index.html</code>, and upload the new one.</li>
-      <li>Your site updates automatically within a minute or two.</li>
+      <li>Click <strong>Download Updated Website</strong> — saves a new <code>index.html</code>.</li>
+      <li>On GitHub, delete the old <code>index.html</code> and upload the new one.</li>
+      <li>Your site updates within a minute or two.</li>
     </ol>
   </div>
 
+  <div class="legal-warning">
+    <strong>Legal-sensitive fields.</strong> The Legal, Programs status, and Contact email fields make factual claims about your company's registration and program status. Only update these when the underlying fact has actually changed (e.g. ward registration certificate received, or a program actually goes live). Keep this page matching reality.
+  </div>
+
+  <!-- 01: HERO -->
   <div class="card">
-    <div class="card-head"><span class="num">01</span><h2>Homepage Message</h2></div>
-    <p class="help">The headline and message people see first when they land on your site.</p>
-    <label for="f-eyebrow">Small label above the headline</label>
-    <input type="text" id="f-eyebrow">
-
+    <div class="card-head"><span class="num">01</span><h2>Hero</h2></div>
+    <label for="h-eyebrow">Eyebrow</label>
+    <input type="text" id="h-eyebrow">
+    <label for="h-headline">Headline</label>
+    <textarea id="h-headline"></textarea>
+    <label for="h-subhead">Subhead</label>
+    <textarea id="h-subhead" style="min-height:80px;"></textarea>
     <div class="row">
-      <div>
-        <label for="f-h1">Headline — line 1</label>
-        <input type="text" id="f-h1">
-      </div>
-      <div>
-        <label for="f-h2">Headline — line 2 (highlighted)</label>
-        <input type="text" id="f-h2">
-      </div>
-    </div>
-
-    <label for="f-sub">Subheading</label>
-    <textarea id="f-sub"></textarea>
-
-    <div class="row">
-      <div>
-        <label for="f-btn1">Main button text</label>
-        <input type="text" id="f-btn1">
-      </div>
-      <div>
-        <label for="f-btn2">Second button text</label>
-        <input type="text" id="f-btn2">
-      </div>
+      <div><label for="h-cta1">Primary button</label><input type="text" id="h-cta1"></div>
+      <div><label for="h-cta2">Secondary button</label><input type="text" id="h-cta2"></div>
     </div>
   </div>
 
+  <!-- 02: COMPANY FACTS -->
   <div class="card">
-    <div class="card-head"><span class="num">02</span><h2>About Section</h2></div>
-    <p class="help">Your story, what you do, what you believe, and your vision — shown right after the homepage message, before anything else. This is usually the first place people go to understand what Dobato Nepal actually is.</p>
-
-    <label for="ab-title">Section title</label>
-    <input type="text" id="ab-title">
-    <label for="ab-intro">Tagline under the title</label>
-    <input type="text" id="ab-intro">
-    <label for="ab-image-file">Photo or video (optional)</label>
-    <input type="file" id="ab-image-file" accept="image/*,video/*"
-      onchange="handleMediaFile(this, (data, label) => { CONTENT.about.image = data; document.getElementById('ab-image-status').textContent = label; renderMediaPreview('ab-image-preview', data); })">
-    <div id="ab-image-preview" class="media-preview"></div>
-    <div id="ab-image-status" class="field__help"></div>
-    <button type="button" class="btn-secondary" onclick="CONTENT.about.image=''; document.getElementById('ab-image-status').textContent=''; renderMediaPreview('ab-image-preview','');">Remove photo/video</button>
-    <label for="ab-story">The story (crossroads narrative)</label>
-    <textarea id="ab-story" style="min-height:110px;"></textarea>
-
-    <label for="ab-pathways-intro">"What We Do" intro line</label>
-    <textarea id="ab-pathways-intro"></textarea>
-    <div id="pathways-list"></div>
-    <button class="add-btn" type="button" onclick="addPathway()" style="margin-bottom:20px;">+ Add a pathway</button>
-
-    <label for="ab-belief">"What We Believe" paragraph</label>
-    <textarea id="ab-belief" style="min-height:90px;"></textarea>
-
-    <label>"How Dobato Works" — 5 steps, in order</label>
-    <div id="process-steps-list"></div>
-    <button class="add-btn" type="button" onclick="addProcessStep()" style="margin-bottom:20px;">+ Add a step</button>
-
-    <label for="ab-vision">Vision paragraph</label>
-    <textarea id="ab-vision" style="min-height:90px;"></textarea>
-    <label for="ab-vision-quote">Closing vision line</label>
-    <input type="text" id="ab-vision-quote">
+    <div class="card-head"><span class="num">02</span><h2>Company Facts Strip</h2></div>
+    <p class="help">Update "Registrations" the day a certificate status changes — e.g. from "in process" to "issued".</p>
+    <label for="cf-entity">Entity</label>
+    <input type="text" id="cf-entity">
+    <label for="cf-registrations">Registrations</label>
+    <input type="text" id="cf-registrations">
+    <label for="cf-base">Base</label>
+    <input type="text" id="cf-base">
+    <label for="cf-model">Model</label>
+    <input type="text" id="cf-model">
+    <label for="cf-namenote">Name meaning note</label>
+    <input type="text" id="cf-namenote">
   </div>
 
+  <!-- 03: SERVICES -->
   <div class="card">
-    <div class="card-head"><span class="num">03</span><h2>Our Work</h2></div>
-    <p class="help">Show people what you've actually done — real work, with a photo or short video and a title. Upload straight from your phone or computer, no linking required. Photos are automatically resized so they don't slow your page down. Appears in the top menu as "Our Work", right after Programs. Hidden on your live site until you add at least one item with both a photo/video and a title, and turn it on.</p>
-    <div id="work-list"></div>
-    <button class="add-btn" type="button" onclick="addWork()">+ Add a piece of work</button>
-  </div>
-
-  <div class="card">
-    <div class="card-head"><span class="num">04</span><h2>Our Services</h2></div>
-    <p class="help">How you fund the free community work. Shown after "Global Foundations" on the live page. Keep each one short and professional — this isn't a checklist, it's a plain explanation of your revenue model.</p>
-    <label for="sv-intro">Intro paragraph</label>
-    <textarea id="sv-intro" style="min-height:80px;"></textarea>
+    <div class="card-head"><span class="num">03</span><h2>Services</h2></div>
+    <p class="help">Six paid, contracted services. This section appears before Programs.</p>
+    <label for="sv-intro">Intro</label>
+    <textarea id="sv-intro"></textarea>
     <div id="services-list"></div>
-    <button class="add-btn" type="button" onclick="addService()" style="margin-bottom:20px;">+ Add a service</button>
     <label for="sv-closing">Closing line</label>
     <input type="text" id="sv-closing">
   </div>
 
+  <!-- 04: PROGRAMS -->
   <div class="card">
-    <div class="card-head"><span class="num">05</span><h2>Contact Info</h2></div>
-    <p class="help">Shown in a dedicated Contact section and used for the phone/email buttons visitors see. This is how people reach you to donate, volunteer, or partner — no forms, no portal.</p>
-    <div class="row">
-      <div>
-        <label for="f-phone">Phone number</label>
-        <input type="text" id="f-phone" placeholder="+977-...">
-      </div>
-      <div>
-        <label for="f-email">Email address</label>
-        <input type="text" id="f-email" placeholder="you@example.org">
-      </div>
-    </div>
+    <div class="card-head"><span class="num">04</span><h2>Community Programs</h2></div>
+    <p class="help">Keep the status badge honest — only remove "Not active in a ward yet" once delivery has actually started under a signed MoU.</p>
+    <label for="pr-status">Status badge</label>
+    <input type="text" id="pr-status">
+    <label for="pr-intro">Intro</label>
+    <textarea id="pr-intro"></textarea>
+    <div id="programs-list"></div>
+    <label for="pr-ask">Partnership ask</label>
+    <textarea id="pr-ask"></textarea>
   </div>
 
+  <!-- 05: METHOD / LEGAL BOUNDARY -->
   <div class="card">
-    <div class="card-head"><span class="num">06</span><h2>Verified Local Contacts</h2></div>
-    <p class="help">Health posts, schools, cooperatives, and community volunteers you've personally verified. Only add contacts you've actually confirmed yourself.</p>
-    <div id="directory-list"></div>
-    <button class="add-btn" type="button" onclick="addContact()">+ Add a verified contact</button>
+    <div class="card-head"><span class="num">05</span><h2>Approach (Method &amp; Legal Boundary)</h2></div>
+    <label>"Company provides" list</label>
+    <div id="provides-list"></div>
+    <button class="add-btn" type="button" onclick="addListItem('method.companyProvides','provides-list')" style="margin-bottom:18px;">+ Add item</button>
+    <label>"Always local" list</label>
+    <div id="local-list"></div>
+    <button class="add-btn" type="button" onclick="addListItem('method.alwaysLocal','local-list')" style="margin-bottom:18px;">+ Add item</button>
+    <label for="m-legal">Legal boundary text (keep this precise — do not soften)</label>
+    <textarea id="m-legal" style="min-height:100px;"></textarea>
   </div>
 
+  <!-- 06: WHY THIS DESIGN -->
   <div class="card">
-    <div class="card-head"><span class="num">07</span><h2>Community Events</h2></div>
-    <p class="help">Health camps, education expos, and other events — especially ones that are free or low-cost for people who can't otherwise access them.</p>
-    <div id="events-list"></div>
-    <button class="add-btn" type="button" onclick="addEvent()">+ Add an event</button>
+    <div class="card-head"><span class="num">06</span><h2>Why This Design (Stats)</h2></div>
+    <p class="help">Every stat needs a named government source. Do not add a figure you can't attribute.</p>
+    <label for="wd-intro">Intro</label>
+    <textarea id="wd-intro"></textarea>
+    <div id="stats-list"></div>
+    <button class="add-btn" type="button" onclick="addStat()">+ Add a statistic</button>
   </div>
 
+  <!-- 07: WORKING WITH US -->
   <div class="card">
-    <div class="card-head"><span class="num">08</span><h2>Articles &amp; Updates</h2></div>
-    <p class="help">Post work updates, articles, or daily notes. Each one appears as a card near the top of your homepage, newest first. This section stays hidden until you add at least one and turn it on.</p>
-    <div id="updates-list"></div>
-    <button class="add-btn" type="button" onclick="addUpdate()">+ Add an article or update</button>
+    <div class="card-head"><span class="num">07</span><h2>Working With Us</h2></div>
+    <div id="workflow-list"></div>
+    <button class="add-btn" type="button" onclick="addWorkflowStep()">+ Add a step</button>
   </div>
 
+  <!-- 08: LEGAL -->
   <div class="card">
-    <div class="card-head"><span class="num">09</span><h2>Social Media</h2></div>
-    <p class="help">Pick a platform, paste your profile link, and turn it on. Use up/down arrows to set the order icons appear in your footer.</p>
+    <div class="card-head"><span class="num">08</span><h2>Legal</h2></div>
+    <p class="help">Factual bullets only. Do not add promotional language here.</p>
+    <div id="legal-list"></div>
+    <button class="add-btn" type="button" onclick="addLegalBullet()">+ Add a bullet</button>
+  </div>
+
+  <!-- 09: FAQ -->
+  <div class="card">
+    <div class="card-head"><span class="num">09</span><h2>FAQ</h2></div>
+    <div id="faq-list"></div>
+    <button class="add-btn" type="button" onclick="addFaq()">+ Add a question</button>
+  </div>
+
+  <!-- 10: CONTACT -->
+  <div class="card">
+    <div class="card-head"><span class="num">10</span><h2>Contact</h2></div>
+    <label>Contact categories</label>
+    <div id="categories-list"></div>
+    <button class="add-btn" type="button" onclick="addCategory()" style="margin-bottom:18px;">+ Add a category</button>
+    <label for="ct-email">Company email (leave blank until you have one — the site will show "replace with company email" instead of a fake address)</label>
+    <input type="email" id="ct-email" placeholder="proposals@dobatonepal.com">
+    <label for="ct-phone">Company phone (optional)</label>
+    <input type="text" id="ct-phone">
+  </div>
+
+  <!-- 11: SOCIAL MEDIA -->
+  <div class="card">
+    <div class="card-head"><span class="num">11</span><h2>Social Media</h2></div>
+    <p class="help">Only X, Facebook, Instagram, YouTube, and TikTok appear on the site, per policy.</p>
     <div id="social-list"></div>
-    <button class="add-btn" type="button" onclick="addSocial()">+ Add a social media link</button>
+    <button class="add-btn" type="button" onclick="addSocial()">+ Add a social link</button>
   </div>
 
+  <!-- 12: FOOTER -->
   <div class="card">
-    <div class="card-head"><span class="num">10</span><h2>YouTube Videos &amp; Posts</h2></div>
-    <p class="help">Paste a link to a YouTube video, YouTube playlist, or a post from X, Instagram, Facebook, or TikTok — it embeds automatically. Hidden until you add at least one and turn it on.</p>
-    <div id="embed-list"></div>
-    <button class="add-btn" type="button" onclick="addEmbed()">+ Add a video or post</button>
+    <div class="card-head"><span class="num">12</span><h2>Footer</h2></div>
+    <label for="ft-base">Base (city, country)</label>
+    <input type="text" id="ft-base">
+    <label for="ft-stats">Statistics attribution line</label>
+    <input type="text" id="ft-stats">
   </div>
 
 </div>
@@ -249,729 +235,206 @@
 const CONTENT = {
   "site": {
     "siteName": "Dobato Nepal",
-    "tagline": "Think Globally. Work Locally.",
-    "description": "Dobato Nepal brings global knowledge in education and health together with trusted local partners across Nepal — free, at the point of use.",
+    "siteNameSuffix": "Private Limited",
+    "legalName": "Dobato Nepal Private Limited",
+    "tagline": "Think globally. Work locally.",
     "url": "https://your-username.github.io/dobato-website/",
     "language": "en",
     "themeColor": "#1D263A",
     "logoText": "Dobato Nepal",
-    "logoMeaning": "Dobato Nepal — दोबाटो — means the point where two roads meet.",
-    "contactEmail": "hello@example.org",
+    "contactEmail": "",
+    "contactPhone": "",
     "socialLinks": [
-      {
-        "platform": "x",
-        "url": "https://x.com/DobatoNepal",
-        "enabled": true
-      },
-      {
-        "platform": "facebook",
-        "url": "https://www.facebook.com/DobatoNepal/",
-        "enabled": true
-      },
-      {
-        "platform": "instagram",
-        "url": "https://www.instagram.com/dobatonepal",
-        "enabled": true
-      },
-      {
-        "platform": "youtube",
-        "url": "https://www.youtube.com/@DobatoNepal",
-        "enabled": true
-      },
-      {
-        "platform": "tiktok",
-        "url": "https://www.tiktok.com/@dobato.nepal",
-        "enabled": true
-      }
+      { "platform": "x", "url": "https://x.com/DobatoNepal", "enabled": true },
+      { "platform": "facebook", "url": "https://www.facebook.com/DobatoNepal/", "enabled": true },
+      { "platform": "instagram", "url": "https://www.instagram.com/dobatonepal", "enabled": true },
+      { "platform": "youtube", "url": "https://www.youtube.com/@DobatoNepal", "enabled": true },
+      { "platform": "tiktok", "url": "https://www.tiktok.com/@dobato.nepal", "enabled": true }
     ],
     "seo": {
-      "defaultTitle": "Dobato Nepal — Think Globally. Work Locally.",
-      "defaultDescription": "Free education and health guidance in Nepal, delivered through trusted local partners.",
-      "ogImage": "/assets/images/og-cover.jpg"
-    },
-    "contactPhone": ""
+      "defaultTitle": "Dobato Nepal Private Limited",
+      "defaultDescription": "Dobato Nepal Private Limited is a registered private limited company in Nepal providing digital services, education support, and non-clinical health information for institutions. Community programs are funded by the company.",
+      "ogImage": ""
+    }
   },
   "nav": {
     "links": [
-      {
-        "label": "Our Approach",
-        "href": "#approach"
-      },
-      {
-        "label": "Programs",
-        "href": "#programs"
-      },
-      {
-        "label": "Our Work",
-        "href": "#work"
-      },
-      {
-        "label": "Global Foundations",
-        "href": "#network"
-      },
-      {
-        "label": "Trust",
-        "href": "#trust"
-      },
-      {
-        "label": "FAQ",
-        "href": "#faq"
-      }
+      { "label": "Services", "href": "#services" },
+      { "label": "Programs", "href": "#programs" },
+      { "label": "Approach", "href": "#approach" },
+      { "label": "Legal", "href": "#legal" },
+      { "label": "Contact", "href": "#contact" }
     ],
-    "cta": {
-      "label": "Get Involved",
-      "href": "#involve"
-    }
+    "cta": { "label": "Request a proposal", "href": "#contact" },
+    "secondaryLink": { "label": "Pilot partnership", "href": "#programs" }
   },
-  "home": {
-    "hero": {
-      "eyebrow": "Free education & health support · Nepal",
-      "headlineLine1": "This isn't our program.",
-      "headlineLine2": "It's yours.",
-      "subhead": "Dobato Nepal connects your family with teachers and health workers your community already trusts — real people, real answers, never a bill. Because that's simply what neighbours do for each other.",
-      "ctaPrimary": {
-        "label": "Bring Dobato Nepal to your community →",
-        "href": "#involve"
-      },
-      "ctaSecondary": {
-        "label": "See how it works",
-        "href": "#approach"
-      }
-    },
-    "stats": [
-      {
-        "number": "770,000",
-        "label": "children entirely outside formal schooling nationally — National Statistics Office"
-      },
-      {
-        "number": "9.5%",
-        "label": "of poverty-line households have home internet — NSO Living Standards Survey"
-      },
-      {
-        "number": "51,000+",
-        "label": "community health volunteers already working across Nepal's wards — Ministry of Health"
-      }
+  "hero": {
+    "eyebrow": "Dobato Nepal Private Limited",
+    "headline": "Education support, health information, and digital services for Nepali institutions and communities.",
+    "subhead": "We design learning-support tools and non-clinical health information for local schools and health posts to deliver. We also contract professional digital and advisory work. Community programs are funded by the company. Families are not invoiced for those programs.",
+    "ctaPrimary": { "label": "Request a proposal", "href": "#contact" },
+    "ctaSecondary": { "label": "Read program design", "href": "#programs" }
+  },
+  "companyFacts": {
+    "entity": "Dobato Nepal Private Limited",
+    "registrations": "Company registered · PAN issued · Corporate bank account · Ward registration in process",
+    "base": "Kathmandu, Nepal",
+    "model": "Professional services + company-funded community programs",
+    "nameNote": "\u2018Dobato\u2019 (\u0926\u094b\u092c\u093e\u091f\u094b) is Nepali for crossroads."
+  },
+  "services": {
+    "kicker": "Services",
+    "title": "Services",
+    "intro": "Dobato Nepal Private Limited is a professional services company. Work below is scoped by contract, delivered against a statement of work, and invoiced to the client.",
+    "items": [
+      { "title": "Websites and digital systems", "description": "For schools, health posts/clinics, and inventory-based businesses. Reliable sites and simple operating tools at a stated price, with maintenance." },
+      { "title": "Education and learning services", "description": "Structured learning support, guidance materials, and educational content for schools and training organisations." },
+      { "title": "Health information (non-clinical)", "description": "Awareness and referral-oriented content for partners. Not medical care. Not diagnosis. Not prescription." },
+      { "title": "Research and advisory", "description": "Applied research and consulting on education, community health information, and related institutional questions." },
+      { "title": "Media for institutions", "description": "Digital content and video for organisations that need clear public information \u2014 not consumer advertising theatre." },
+      { "title": "Community and institutional advisory", "description": "Help organisations brief and work with local schools and health posts without substituting for those institutions." }
     ],
-    "approach": {
-      "kicker": "Our Approach",
-      "title": "Global standards. Local hands.",
-      "intro": "Dobato Nepal isn't built around a single outside idea of what a village needs. It's built around a simple division of labour: we bring the knowledge that travels well, and local partners bring everything that has to stay local.",
-      "global": {
-        "label": "Think Globally",
-        "title": "What we bring from the wider world",
-        "items": [
-          "Structured learning materials aligned with recognised foundational-literacy and numeracy frameworks used in education systems worldwide",
-          "Health guidance and triage structured around internationally recognised primary-care and referral protocols",
-          "Lessons drawn from community health worker programs that have worked at scale in South Asia and beyond",
-          "Digital tools that keep the quality of guidance consistent, whether the first village or the fiftieth"
-        ]
-      },
-      "local": {
-        "label": "Work Locally",
-        "title": "What always stays in local hands",
-        "items": [
-          "Who delivers it — a health post, a teacher, a community volunteer your family already knows and trusts",
-          "The language, tone, and pace it's delivered in, set by the community, never dictated from outside",
-          "Which village or ward goes first — decided by need and readiness on the ground, not by convenience",
-          "Ownership of the outcome — the goal is a community that's stronger, not a community that depends on us"
-        ]
-      },
-      "quote": "The idea can come from anywhere. The trust has to come from home."
-    },
-    "problem": {
-      "kicker": "Why This Design",
-      "title": "The people who need this most are the hardest to reach with an outside solution.",
-      "intro": "Nepal's progress on access looks strong nationally — until you sort it by income and geography. That single fact shapes everything about how Dobato Nepal works.",
-      "cards": [
-        {
-          "label": "01 — REACH",
-          "big": "14%",
-          "caption": "household internet access in Karnali Province, versus 79.3% in Kathmandu — National Statistics Office, Living Standards Survey. The gap sits exactly where the need is highest."
-        },
-        {
-          "label": "02 — LEARNING",
-          "big": "28.1%",
-          "caption": "of school dropouts cite poor learning outcomes as the reason — the single largest cause, ahead of child labour or early marriage. NLSS 2024."
-        },
-        {
-          "label": "03 — EQUITY",
-          "big": "11% vs 22%",
-          "caption": "secondary-school completion rate for low-income children versus wealthier children — National Statistics Office."
-        }
-      ]
-    },
-    "model": {
-      "kicker": "How It Reaches A Household",
-      "title": "A trusted local partner first, technology second.",
-      "intro": "No app to download, no data plan required to start. A local partner already known to the community carries Dobato Nepal into homes that outside programs usually miss.",
-      "nodes": [
-        {
-          "letter": "D",
-          "title": "Dobato Nepal",
-          "description": "Structured learning plans and health-triage guidance, built to internationally informed standards and kept current centrally."
-        },
-        {
-          "letter": "P",
-          "title": "Local Partner",
-          "description": "A community health volunteer, teacher, or ward contact — already known and trusted — delivers it by voice, SMS, or in person."
-        },
-        {
-          "letter": "F",
-          "title": "Family",
-          "description": "Gets a straight answer, a next step, or a referral to a real clinic or school resource — no data connection required."
-        }
-      ],
-      "footnote": "The line we don't cross: Dobato Nepal does not diagnose or replace a doctor or teacher. Every health interaction ends in triage and a named referral, never a prescription. Every learning interaction supports a real classroom, never replaces one."
-    }
+    "closing": "Fees from this work fund company programs. Program participation by families is not sold as a package on this page."
   },
   "programs": {
-    "kicker": "What We Run",
-    "title": "Two programs, each with one narrow, honest promise.",
-    "intro": "We'd rather do one thing well in one district than everything, thinly, everywhere.",
+    "kicker": "Community programs",
+    "title": "Community programs",
+    "statusBadge": "Design complete \u00b7 Delivery starts after a signed institutional MoU \u00b7 Not active in a ward yet",
+    "intro": "Two programs only. Each has one promise. Neither replaces a school or a clinic.",
     "items": [
       {
-        "tag": "Education",
-        "style": "edu",
         "title": "Learning Catch-Up",
-        "description": "For children who are enrolled but falling behind grade-level Nepali and math — the gap most programs miss, and government data shows is the single biggest driver of dropout.",
+        "description": "For children already enrolled who are behind grade-level Nepali and mathematics.",
         "bullets": [
-          "Weekly personalised practice sets, delivered through the local volunteer or teacher",
-          "Early dropout-risk signals shared directly with the school, not just collected as data",
-          "Designed to work entirely offline after a weekly sync — no student device required",
-          "Built around recognised foundational literacy and numeracy benchmarks, adapted to the local curriculum"
+          "Weekly practice sets via the partner teacher or volunteer",
+          "Dropout-risk flags shared with the partner school",
+          "Offline after a weekly sync; no student device required",
+          "Supports the classroom; does not replace it"
         ],
         "journey": [
-          "Teacher flags a child falling behind in class",
-          "Weekly practice set matched to that child's gap",
-          "Volunteer checks progress, reports back monthly"
+          "Teacher flags a child behind in class",
+          "Practice set matched to the gap",
+          "Monthly progress note to the school"
         ]
       },
       {
-        "tag": "Health",
-        "style": "health",
         "title": "Ask Before It's Urgent",
-        "description": "A judgment-free way to ask a health question and know whether it's a home-care matter or a \"go now\" matter — before a small problem becomes an emergency.",
+        "description": "Non-clinical guidance so a household can distinguish home-care from \u201cgo to the health post now.\u201d",
         "bullets": [
-          "Voice or SMS triage line run through a trained community health volunteer",
-          "Direct referral to a named partner health post — the handoff is tracked, not just the call",
-          "Plain-language health literacy content, reviewed by a licensed clinician before release",
-          "Built around internationally recognised primary-care triage principles, adapted to what's actually available locally"
+          "Delivered by a partner community health volunteer using approved scripts",
+          "Ends in home-care information or a named referral to the partner health post",
+          "Scripts reviewed by a licensed clinician before use",
+          "Dobato Nepal does not diagnose, treat, or prescribe"
         ],
         "journey": [
-          "Family calls or messages the local volunteer",
-          "Volunteer runs a short triage conversation",
-          "Home-care guidance, or a direct referral to the health post"
+          "Family contacts the partner volunteer",
+          "Volunteer follows the approved script",
+          "Home-care information or referral to the named post"
         ]
-      }
-    ]
-  },
-  "foundations": {
-    "kicker": "Global Foundations, Applied Locally",
-    "title": "We didn't invent this from nothing — we adapted what already works.",
-    "intro": "Dobato Nepal's program design draws on established, publicly documented approaches from education and public health — reshaped for Nepal's specific realities, not copied in from elsewhere.",
-    "cards": [
-      {
-        "label": "Education",
-        "title": "Foundational Learning Frameworks",
-        "description": "Grounded in widely used approaches to early literacy and numeracy assessment and remediation, adapted to Nepal's own curriculum and grade benchmarks."
-      },
-      {
-        "label": "Health",
-        "title": "Community Health Worker Models",
-        "description": "Informed by decades of evidence from community health worker programs across South Asia and Africa — and built to work alongside Nepal's own existing volunteer health network, not around it."
-      },
-      {
-        "label": "Delivery",
-        "title": "Low-Bandwidth, Human-First Design",
-        "description": "Designed for the connectivity Nepal's poorest households actually have — voice and SMS first — not the connectivity a head office assumes they have."
-      }
-    ]
-  },
-  "involve": {
-    "kicker": "Get Involved",
-    "title": "Three ways to be part of Dobato Nepal.",
-    "cards": [
-      {
-        "number": "1",
-        "title": "Partner Locally",
-        "description": "Run a health post, school, or community program? Become the trusted local partner Dobato Nepal works through in your area.",
-        "linkLabel": "Start a pilot conversation →",
-        "linkHref": "#"
-      },
-      {
-        "number": "2",
-        "title": "Support From Anywhere",
-        "description": "Want to donate, sponsor a program, or just help from a distance? Contact us directly — phone, email, or social media, listed below. We'll talk it through openly and let you know exactly where it goes.",
-        "linkLabel": "See our contact details ↓",
-        "linkHref": "#contact"
-      },
-      {
-        "number": "3",
-        "title": "Bring It To Your Family",
-        "description": "We work through one local partner at a time. Tell us your village or ward, and we'll let you know when Dobato Nepal reaches you.",
-        "linkLabel": "Check if we're near you →",
-        "linkHref": "#"
       }
     ],
-    "splitCta": {
-      "families": {
-        "title": "Need this for your family?",
-        "description": "We work through one local partner at a time. Tell us your village or ward, and we'll let you know if — or when — Dobato Nepal is there.",
-        "buttonLabel": "Check if we're near you",
-        "buttonHref": "#"
-      },
-      "partners": {
-        "title": "Run a school, clinic, or health post?",
-        "description": "We're looking for our first partners: one health post, one community school, one panel of volunteers. Pilot programs start small and stay local.",
-        "buttonLabel": "Start a pilot conversation",
-        "buttonHref": "#"
-      }
-    }
+    "partnershipAsk": "We will sign one community school and one health post for the first pilot. Institutions: request an MoU conversation."
   },
-  "trust": {
-    "kicker": "Trust & Transparency",
-    "title": "We'll tell you exactly what Dobato Nepal is — and isn't — registered as.",
-    "intro": "Free doesn't mean unaccountable. Every rupee, every partner, and every legal boundary we operate inside is public information.",
-    "points": [
-      "We do not diagnose, prescribe, or treat. All health guidance ends in a referral to a licensed provider.",
-      "No family is ever charged for a program listed here, now or later.",
-      "Every local partner is trained, verified, and reviewed — we publish who they are to the community they serve.",
-      "Every statistic on this site is sourced to a named Nepal government body — not estimated, not invented."
+  "method": {
+    "kicker": "Approach",
+    "title": "How delivery is split",
+    "companyProvidesLabel": "Company provides",
+    "companyProvides": [
+      "Structured learning materials aligned to foundational literacy/numeracy practice and the local curriculum",
+      "Non-clinical health-information scripts and referral rules",
+      "Digital tools so the same script is used consistently"
+    ],
+    "alwaysLocalLabel": "Always local",
+    "alwaysLocal": [
+      "The teacher, health post, or volunteer who delivers",
+      "Language and pacing",
+      "Which ward is ready",
+      "Ownership of the outcome at the institution"
+    ],
+    "legalBoundaryTitle": "Legal boundary",
+    "legalBoundary": "Dobato Nepal Private Limited does not diagnose, treat, or prescribe. It does not replace a doctor, a health post, or a teacher. Every health interaction is information and triage toward a named licensed provider. Every learning interaction supports a real classroom. Volunteers are not presented as Dobato clinicians or Dobato teachers."
+  },
+  "whyDesign": {
+    "kicker": "Why this design",
+    "title": "Why this design",
+    "intro": "National averages hide geography and income. Delivery is built for low connectivity and existing local workers, not for an app-first household.",
+    "stats": [
+      { "big": "770,000", "caption": "children outside formal schooling", "source": "National Statistics Office" },
+      { "big": "9.5%", "caption": "of poverty-line households with home internet", "source": "NSO Living Standards Survey" },
+      { "big": "51,000+", "caption": "community health volunteers", "source": "Ministry of Health" },
+      { "big": "14% vs 79.3%", "caption": "household internet in Karnali vs Kathmandu", "source": "NSO LSS" },
+      { "big": "28.1%", "caption": "of dropouts cite poor learning outcomes", "source": "NLSS 2024" },
+      { "big": "11% vs 22%", "caption": "secondary completion, low-income vs wealthier", "source": "NSO" }
+    ]
+  },
+  "workflow": {
+    "kicker": "Working with us",
+    "title": "Working with us",
+    "columns": [
+      { "title": "Proposal", "description": "Scope, price, timeline, statement of work." },
+      { "title": "Contract", "description": "Company invoice, company bank account, defined deliverables." },
+      { "title": "Pilot MoU (programs)", "description": "One school or one health post, data and safeguarding terms, referral rules, exit terms." }
+    ]
+  },
+  "legal": {
+    "kicker": "Legal",
+    "title": "Legal",
+    "bullets": [
+      "Legal name: Dobato Nepal Private Limited",
+      "Company registration: issued (Office of the Company Registrar)",
+      "PAN: issued (Inland Revenue Department)",
+      "Bank: corporate account in the company name",
+      "Ward / municipal business registration: in process",
+      "Company type: private limited company. Not an NGO. Not a Social Welfare Council affiliate. Not a charity.",
+      "Community programs are funded from company operations. The company does not solicit public donations on this website.",
+      "Personal data (including children\u2019s education data and any health-related questions) is collected only with informed consent; for persons under 18, guardian consent. Use limited to the stated program or contract purpose.",
+      "Health content released only after licensed-clinician review.",
+      "Registration numbers to be inserted from the certificates."
     ]
   },
   "faq": {
-    "kicker": "Questions",
-    "title": "Common questions, answered plainly.",
+    "kicker": "FAQ",
+    "title": "FAQ",
     "items": [
-      {
-        "question": "Is this really free, forever?",
-        "answer": "Yes, for the families and communities we serve — that never changes. We're a community-centered platform, not a charity, and we're upfront about how we sustain that: through our own professional services (see \"How We Sustain This Work\" above), direct partnerships, and support from people who reach out to us directly. If you'd like to fund or sponsor a specific program, contact us by phone, email, or social media and we'll talk it through openly.",
-        "content": null
-      },
-      {
-        "question": "How do you decide which village or ward comes first?",
-        "answer": "By need and by readiness — places with the largest documented gaps in access, where a trusted local partner already exists or is willing to take part. We deliberately start small and prove a program works before expanding."
-      },
-      {
-        "question": "How do you make sure health guidance is safe?",
-        "answer": "Every piece of health content is reviewed by a licensed clinician before it reaches a family, and every interaction is designed to end in a referral to a real health post — never a diagnosis or a prescription from us."
-      },
-      {
-        "question": "Can I donate, volunteer, or partner with you?",
-        "answer": "Yes to all three. We don't run a donation portal or a formal volunteer application — instead, contact us directly by phone, email, or social media (see the Contact section below), tell us what you have in mind, and we'll figure out the best way to work together. We're transparent about how any contribution is used."
-      },
-      {
-        "question": "Who runs Dobato Nepal?",
-        "answer": "Dobato Nepal is a community-centered platform connecting people to education, health, and social support — built and run from Nepal, currently completing its formal business registration (see Trust & Governance below). We're growing from the community level toward a national and eventually global platform, one verified district at a time."
-      }
+      { "question": "Are community programs charged to families?", "answer": "No. Those programs are funded by the company. Institutional services are charged to the contracting organisation." },
+      { "question": "Are you an NGO or a charity?", "answer": "No. Dobato Nepal Private Limited is a registered private limited company." },
+      { "question": "Do you provide medical care?", "answer": "No. We provide non-clinical information and referral to a named health post. We do not diagnose, treat, or prescribe." },
+      { "question": "Are programs running in my ward?", "answer": "Not yet. Delivery starts only after a signed MoU with a local school or health post. There is no coverage map until that exists." },
+      { "question": "How do institutions hire you?", "answer": "Request a proposal. Work proceeds under a contract and company invoice." }
     ]
   },
+  "contactSection": {
+    "kicker": "Contact",
+    "title": "Contact",
+    "categories": ["Institutional services / proposals", "Pilot MoU (school or health post)"],
+    "needOptions": ["Services", "Pilot", "Other"],
+    "noEmailNote": "Contact form \u2014 replace with company email before publish."
+  },
   "footer": {
-    "tagline": "An early-stage initiative built and run from Nepal. We'll publish our first program outcomes here once our first community pilot is complete.",
-    "columns": [
-      {
-        "heading": "Quick Navigation",
-        "links": [
-          {
-            "label": "Our Approach",
-            "href": "#approach"
-          },
-          {
-            "label": "Programs",
-            "href": "#programs"
-          },
-          {
-            "label": "Our Work",
-            "href": "#work"
-          },
-          {
-            "label": "Community Events",
-            "href": "#events"
-          },
-          {
-            "label": "FAQ",
-            "href": "#faq"
-          }
-        ]
-      },
-      {
-        "heading": "Transparency & Governance",
-        "links": [
-          {
-            "label": "Trust & Registration Status",
-            "href": "#trust"
-          },
-          {
-            "label": "How We Verify Information",
-            "href": "#approach"
-          },
-          {
-            "label": "Contact Us Directly",
-            "href": "#contact"
-          }
-        ]
-      }
-    ],
-    "bottomText": "A startup built from the community level up. All statistics sourced to named Nepal government bodies — see Trust & Governance."
-  },
-  "embeds": {
-    "kicker": "From The Field",
-    "title": "See it, not just read about it.",
-    "intro": "Short updates, videos, and posts from the work as it happens. This section only appears once at least one item below is enabled — safe to leave empty.",
-    "items": []
-  },
-  "updates": {
-    "kicker": "Latest Work",
-    "title": "Updates from the ground.",
-    "intro": "Short notes on what's happening — pilots starting, partners joining, lessons learned. Posted as things happen, not on a schedule.",
-    "items": []
-  },
-  "hotlines": {
-    "kicker": "Emergency Services",
-    "title": "Verified National & District Emergency Hotlines",
-    "intro": "Cross-checked against multiple official and independent sources, including the U.S. Embassy Nepal's public safety page and Nepal's disaster authority. Numbers can change — if in doubt, dial 100 as the universal fallback, and always follow official guidance over anything listed here.",
-    "national": [
-      {
-        "label": "Police",
-        "number": "100"
-      },
-      {
-        "label": "Fire Brigade",
-        "number": "101"
-      },
-      {
-        "label": "Ambulance",
-        "number": "102"
-      },
-      {
-        "label": "Traffic Police",
-        "number": "103"
-      },
-      {
-        "label": "Disaster & Rescue (NDRRMA)",
-        "number": "1234"
-      },
-      {
-        "label": "Tourist Police",
-        "number": "1144"
-      },
-      {
-        "label": "Child Helpline",
-        "number": "1098"
-      }
-    ],
-    "sourceNote": "National numbers verified against the U.S. Embassy in Nepal, Nepal Disaster Risk Reduction and Management Authority (NDRRMA) public advisories, and independent cross-checks — last reviewed August 2026.",
-    "district": []
-  },
-  "verifiedContacts": {
-    "kicker": "Local Directory",
-    "title": "Direct, verified contacts across your district.",
-    "intro": "Health posts, schools, cooperatives, and community volunteers we've personally verified. This list grows as we confirm each contact ourselves — nothing here is scraped or automated.",
-    "items": []
-  },
-  "alerts": {
-    "kicker": "Community Safety",
-    "title": "Critical Alerts",
-    "intro": "Posted by our team when we become aware of a real, current risk — flooding, landslides, heavy rainfall, or other emergencies. This is a manually maintained board, not an automated live feed. For real-time official monitoring, always check Nepal's BIPAD Portal or NDRRMA directly.",
-    "officialLinks": [
-      {
-        "label": "BIPAD Portal (live disaster monitoring)",
-        "url": "https://bipadportal.gov.np"
-      },
-      {
-        "label": "NDRRMA (national disaster authority)",
-        "url": "https://ndrrma.gov.np/en"
-      }
-    ],
-    "items": []
-  },
-  "events": {
-    "kicker": "What's Coming Up",
-    "title": "Community Events",
-    "intro": "Health camps, education expos, and other events that are free or low-cost for people who can't otherwise access them.",
-    "items": []
-  },
-  "about": {
-    "kicker": "About Dobato Nepal",
-    "title": "Where learning, care, and community meet.",
-    "intro": "Connecting people to the right knowledge, support, and opportunities to move forward.",
-    "story": "Every life reaches a crossroads. A student deciding what to learn. A family looking for the right support. A community trying to stay healthy. A person facing a difficult moment and simply needing someone to stand beside them. Dobato Nepal exists for those moments. In Nepali, दोबाटो (Dobato) means a crossroads — a place where paths meet and a new direction can begin. That's what we're building: a trusted connection between people and the education, guidance, health support, and social care they need to move forward.",
-    "pathwaysKicker": "What We Do",
-    "pathwaysIntro": "We work at the community level, because meaningful change begins close to people — where their real needs, challenges, families, and aspirations are understood. Our work spans four interconnected areas.",
-    "pathways": [
-      {
-        "title": "Education",
-        "description": "Creating opportunities to learn beyond traditional classrooms, develop practical skills, and build better futures."
-      },
-      {
-        "title": "Education Support",
-        "description": "Helping students, families, educators, and institutions navigate learning, academic decisions, career pathways, and the next step forward."
-      },
-      {
-        "title": "Community Health",
-        "description": "Bringing health education, prevention, wellness, and accessible community-based support closer to everyday life."
-      },
-      {
-        "title": "Social Support",
-        "description": "Standing alongside individuals and families who need guidance, advocacy, welfare support, or a helping hand through difficult moments."
-      }
-    ],
-    "beliefKicker": "What We Believe",
-    "belief": "We don't believe meaningful change comes from simply delivering a service. It comes from building trust, understanding the community, and creating solutions people can actually use and own. That's why we listen first, work with local people and institutions, adapt to the needs of each community, and build for lasting impact — not a quick fix.",
-    "processKicker": "How Dobato Works",
-    "processSteps": [
-      "Listen",
-      "Connect",
-      "Support",
-      "Empower",
-      "Sustain"
-    ],
-    "visionKicker": "The Vision",
-    "vision": "Today, our roots are firmly in Nepal. Tomorrow, our vision reaches beyond it. We're building a model that can grow across communities, provinces, and eventually borders — while keeping the same principle at its center.",
-    "visionQuote": "People first. Community first. Impact that lasts.",
-    "image": ""
-  },
-  "services": {
-    "kicker": "How We Sustain This Work",
-    "title": "One platform, two tracks.",
-    "intro": "Our community programs are free, and always will be. Alongside them, Dobato Nepal also works as a registered professional services company — revenue from this work is what makes the free side possible. Here's what that looks like, in plain terms.",
-    "items": [
-      {
-        "title": "Media & Storytelling",
-        "description": "Digital content, video production, and community reporting — built for organizations who want to reach people the way we do: directly, honestly, and without corporate polish."
-      },
-      {
-        "title": "Education & Learning Services",
-        "description": "Structured learning support, guidance, and educational content for schools, institutions, and organizations investing in their communities."
-      },
-      {
-        "title": "Health Guidance & Awareness",
-        "description": "Non-clinical health information and awareness work for partners building healthier communities — never a substitute for medical care."
-      },
-      {
-        "title": "Social & Community Advisory",
-        "description": "Helping organizations connect authentically with the communities they serve, using the same trust-first approach behind our own programs."
-      },
-      {
-        "title": "Research & Professional Consulting",
-        "description": "Applied research and advisory work on education, health, and community topics, for partners who need real answers grounded in real communities."
-      }
-    ],
-    "closing": "Every service we offer is registered and transparent, and connects back to the same mission: people first, community first, impact that lasts."
-  },
-  "work": {
-    "kicker": "Our Work",
-    "title": "What we've done.",
-    "intro": "A look at the work already underway — real programs, real communities, real people. This section stays hidden until at least one item below is added and turned on.",
-    "items": []
+    "legalName": "Dobato Nepal Private Limited",
+    "base": "Kathmandu, Nepal",
+    "statsSourceLine": "Statistics on this page are attributed to the named Government of Nepal sources listed in Approach."
   }
-};
-
-const PLATFORMS = ['facebook','instagram','x','linkedin','youtube','tiktok','threads','pinterest','reddit','telegram','discord'];
-const EMBED_TYPES = [
-  ['youtube-video','YouTube video'], ['youtube-playlist','YouTube playlist'],
-  ['x-post','X (Twitter) post'], ['instagram-post','Instagram post'],
-  ['facebook-post','Facebook post'], ['tiktok-video','TikTok video'],
-  ['linkedin-post','LinkedIn post'],
-];
-
+}
+;
 function escAttr(s) { return (s || "").replace(/"/g, "&quot;"); }
+function getPath(obj, path) { return path.split('.').reduce((o,k)=>o&&o[k], obj); }
 
-/* ==================== Direct file upload (photos & videos) ====================
-   No server, no storage account — files are read straight off your device and
-   embedded into the page itself. Images are automatically resized/compressed
-   so a 12MP phone photo doesn't bloat the page. Videos can't be compressed
-   this way (that needs real transcoding), so large videos get a warning —
-   a short clip is fine, but a multi-minute video will make your page heavy
-   to load. For long videos, uploading to YouTube and pasting the link (in
-   "Embedded Content") is the better option. */
+/* ---------- Hero ---------- */
+document.getElementById('h-eyebrow').value = CONTENT.hero.eyebrow;
+document.getElementById('h-headline').value = CONTENT.hero.headline;
+document.getElementById('h-subhead').value = CONTENT.hero.subhead;
+document.getElementById('h-cta1').value = CONTENT.hero.ctaPrimary.label;
+document.getElementById('h-cta2').value = CONTENT.hero.ctaSecondary.label;
 
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-}
+/* ---------- Company Facts ---------- */
+document.getElementById('cf-entity').value = CONTENT.companyFacts.entity;
+document.getElementById('cf-registrations').value = CONTENT.companyFacts.registrations;
+document.getElementById('cf-base').value = CONTENT.companyFacts.base;
+document.getElementById('cf-model').value = CONTENT.companyFacts.model;
+document.getElementById('cf-namenote').value = CONTENT.companyFacts.nameNote;
 
-function readFileAsDataURL(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-/** Resizes+recompresses an image data URL via canvas so uploads from a phone
- *  camera (often 3-10MB) become a few hundred KB, regardless of source size. */
-function compressImageDataUrl(dataUrl, maxDim, quality) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      let w = img.width, h = img.height;
-      if (w > maxDim || h > maxDim) {
-        if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
-        else { w = Math.round(w * (maxDim / h)); h = maxDim; }
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      resolve(canvas.toDataURL('image/jpeg', quality));
-    };
-    img.onerror = reject;
-    img.src = dataUrl;
-  });
-}
-
-function isVideoFile(file) { return file.type.startsWith('video/'); }
-function isVideoSrc(src) {
-  if (!src) return false;
-  if (src.startsWith('data:video')) return true;
-  return /\.(mp4|webm|mov|ogg|m4v)(\?|#|$)/i.test(src);
-}
-
-function renderMediaPreview(elId, src) {
-  const el = document.getElementById(elId);
-  if (!el) return;
-  if (!src) { el.innerHTML = ''; return; }
-  el.innerHTML = isVideoSrc(src)
-    ? `<video src="${src}" controls class="media-preview__thumb"></video>`
-    : `<img src="${src}" class="media-preview__thumb">`;
-}
-
-/** Wires up a <input type="file"> to read, (for images) compress, and hand
- *  the final data URL to onDone(dataUrl, statusLabel). Shows size warnings
- *  for large videos since those can't be compressed client-side. */
-async function handleMediaFile(inputEl, onDone) {
-  const file = inputEl.files && inputEl.files[0];
-  if (!file) return;
-  const MB = 1024 * 1024;
-
-  if (isVideoFile(file)) {
-    if (file.size > 60 * MB) {
-      alert(`This video is ${formatBytes(file.size)} — too large to embed directly. Please use a shorter clip (under ~60MB), or add it via "Embedded Content" with a YouTube link instead.`);
-      inputEl.value = '';
-      return;
-    }
-    if (file.size > 8 * MB) {
-      const proceed = confirm(`This video is ${formatBytes(file.size)}. Large videos make your page slow to load, especially on mobile. Continue anyway?`);
-      if (!proceed) { inputEl.value = ''; return; }
-    }
-    const dataUrl = await readFileAsDataURL(file);
-    onDone(dataUrl, `${file.name} — ${formatBytes(file.size)} (video)`);
-  } else {
-    const raw = await readFileAsDataURL(file);
-    const compressed = await compressImageDataUrl(raw, 1600, 0.82);
-    const approxBytes = Math.round(compressed.length * 0.75);
-    onDone(compressed, `${file.name} — ${formatBytes(approxBytes)} after compression`);
-  }
-  inputEl.value = '';
-}
-/* ================================================================ */
-
-document.getElementById('f-eyebrow').value = CONTENT.home.hero.eyebrow;
-document.getElementById('f-h1').value = CONTENT.home.hero.headlineLine1;
-document.getElementById('f-h2').value = CONTENT.home.hero.headlineLine2;
-document.getElementById('f-sub').value = CONTENT.home.hero.subhead;
-document.getElementById('f-btn1').value = CONTENT.home.hero.ctaPrimary.label;
-document.getElementById('f-btn2').value = CONTENT.home.hero.ctaSecondary.label;
-document.getElementById('f-phone').value = CONTENT.site.contactPhone || '';
-document.getElementById('f-email').value = CONTENT.site.contactEmail || '';
-
-// ---- About Section ----
-document.getElementById('ab-title').value = CONTENT.about.title;
-document.getElementById('ab-intro').value = CONTENT.about.intro;
-document.getElementById('ab-story').value = CONTENT.about.story;
-document.getElementById('ab-pathways-intro').value = CONTENT.about.pathwaysIntro;
-document.getElementById('ab-belief').value = CONTENT.about.belief;
-document.getElementById('ab-vision').value = CONTENT.about.vision;
-document.getElementById('ab-vision-quote').value = CONTENT.about.visionQuote;
-renderMediaPreview('ab-image-preview', CONTENT.about.image);
-if (CONTENT.about.image) document.getElementById('ab-image-status').textContent = 'Current file saved';
-
-function renderPathways() {
-  const wrap = document.getElementById('pathways-list');
-  wrap.innerHTML = '';
-  CONTENT.about.pathways.forEach((p, i) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      <div class="item-top">
-        <span>Pathway ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="movePathway(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.about.pathways.length - 1 ? `<button type="button" onclick="movePathway(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removePathway(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <label>Title</label>
-      <input type="text" value="${escAttr(p.title)}" oninput="CONTENT.about.pathways[${i}].title=this.value">
-      <label>Description</label>
-      <textarea oninput="CONTENT.about.pathways[${i}].description=this.value">${(p.description||'').replace(/</g,'&lt;')}</textarea>`;
-    wrap.appendChild(div);
-  });
-}
-function addPathway() { CONTENT.about.pathways.push({ title:'', description:'' }); renderPathways(); }
-function removePathway(i) { CONTENT.about.pathways.splice(i,1); renderPathways(); }
-function movePathway(i,dir) { const a=CONTENT.about.pathways; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderPathways(); }
-
-// ---- Our Work (portfolio gallery) ----
-if (!CONTENT.work) CONTENT.work = { kicker: 'Our Work', title: "What we've done.", intro: '', items: [] };
-function renderWork() {
-  const wrap = document.getElementById('work-list');
-  wrap.innerHTML = '';
-  CONTENT.work.items.forEach((w, i) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      <div class="item-top">
-        <span>Work item ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveWork(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.work.items.length - 1 ? `<button type="button" onclick="moveWork(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeWork(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <label>Photo or video</label>
-      <input type="file" accept="image/*,video/*"
-        onchange="handleMediaFile(this, (data, label) => { CONTENT.work.items[${i}].image=data; document.getElementById('work-status-${i}').textContent=label; renderMediaPreview('work-preview-${i}', data); })">
-      <div id="work-preview-${i}" class="media-preview"></div>
-      <div id="work-status-${i}" class="field__help">${w.image ? 'Current file saved' : ''}</div>
-      ${w.image ? `<button type="button" class="btn-secondary" onclick="CONTENT.work.items[${i}].image=''; document.getElementById('work-status-${i}').textContent=''; renderMediaPreview('work-preview-${i}','');">Remove photo/video</button>` : ''}
-      <label>Title</label>
-      <input type="text" value="${escAttr(w.title)}" oninput="CONTENT.work.items[${i}].title=this.value">
-      <label>Short description (optional)</label>
-      <input type="text" value="${escAttr(w.description)}" oninput="CONTENT.work.items[${i}].description=this.value">
-      <div class="toggle-row">
-        <input type="checkbox" id="work-en-${i}" ${w.enabled !== false ? 'checked' : ''} onchange="CONTENT.work.items[${i}].enabled=this.checked">
-        <label for="work-en-${i}">Show this on my live site</label>
-      </div>`;
-    wrap.appendChild(div);
-    renderMediaPreview(`work-preview-${i}`, w.image);
-  });
-}
-function addWork() { CONTENT.work.items.unshift({ image:'', title:'', description:'', enabled:true }); renderWork(); }
-function removeWork(i) { CONTENT.work.items.splice(i,1); renderWork(); }
-function moveWork(i,dir) { const a=CONTENT.work.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderWork(); }
-renderWork();
-
-function renderProcessSteps() {
-  const wrap = document.getElementById('process-steps-list');
-  wrap.innerHTML = '';
-  CONTENT.about.processSteps.forEach((s, i) => {
-    const row = document.createElement('div');
-    row.className = 'list-editor__row';
-    row.innerHTML = `<input type="text" value="${escAttr(s)}" oninput="CONTENT.about.processSteps[${i}]=this.value">
-      <button type="button" class="btn-icon" onclick="removeProcessStep(${i})" title="Remove">X</button>`;
-    wrap.appendChild(row);
-  });
-}
-function addProcessStep() { CONTENT.about.processSteps.push(''); renderProcessSteps(); }
-function removeProcessStep(i) { CONTENT.about.processSteps.splice(i,1); renderProcessSteps(); }
-
-renderPathways();
-renderProcessSteps();
-
-// ---- Our Services ----
+/* ---------- Services ---------- */
 document.getElementById('sv-intro').value = CONTENT.services.intro;
 document.getElementById('sv-closing').value = CONTENT.services.closing;
 function renderServices() {
@@ -981,74 +444,155 @@ function renderServices() {
     const div = document.createElement('div');
     div.className = 'item';
     div.innerHTML = `
-      <div class="item-top">
-        <span>Service ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveService(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.services.items.length - 1 ? `<button type="button" onclick="moveService(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeService(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <label>Title</label>
-      <input type="text" value="${escAttr(sv.title)}" oninput="CONTENT.services.items[${i}].title=this.value">
-      <label>Description</label>
-      <textarea oninput="CONTENT.services.items[${i}].description=this.value">${(sv.description||'').replace(/</g,'&lt;')}</textarea>`;
+      <div class="item-top"><span>Service ${i+1}</span><div class="item-actions">
+        ${i>0?`<button type="button" onclick="moveService(${i},-1)">Up</button>`:''}
+        ${i<CONTENT.services.items.length-1?`<button type="button" onclick="moveService(${i},1)">Down</button>`:''}
+        <button type="button" onclick="removeService(${i})">X</button></div></div>
+      <label>Title</label><input type="text" value="${escAttr(sv.title)}" oninput="CONTENT.services.items[${i}].title=this.value">
+      <label>Description</label><textarea oninput="CONTENT.services.items[${i}].description=this.value">${(sv.description||'').replace(/</g,'&lt;')}</textarea>`;
     wrap.appendChild(div);
   });
 }
-function addService() { CONTENT.services.items.push({ title:'', description:'' }); renderServices(); }
-function removeService(i) { CONTENT.services.items.splice(i,1); renderServices(); }
-function moveService(i,dir) { const a=CONTENT.services.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderServices(); }
+function addService(){ if(CONTENT.services.items.length>=6){alert('Policy caps this at six services — remove one before adding another.');return;} CONTENT.services.items.push({title:'',description:''}); renderServices(); }
+function removeService(i){ CONTENT.services.items.splice(i,1); renderServices(); }
+function moveService(i,d){ const a=CONTENT.services.items; [a[i],a[i+d]]=[a[i+d],a[i]]; renderServices(); }
 renderServices();
 
-if (!CONTENT.updates) CONTENT.updates = { kicker: 'Latest Work', title: 'Updates from the ground.', intro: '', items: [] };
-function renderUpdates() {
-  const wrap = document.getElementById('updates-list');
+/* ---------- Programs ---------- */
+document.getElementById('pr-status').value = CONTENT.programs.statusBadge;
+document.getElementById('pr-intro').value = CONTENT.programs.intro;
+document.getElementById('pr-ask').value = CONTENT.programs.partnershipAsk;
+function renderPrograms() {
+  const wrap = document.getElementById('programs-list');
   wrap.innerHTML = '';
-  CONTENT.updates.items.forEach((u, i) => {
+  CONTENT.programs.items.forEach((p, i) => {
     const div = document.createElement('div');
     div.className = 'item';
     div.innerHTML = `
-      <div class="item-top">
-        <span>Article ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveUpdate(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.updates.items.length - 1 ? `<button type="button" onclick="moveUpdate(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeUpdate(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <div class="row">
-        <div>
-          <label>Title</label>
-          <input type="text" value="${escAttr(u.title)}" oninput="CONTENT.updates.items[${i}].title=this.value">
-        </div>
-        <div>
-          <label>Date (any format, e.g. August 2026)</label>
-          <input type="text" value="${escAttr(u.date)}" oninput="CONTENT.updates.items[${i}].date=this.value">
-        </div>
-      </div>
-      <label>Content</label>
-      <textarea oninput="CONTENT.updates.items[${i}].content=this.value">${(u.content || '').replace(/</g,'&lt;')}</textarea>
-      <label>Image link (optional, paste a URL to a photo)</label>
-      <input type="url" value="${escAttr(u.imageUrl)}" placeholder="https://..." oninput="CONTENT.updates.items[${i}].imageUrl=this.value">
-      <div class="toggle-row">
-        <input type="checkbox" id="update-en-${i}" ${u.enabled !== false ? 'checked' : ''} onchange="CONTENT.updates.items[${i}].enabled=this.checked">
-        <label for="update-en-${i}">Show this on my live site</label>
-      </div>`;
+      <div class="item-top"><span>Program ${i+1}</span></div>
+      <label>Title</label><input type="text" value="${escAttr(p.title)}" oninput="CONTENT.programs.items[${i}].title=this.value">
+      <label>Description</label><textarea oninput="CONTENT.programs.items[${i}].description=this.value">${(p.description||'').replace(/</g,'&lt;')}</textarea>
+      <label>Bullets (one per line)</label><textarea style="min-height:90px;" oninput="CONTENT.programs.items[${i}].bullets=this.value.split('\\n').filter(Boolean)">${(p.bullets||[]).join('\\n')}</textarea>
+      <label>Typical flow steps (one per line)</label><textarea style="min-height:70px;" oninput="CONTENT.programs.items[${i}].journey=this.value.split('\\n').filter(Boolean)">${(p.journey||[]).join('\\n')}</textarea>`;
     wrap.appendChild(div);
   });
 }
-function addUpdate() {
-  CONTENT.updates.items.unshift({ title: '', date: '', content: '', imageUrl: '', enabled: true });
-  renderUpdates();
-}
-function removeUpdate(i) { CONTENT.updates.items.splice(i, 1); renderUpdates(); }
-function moveUpdate(i, dir) {
-  const arr = CONTENT.updates.items;
-  [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
-  renderUpdates();
-}
+renderPrograms();
 
+/* ---------- Method ---------- */
+document.getElementById('m-legal').value = CONTENT.method.legalBoundary;
+function renderSimpleList(path, wrapId) {
+  const arr = getPath(CONTENT, path);
+  const wrap = document.getElementById(wrapId);
+  wrap.innerHTML = '';
+  arr.forEach((val, i) => {
+    const row = document.createElement('div');
+    row.className = 'list-editor__row';
+    row.innerHTML = `<input type="text" value="${escAttr(val)}" oninput="getPath(CONTENT,'${path}')[${i}]=this.value">
+      <button type="button" class="btn-icon" onclick="removeListItem('${path}','${wrapId}',${i})">X</button>`;
+    wrap.appendChild(row);
+  });
+}
+function addListItem(path, wrapId) { getPath(CONTENT, path).push(''); renderSimpleList(path, wrapId); }
+function removeListItem(path, wrapId, i) { getPath(CONTENT, path).splice(i,1); renderSimpleList(path, wrapId); }
+renderSimpleList('method.companyProvides','provides-list');
+renderSimpleList('method.alwaysLocal','local-list');
+
+/* ---------- Why This Design ---------- */
+document.getElementById('wd-intro').value = CONTENT.whyDesign.intro;
+function renderStats() {
+  const wrap = document.getElementById('stats-list');
+  wrap.innerHTML = '';
+  CONTENT.whyDesign.stats.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top"><span>Stat ${i+1}</span><div class="item-actions"><button type="button" onclick="removeStat(${i})">X</button></div></div>
+      <div class="row">
+        <div><label>Figure</label><input type="text" value="${escAttr(s.big)}" oninput="CONTENT.whyDesign.stats[${i}].big=this.value"></div>
+        <div><label>Source</label><input type="text" value="${escAttr(s.source)}" oninput="CONTENT.whyDesign.stats[${i}].source=this.value"></div>
+      </div>
+      <label>Caption</label><input type="text" value="${escAttr(s.caption)}" oninput="CONTENT.whyDesign.stats[${i}].caption=this.value">`;
+    wrap.appendChild(div);
+  });
+}
+function addStat(){ CONTENT.whyDesign.stats.push({big:'',caption:'',source:''}); renderStats(); }
+function removeStat(i){ CONTENT.whyDesign.stats.splice(i,1); renderStats(); }
+renderStats();
+
+/* ---------- Workflow ---------- */
+function renderWorkflow() {
+  const wrap = document.getElementById('workflow-list');
+  wrap.innerHTML = '';
+  CONTENT.workflow.columns.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top"><span>Step ${i+1}</span><div class="item-actions">
+      ${CONTENT.workflow.columns.length>1?`<button type="button" onclick="removeWorkflowStep(${i})">X</button>`:''}</div></div>
+      <label>Title</label><input type="text" value="${escAttr(c.title)}" oninput="CONTENT.workflow.columns[${i}].title=this.value">
+      <label>Description</label><input type="text" value="${escAttr(c.description)}" oninput="CONTENT.workflow.columns[${i}].description=this.value">`;
+    wrap.appendChild(div);
+  });
+}
+function addWorkflowStep(){ CONTENT.workflow.columns.push({title:'',description:''}); renderWorkflow(); }
+function removeWorkflowStep(i){ CONTENT.workflow.columns.splice(i,1); renderWorkflow(); }
+renderWorkflow();
+
+/* ---------- Legal bullets ---------- */
+function renderLegalList() {
+  const wrap = document.getElementById('legal-list');
+  wrap.innerHTML = '';
+  CONTENT.legal.bullets.forEach((b, i) => {
+    const row = document.createElement('div');
+    row.className = 'list-editor__row';
+    row.innerHTML = `<input type="text" value="${escAttr(b)}" oninput="CONTENT.legal.bullets[${i}]=this.value">
+      <button type="button" class="btn-icon" onclick="removeLegalBullet(${i})">X</button>`;
+    wrap.appendChild(row);
+  });
+}
+function addLegalBullet(){ CONTENT.legal.bullets.push(''); renderLegalList(); }
+function removeLegalBullet(i){ CONTENT.legal.bullets.splice(i,1); renderLegalList(); }
+renderLegalList();
+
+/* ---------- FAQ ---------- */
+function renderFaq() {
+  const wrap = document.getElementById('faq-list');
+  wrap.innerHTML = '';
+  CONTENT.faq.items.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+      <div class="item-top"><span>Q${i+1}</span><div class="item-actions"><button type="button" onclick="removeFaq(${i})">X</button></div></div>
+      <label>Question</label><input type="text" value="${escAttr(f.question)}" oninput="CONTENT.faq.items[${i}].question=this.value">
+      <label>Answer</label><textarea oninput="CONTENT.faq.items[${i}].answer=this.value">${(f.answer||'').replace(/</g,'&lt;')}</textarea>`;
+    wrap.appendChild(div);
+  });
+}
+function addFaq(){ CONTENT.faq.items.push({question:'',answer:''}); renderFaq(); }
+function removeFaq(i){ CONTENT.faq.items.splice(i,1); renderFaq(); }
+renderFaq();
+
+/* ---------- Contact ---------- */
+document.getElementById('ct-email').value = CONTENT.site.contactEmail || '';
+document.getElementById('ct-phone').value = CONTENT.site.contactPhone || '';
+function renderCategories() {
+  const wrap = document.getElementById('categories-list');
+  wrap.innerHTML = '';
+  CONTENT.contactSection.categories.forEach((c, i) => {
+    const row = document.createElement('div');
+    row.className = 'list-editor__row';
+    row.innerHTML = `<input type="text" value="${escAttr(c)}" oninput="CONTENT.contactSection.categories[${i}]=this.value">
+      <button type="button" class="btn-icon" onclick="removeCategory(${i})">X</button>`;
+    wrap.appendChild(row);
+  });
+}
+function addCategory(){ CONTENT.contactSection.categories.push(''); renderCategories(); }
+function removeCategory(i){ CONTENT.contactSection.categories.splice(i,1); renderCategories(); }
+renderCategories();
+
+/* ---------- Social ---------- */
+const PLATFORMS = ['facebook','instagram','x','linkedin','youtube','tiktok','threads','pinterest','reddit','telegram','discord'];
 function renderSocial() {
   const wrap = document.getElementById('social-list');
   wrap.innerHTML = '';
@@ -1056,210 +600,60 @@ function renderSocial() {
     const div = document.createElement('div');
     div.className = 'item';
     div.innerHTML = `
-      <div class="item-top">
-        <span>Link ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveSocial(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.site.socialLinks.length - 1 ? `<button type="button" onclick="moveSocial(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeSocial(${i})" title="Remove">X</button>
-        </div>
-      </div>
+      <div class="item-top"><span>Link ${i+1}</span><div class="item-actions"><button type="button" onclick="removeSocial(${i})">X</button></div></div>
       <div class="row">
-        <div>
-          <label>Platform</label>
-          <select onchange="CONTENT.site.socialLinks[${i}].platform=this.value">
-            ${PLATFORMS.map(p => `<option value="${p}" ${p === s.platform ? 'selected' : ''}>${p[0].toUpperCase() + p.slice(1)}</option>`).join('')}
-          </select>
-        </div>
-        <div>
-          <label>Profile link</label>
-          <input type="url" value="${escAttr(s.url)}" placeholder="https://..." oninput="CONTENT.site.socialLinks[${i}].url=this.value">
-        </div>
-      </div>
-      <div class="toggle-row">
-        <input type="checkbox" id="social-en-${i}" ${s.enabled ? 'checked' : ''} onchange="CONTENT.site.socialLinks[${i}].enabled=this.checked">
-        <label for="social-en-${i}">Show this on my live site</label>
+        <div><label>Platform</label><select onchange="CONTENT.site.socialLinks[${i}].platform=this.value">
+          ${PLATFORMS.map(p=>`<option value="${p}" ${p===s.platform?'selected':''}>${p[0].toUpperCase()+p.slice(1)}</option>`).join('')}
+        </select></div>
+        <div><label>URL</label><input type="url" value="${escAttr(s.url)}" oninput="CONTENT.site.socialLinks[${i}].url=this.value"></div>
       </div>`;
     wrap.appendChild(div);
   });
 }
-function addSocial() {
-  CONTENT.site.socialLinks.push({ platform: 'facebook', url: '', enabled: true });
-  renderSocial();
-}
-function removeSocial(i) { CONTENT.site.socialLinks.splice(i, 1); renderSocial(); }
-function moveSocial(i, dir) {
-  const arr = CONTENT.site.socialLinks;
-  [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
-  renderSocial();
-}
-
-function renderEmbeds() {
-  const wrap = document.getElementById('embed-list');
-  wrap.innerHTML = '';
-  CONTENT.embeds.items.forEach((e, i) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      <div class="item-top">
-        <span>Item ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveEmbed(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.embeds.items.length - 1 ? `<button type="button" onclick="moveEmbed(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeEmbed(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <label>Type</label>
-      <select onchange="CONTENT.embeds.items[${i}].type=this.value">
-        ${EMBED_TYPES.map(([v, l]) => `<option value="${v}" ${v === e.type ? 'selected' : ''}>${l}</option>`).join('')}
-      </select>
-      <label>Paste the link here</label>
-      <input type="url" value="${escAttr(e.url)}" placeholder="https://..." oninput="CONTENT.embeds.items[${i}].url=this.value">
-      <label>Caption (optional)</label>
-      <input type="text" value="${escAttr(e.caption)}" oninput="CONTENT.embeds.items[${i}].caption=this.value">
-      <div class="toggle-row">
-        <input type="checkbox" id="embed-en-${i}" ${e.enabled !== false ? 'checked' : ''} onchange="CONTENT.embeds.items[${i}].enabled=this.checked">
-        <label for="embed-en-${i}">Show this on my live site</label>
-      </div>`;
-    wrap.appendChild(div);
-  });
-}
-function addEmbed() {
-  CONTENT.embeds.items.push({ type: 'youtube-video', url: '', caption: '', enabled: true });
-  renderEmbeds();
-}
-function removeEmbed(i) { CONTENT.embeds.items.splice(i, 1); renderEmbeds(); }
-function moveEmbed(i, dir) {
-  const arr = CONTENT.embeds.items;
-  [arr[i], arr[i + dir]] = [arr[i + dir], arr[i]];
-  renderEmbeds();
-}
-
-const SEVERITY_TYPES = [['flood','Flood'],['landslide','Landslide'],['rain','Heavy Rain'],['other','Other Emergency']];
-const CONTACT_TYPES = [['Health Post','Health Post'],['School','School'],['Cooperative','Cooperative'],['Community Volunteer','Community Volunteer'],['Other','Other']];
-
-// ---- Verified Local Contacts ----
-if (!CONTENT.verifiedContacts) CONTENT.verifiedContacts = { kicker:'Local Directory', title:'Direct, verified contacts across your district.', intro:'', items:[] };
-function renderContacts() {
-  const wrap = document.getElementById('directory-list');
-  wrap.innerHTML = '';
-  CONTENT.verifiedContacts.items.forEach((c, i) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      <div class="item-top">
-        <span>Contact ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveContact(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.verifiedContacts.items.length - 1 ? `<button type="button" onclick="moveContact(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeContact(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <div class="row">
-        <div>
-          <label>Type</label>
-          <select onchange="CONTENT.verifiedContacts.items[${i}].type=this.value">
-            ${CONTACT_TYPES.map(([v,l]) => `<option value="${v}" ${v===c.type?'selected':''}>${l}</option>`).join('')}
-          </select>
-        </div>
-        <div>
-          <label>District</label>
-          <input type="text" value="${escAttr(c.district)}" oninput="CONTENT.verifiedContacts.items[${i}].district=this.value">
-        </div>
-      </div>
-      <label>Name</label>
-      <input type="text" value="${escAttr(c.name)}" oninput="CONTENT.verifiedContacts.items[${i}].name=this.value">
-      <label>Phone</label>
-      <input type="text" value="${escAttr(c.phone)}" oninput="CONTENT.verifiedContacts.items[${i}].phone=this.value">
-      <label>Notes (optional)</label>
-      <input type="text" value="${escAttr(c.notes)}" oninput="CONTENT.verifiedContacts.items[${i}].notes=this.value">
-      <div class="toggle-row">
-        <input type="checkbox" id="contact-en-${i}" ${c.enabled!==false?'checked':''} onchange="CONTENT.verifiedContacts.items[${i}].enabled=this.checked">
-        <label for="contact-en-${i}">Show this on my live site</label>
-      </div>`;
-    wrap.appendChild(div);
-  });
-}
-function addContact() { CONTENT.verifiedContacts.items.unshift({ type:'Health Post', district:'', name:'', phone:'', notes:'', enabled:true }); renderContacts(); }
-function removeContact(i) { CONTENT.verifiedContacts.items.splice(i,1); renderContacts(); }
-function moveContact(i,dir) { const a=CONTENT.verifiedContacts.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderContacts(); }
-
-// ---- Community Events ----
-if (!CONTENT.events) CONTENT.events = { kicker:"What's Coming Up", title:'Community Events', intro:'', items:[] };
-function renderEvents() {
-  const wrap = document.getElementById('events-list');
-  wrap.innerHTML = '';
-  CONTENT.events.items.forEach((e, i) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      <div class="item-top">
-        <span>Event ${i + 1}</span>
-        <div class="item-actions">
-          ${i > 0 ? `<button type="button" onclick="moveEvent(${i},-1)" title="Move up">Up</button>` : ''}
-          ${i < CONTENT.events.items.length - 1 ? `<button type="button" onclick="moveEvent(${i},1)" title="Move down">Down</button>` : ''}
-          <button type="button" onclick="removeEvent(${i})" title="Remove">X</button>
-        </div>
-      </div>
-      <div class="row">
-        <div>
-          <label>Title</label>
-          <input type="text" value="${escAttr(e.title)}" oninput="CONTENT.events.items[${i}].title=this.value">
-        </div>
-        <div>
-          <label>Date</label>
-          <input type="text" value="${escAttr(e.date)}" placeholder="e.g. August 15, 2026" oninput="CONTENT.events.items[${i}].date=this.value">
-        </div>
-      </div>
-      <label>Location</label>
-      <input type="text" value="${escAttr(e.location)}" oninput="CONTENT.events.items[${i}].location=this.value">
-      <label>Description</label>
-      <textarea oninput="CONTENT.events.items[${i}].description=this.value">${(e.description||'').replace(/</g,'&lt;')}</textarea>
-      <div class="toggle-row">
-        <input type="checkbox" id="event-en-${i}" ${e.enabled!==false?'checked':''} onchange="CONTENT.events.items[${i}].enabled=this.checked">
-        <label for="event-en-${i}">Show this on my live site</label>
-      </div>`;
-    wrap.appendChild(div);
-  });
-}
-function addEvent() { CONTENT.events.items.unshift({ title:'', date:'', location:'', description:'', enabled:true }); renderEvents(); }
-function removeEvent(i) { CONTENT.events.items.splice(i,1); renderEvents(); }
-function moveEvent(i,dir) { const a=CONTENT.events.items; [a[i],a[i+dir]]=[a[i+dir],a[i]]; renderEvents(); }
-
-renderContacts();
-renderEvents();
-renderUpdates();
+function addSocial(){ CONTENT.site.socialLinks.push({platform:'facebook',url:'',enabled:true}); renderSocial(); }
+function removeSocial(i){ CONTENT.site.socialLinks.splice(i,1); renderSocial(); }
 renderSocial();
-renderEmbeds();
 
+/* ---------- Footer ---------- */
+document.getElementById('ft-base').value = CONTENT.footer.base;
+document.getElementById('ft-stats').value = CONTENT.footer.statsSourceLine;
+
+/* ---------- Save & Download ---------- */
 function downloadSite() {
-  CONTENT.home.hero.eyebrow = document.getElementById('f-eyebrow').value;
-  CONTENT.home.hero.headlineLine1 = document.getElementById('f-h1').value;
-  CONTENT.home.hero.headlineLine2 = document.getElementById('f-h2').value;
-  CONTENT.home.hero.subhead = document.getElementById('f-sub').value;
-  CONTENT.home.hero.ctaPrimary.label = document.getElementById('f-btn1').value;
-  CONTENT.home.hero.ctaSecondary.label = document.getElementById('f-btn2').value;
-  CONTENT.site.contactPhone = document.getElementById('f-phone').value;
-  CONTENT.site.contactEmail = document.getElementById('f-email').value;
-  CONTENT.about.title = document.getElementById('ab-title').value;
-  CONTENT.about.intro = document.getElementById('ab-intro').value;
-  CONTENT.about.story = document.getElementById('ab-story').value;
-  CONTENT.about.pathwaysIntro = document.getElementById('ab-pathways-intro').value;
-  CONTENT.about.belief = document.getElementById('ab-belief').value;
-  CONTENT.about.vision = document.getElementById('ab-vision').value;
-  CONTENT.about.visionQuote = document.getElementById('ab-vision-quote').value;
+  CONTENT.hero.eyebrow = document.getElementById('h-eyebrow').value;
+  CONTENT.hero.headline = document.getElementById('h-headline').value;
+  CONTENT.hero.subhead = document.getElementById('h-subhead').value;
+  CONTENT.hero.ctaPrimary.label = document.getElementById('h-cta1').value;
+  CONTENT.hero.ctaSecondary.label = document.getElementById('h-cta2').value;
+
+  CONTENT.companyFacts.entity = document.getElementById('cf-entity').value;
+  CONTENT.companyFacts.registrations = document.getElementById('cf-registrations').value;
+  CONTENT.companyFacts.base = document.getElementById('cf-base').value;
+  CONTENT.companyFacts.model = document.getElementById('cf-model').value;
+  CONTENT.companyFacts.nameNote = document.getElementById('cf-namenote').value;
+
   CONTENT.services.intro = document.getElementById('sv-intro').value;
   CONTENT.services.closing = document.getElementById('sv-closing').value;
+
+  CONTENT.programs.statusBadge = document.getElementById('pr-status').value;
+  CONTENT.programs.intro = document.getElementById('pr-intro').value;
+  CONTENT.programs.partnershipAsk = document.getElementById('pr-ask').value;
+
+  CONTENT.method.legalBoundary = document.getElementById('m-legal').value;
+  CONTENT.whyDesign.intro = document.getElementById('wd-intro').value;
+
+  CONTENT.site.contactEmail = document.getElementById('ct-email').value;
+  CONTENT.site.contactPhone = document.getElementById('ct-phone').value;
+
+  CONTENT.footer.base = document.getElementById('ft-base').value;
+  CONTENT.footer.statsSourceLine = document.getElementById('ft-stats').value;
 
   const html = buildFullSite(CONTENT);
   const blob = new Blob([html], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'index.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  a.href = url; a.download = 'index.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
   const status = document.getElementById('status');
@@ -1366,576 +760,178 @@ function iconSvg(platformKey, size) {
   return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${inner}</svg>`;
 }
 
-/**
- * embed-helpers.js — turns a plain URL the admin pastes into the correct
- * embed markup per platform. This is what makes "paste a link" actually
- * work with no third-party embed API or paid oEmbed service.
- *
- * Strategy per platform:
- *   - YouTube (video/playlist): we can extract the ID ourselves and build
- *     a plain <iframe> — no external script needed at all.
- *   - X, Instagram, TikTok: these platforms only support embedding via
- *     their own official, free, public widget scripts (widgets.js /
- *     embed.js). We render the specific blockquote markup each of those
- *     scripts expects; the script itself is loaded once in the page layout.
- *   - Facebook: their public Page Plugin iframe embeds a post URL
- *     directly with no app id required for basic public posts.
- *   - LinkedIn: LinkedIn does not offer a general URL-to-embed path
- *     without a post-specific URN, so we render a clean fallback card
- *     that links out, clearly labelled as a link rather than a false
- *     "embed" — documented in docs/CONTENT_SCHEMA.md.
- */
-
-function extractYouTubeId(url) {
-  const patterns = [
-    /youtu\.be\/([a-zA-Z0-9_-]{6,})/,
-    /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{6,})/,
-    /youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})/,
-    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{6,})/,
-  ];
-  for (const re of patterns) {
-    const m = url.match(re);
-    if (m) return m[1];
-  }
-  return null;
+function socialIcons(socialLinks) {
+  const enabled = (socialLinks || []).filter((s) => s.enabled && s.url);
+  if (enabled.length === 0) return '';
+  const items = enabled
+    .map(
+      (s) =>
+        `<a href="${esc(s.url)}" class="social-icons__link" target="_blank" rel="noopener" aria-label="${esc(s.platform)}">${iconSvg(s.platform, 18)}</a>`
+    )
+    .join('');
+  return `<div class="social-icons">${items}</div>`;
 }
 
-function extractYouTubePlaylistId(url) {
-  const m = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
-  return m ? m[1] : null;
+const INLINE_CSS = `:root{
+  --paper:#F2F0E8; --ink:#1D2019; --ink-soft:#565B52;
+  --accent:#B5701A; --accent-deep:#8F5813;
+  --indigo:#2E3A55; --indigo-deep:#1D263A;
+  --line:#D8D3C4; --white:#FBFAF6;
+  --font-display:Fraunces,Georgia,serif; --font-body:'Work Sans',-apple-system,sans-serif; --font-mono:'IBM Plex Mono',monospace;
+  --max-width:1080px;
 }
+*,*::before,*::after{box-sizing:border-box;}
+*{margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;line-height:1.18;}
+a{color:inherit;text-decoration:none;}
+ul,ol{list-style:none;}
+button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+:focus-visible{outline:3px solid #2E7DD1;outline-offset:2px;}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--indigo-deep);color:#fff;padding:12px 18px;z-index:100;}
+.skip-link:focus{left:0;}
+.wrap{max-width:var(--max-width);margin:0 auto;padding:0 28px;}
+.section{padding:64px 28px;}
+.section-head{max-width:680px;margin-bottom:36px;}
+.kicker{font-size:12px;color:var(--accent-deep);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:10px;}
+.section-head h2{font-size:clamp(24px,3vw,32px);}
+.section-head p{margin-top:12px;color:var(--ink-soft);font-size:15px;max-width:640px;}
 
-function renderEmbed(item) {
-  const { type, url, caption } = item;
-  const captionHtml = caption ? `<p class="embed-card__caption">${esc(caption)}</p>` : '';
-  let body = '';
-
-  if (type === 'youtube-video') {
-    const id = extractYouTubeId(url);
-    body = id
-      ? `<div class="embed-card__frame"><iframe src="https://www.youtube.com/embed/${id}" title="${esc(caption || 'YouTube video')}" loading="lazy" allowfullscreen></iframe></div>`
-      : embedError(url, 'Could not read a YouTube video ID from this URL.');
-  } else if (type === 'youtube-playlist') {
-    const id = extractYouTubePlaylistId(url);
-    body = id
-      ? `<div class="embed-card__frame"><iframe src="https://www.youtube.com/embed/videoseries?list=${id}" title="${esc(caption || 'YouTube playlist')}" loading="lazy" allowfullscreen></iframe></div>`
-      : embedError(url, 'Could not read a playlist ID from this URL.');
-  } else if (type === 'x-post') {
-    body = `<blockquote class="twitter-tweet"><a href="${esc(url)}"></a></blockquote>`;
-  } else if (type === 'instagram-post') {
-    body = `<blockquote class="instagram-media" data-instgrm-permalink="${esc(url)}" data-instgrm-version="14"></blockquote>`;
-  } else if (type === 'tiktok-video') {
-    body = `<blockquote class="tiktok-embed" cite="${esc(url)}"></blockquote>`;
-  } else if (type === 'facebook-post') {
-    body = `<div class="embed-card__frame embed-card__frame--tall"><iframe src="https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(url)}&show_text=true" title="${esc(caption || 'Facebook post')}" loading="lazy"></iframe></div>`;
-  } else if (type === 'linkedin-post') {
-    body = `<a class="embed-card__fallback" href="${esc(url)}" target="_blank" rel="noopener">View this LinkedIn post ↗</a>`;
-  } else {
-    body = embedError(url, 'Unsupported embed type.');
-  }
-
-  return `<div class="embed-card" data-embed-type="${esc(type)}">${body}${captionHtml}</div>`;
-}
-
-function embedError(url, message) {
-  return `<p class="embed-card__error">${esc(message)} <a href="${esc(url)}" target="_blank" rel="noopener">Open link instead ↗</a></p>`;
-}
-
-/** Which external widget scripts need to load, based on which embed types are actually used. */
-function requiredScripts(items) {
-  const scripts = new Set();
-  items.forEach((item) => {
-    if (!item.enabled) return;
-    if (item.type === 'x-post') scripts.add('https://platform.twitter.com/widgets.js');
-    if (item.type === 'instagram-post') scripts.add('https://www.instagram.com/embed.js');
-    if (item.type === 'tiktok-video') scripts.add('https://www.tiktok.com/embed.js');
-  });
-  return Array.from(scripts);
-}
-
-const INLINE_CSS = `/*
-  Design Tokens — Dobato Design System
-  ------------------------------------
-  Single source of truth for colour, type, spacing, and motion.
-  Editing values here re-themes the entire site. Do not hardcode
-  colours or font sizes in component CSS — reference a token.
-*/
-:root {
-  /* Colour: brand */
-  --color-paper: #F2F0E8;
-  --color-ink: #20241F;
-  --color-ink-soft: #4A4F45;
-  --color-marigold: #D98B24;
-  --color-marigold-deep: #B5701A;
-  --color-indigo: #2E3A55;
-  --color-indigo-deep: #1D263A;
-  --color-pine: #4F6B4E;
-  --color-pine-soft: #DCE6D4;
-  --color-line: #D8D3C4;
-  --color-white: #FBFAF6;
-
-  /* Colour: semantic */
-  --color-bg: var(--color-paper);
-  --color-surface: var(--color-white);
-  --color-text: var(--color-ink);
-  --color-text-muted: var(--color-ink-soft);
-  --color-accent: var(--color-marigold);
-  --color-accent-deep: var(--color-marigold-deep);
-  --color-focus-ring: #2E7DD1;
-
-  /* Typography */
-  --font-display: Fraunces, 'Iowan Old Style', Georgia, serif;
-  --font-body: 'Work Sans', -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.85rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: clamp(1.6rem, 3.2vw, 2.4rem);
-  --text-3xl: clamp(2.2rem, 5vw, 3.6rem);
-
-  /* Spacing scale (4px base) */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-8: 3rem;
-  --space-10: 4rem;
-  --space-12: 5.5rem;
-
-  /* Layout */
-  --max-width: 1140px;
-  --radius-sm: 3px;
-  --radius-md: 4px;
-  --border-width: 1px;
-
-  /* Motion */
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-base: 300ms;
-  --duration-slow: 600ms;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --duration-fast: 0ms;
-    --duration-base: 0ms;
-    --duration-slow: 0ms;
-  }
-}
-
-/* Base reset + accessibility defaults */
-*, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1, h2, h3, .display {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-}
-
-a { color: inherit; text-decoration: none; }
-ul, ol { list-style: none; }
-img, svg { max-width: 100%; display: block; }
-button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
-
-/* Visible, high-contrast focus ring for keyboard users — WCAG AA */
-:focus-visible {
-  outline: 3px solid var(--color-focus-ring);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* Skip link for screen-reader / keyboard users */
-.skip-link {
-  position: absolute;
-  left: -999px;
-  top: 0;
-  background: var(--color-indigo-deep);
-  color: var(--color-white);
-  padding: 12px 18px;
-  z-index: 100;
-  border-radius: 0 0 4px 0;
-}
-.skip-link:focus { left: 0; }
-
-.visually-hidden {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
-}
-
-.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-6); }
-
-/* Scroll-reveal (progressive enhancement — content is fully visible with JS disabled) */
-.reveal { opacity: 1; transform: none; }
-.js-enabled .reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity var(--duration-slow) var(--ease-standard),
-              transform var(--duration-slow) var(--ease-standard);
-}
-.js-enabled .reveal.is-visible { opacity: 1; transform: none; }
-
-/* ==========================================================================
-   Dobato Component Library
-   Every rule below is scoped to a single, reusable component class.
-   Components consume tokens.css — never hardcode a colour or size here.
-   ========================================================================== */
-
-/* --- Nav --- */
-.nav { display: flex; align-items: center; justify-content: space-between;
-  padding: var(--space-5) var(--space-6); max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 20; }
-.nav__logo { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; }
-.nav__logo-mark { width: 24px; height: 24px; flex-shrink: 0; }
-.nav__links { display: flex; gap: 28px; font-size: var(--text-sm); color: var(--color-text-muted); }
-.nav__links a:hover, .nav__links a:focus-visible { color: var(--color-text); }
-.nav__cta { background: var(--color-indigo-deep); color: var(--color-white);
-  padding: 9px 17px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; white-space: nowrap; }
-.nav__toggle { display: none; }
-
-@media (max-width: 820px) {
-  .nav__links { display: none; }
-  .nav__toggle { display: block; background: var(--color-indigo-deep); color: var(--color-white);
-    padding: 8px 12px; border-radius: var(--radius-sm); font-size: 13px; }
-  .nav__links.is-open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--color-white); padding: var(--space-5) var(--space-6); gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+/* --- Header / nav --- */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;max-width:var(--max-width);margin:0 auto;flex-wrap:wrap;gap:14px;}
+.nav__brand{display:flex;flex-direction:column;line-height:1.15;}
+.nav__brand-name{font-family:var(--font-display);font-size:19px;font-weight:600;}
+.nav__brand-suffix{font-size:11px;color:var(--ink-soft);letter-spacing:0.03em;}
+.nav__links{display:flex;gap:26px;font-size:13.5px;color:var(--ink-soft);align-items:center;}
+.nav__links a:hover{color:var(--ink);}
+.nav__actions{display:flex;align-items:center;gap:16px;}
+.nav__secondary{font-size:13px;color:var(--ink-soft);border-bottom:1px solid var(--line);}
+.nav__cta{background:var(--indigo-deep);color:#fff;padding:10px 18px;border-radius:3px;font-size:13.5px;font-weight:600;}
+.nav__toggle{display:none;}
+@media (max-width:820px){
+  .nav__links{display:none;}
+  .nav__toggle{display:block;background:var(--indigo-deep);color:#fff;padding:8px 12px;border-radius:3px;font-size:13px;}
+  .nav__links.is-open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:var(--white);padding:20px 28px;gap:14px;box-shadow:0 8px 20px rgba(0,0,0,0.1);z-index:30;}
 }
 
 /* --- Hero --- */
-.hero { position: relative; overflow: hidden; background: var(--color-indigo-deep); color: var(--color-white); padding: 76px var(--space-6) 0; }
-.hero__inner { max-width: var(--max-width); margin: 0 auto; position: relative; z-index: 2; }
-.eyebrow { font-size: var(--text-xs); color: #C9A15A; text-transform: uppercase; letter-spacing: 0.14em;
-  display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-5); }
-.eyebrow::before { content: ''; width: 26px; height: 1px; background: #C9A15A; }
-.hero__title { font-size: var(--text-3xl); max-width: 760px; margin-bottom: var(--space-5); }
-.hero__title em { font-style: italic; color: #E4B15F; }
-.hero__subhead { font-size: var(--text-lg); color: #C7CCD8; max-width: 560px; margin-bottom: var(--space-8); }
-.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: var(--space-10); }
-.btn { padding: 13px 22px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
-  display: inline-flex; align-items: center; gap: 8px; transition: transform var(--duration-fast) var(--ease-standard),
-  filter var(--duration-fast) var(--ease-standard); }
-.btn:hover, .btn:focus-visible { transform: translateY(-1px); filter: brightness(1.05); }
-.btn--primary { background: var(--color-accent); color: #221701; }
-.btn--ghost { border: 1px solid #4B5670; color: var(--color-white); }
-.hero__terrace { position: absolute; left: 0; right: 0; bottom: 0; height: 140px; z-index: 1; opacity: 0.9; }
+.hero{background:var(--indigo-deep);color:#fff;padding:56px 28px 64px;}
+.hero__inner{max-width:var(--max-width);margin:0 auto;}
+.hero .kicker{color:#C9A15A;}
+.hero h1{font-size:clamp(28px,4vw,42px);max-width:780px;margin-bottom:18px;color:#fff;font-style:normal;}
+.hero p{font-size:16px;color:#C7CCD8;max-width:640px;margin-bottom:30px;}
+.hero__ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{padding:12px 20px;border-radius:3px;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:8px;}
+.btn--primary{background:var(--accent);color:#221701;}
+.btn--ghost{border:1px solid #4B5670;color:#fff;}
 
-.statstrip { background: var(--color-indigo); border-top: var(--border-width) solid #3A4562; padding: var(--space-6);
-  position: relative; z-index: 2; }
-.statstrip__grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-.stat__num { font-family: var(--font-display); font-size: 26px; color: var(--color-white); }
-.stat__label { font-family: var(--font-mono); font-size: 12px; color: #98A1B8; margin-top: 4px; line-height: 1.4; }
-
-/* --- Section shell --- */
-.section { padding: 88px var(--space-6); }
-.section-head { max-width: 640px; margin-bottom: var(--space-8); }
-.section-head--center { margin-left: auto; margin-right: auto; text-align: center; }
-.kicker { font-size: var(--text-xs); color: var(--color-accent-deep); text-transform: uppercase;
-  letter-spacing: 0.12em; margin-bottom: var(--space-4); font-weight: 600; }
-.section-head h2 { font-size: var(--text-2xl); }
-.section-head p { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-base); }
-
-/* --- Approach (glocal) grid --- */
-.philosophy { background: var(--color-surface); border-top: var(--border-width) solid var(--color-line);
-  border-bottom: var(--border-width) solid var(--color-line); }
-.glocal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--color-line);
-  border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
-.glocal-col { background: var(--color-surface); padding: var(--space-8) var(--space-6); }
-.glocal-col h3 { font-size: var(--text-xl); margin-bottom: 6px; }
-.glocal-col__sub { font-size: 13px; color: var(--color-accent-deep); text-transform: uppercase;
-  letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--space-5); }
-.glocal-col--local .glocal-col__sub { color: var(--color-pine); }
-.glocal-col li { font-size: 14.5px; padding: 11px 0; border-top: var(--border-width) solid var(--color-line);
-  display: flex; gap: 10px; color: var(--color-text-muted); }
-.glocal-col li:first-of-type { border-top: none; }
-.glocal-col li::before { content: '—'; opacity: 0.5; flex-shrink: 0; }
-.glocal-quote { text-align: center; font-family: var(--font-display); font-style: italic; font-size: 18px;
-  color: var(--color-text-muted); margin: var(--space-6) 0 4px; }
-
-/* --- Problem stat cards --- */
-.problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-line);
-  border: var(--border-width) solid var(--color-line); }
-.problem-card { background: var(--color-surface); padding: var(--space-6); }
-.problem-card__label { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-accent-deep);
-  display: block; margin-bottom: var(--space-4); }
-.problem-card__big { font-family: var(--font-display); font-size: 36px; color: var(--color-indigo-deep); line-height: 1; }
-.problem-card__caption { font-size: 13.5px; color: var(--color-text-muted); margin-top: var(--space-3); line-height: 1.5; }
-
-/* --- Model diagram --- */
-.model { background: var(--color-surface); border: var(--border-width) solid var(--color-line);
-  border-radius: var(--radius-md); padding: var(--space-8); }
-.model__row { display: flex; align-items: stretch; }
-.model-node { flex: 1; padding: 0 18px; text-align: center; }
-.model-node__circle { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
-  justify-content: center; margin: 0 auto var(--space-4); font-family: var(--font-display); font-size: 18px; }
-.model-node:nth-child(1) .model-node__circle { background: var(--color-indigo-deep); color: var(--color-white); }
-.model-node:nth-child(2) .model-node__circle { background: var(--color-pine-soft); color: var(--color-pine); border: 1.5px solid var(--color-pine); }
-.model-node:nth-child(3) .model-node__circle { background: #F3DFB8; color: var(--color-accent-deep); border: 1.5px solid var(--color-accent-deep); }
-.model-node h4 { font-size: 15px; margin-bottom: 8px; }
-.model-node p { font-size: 13px; color: var(--color-text-muted); }
-.model__connector { flex: 0 0 56px; display: flex; align-items: center; justify-content: center; padding-top: 30px; }
-.model__footnote { margin-top: var(--space-8); padding-top: var(--space-6); border-top: var(--border-width) solid var(--color-line);
-  font-size: 13.5px; color: var(--color-text-muted); }
-.model__footnote b { color: var(--color-text); }
-
-/* --- Programs --- */
-.programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
-.program-card { padding: var(--space-8); border-radius: var(--radius-md); }
-.program-card--edu { background: var(--color-indigo-deep); color: var(--color-white); }
-.program-card--health { background: var(--color-pine-soft); color: var(--color-indigo-deep); }
-.program-card__tag { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: var(--space-4); }
-.program-card--edu .program-card__tag { color: #C9A15A; }
-.program-card--health .program-card__tag { color: var(--color-pine); }
-.program-card h3 { font-size: 23px; margin-bottom: var(--space-3); }
-.program-card__desc { font-size: 14px; }
-.program-card--edu .program-card__desc { color: #C7CCD8; }
-.program-card--health .program-card__desc { color: var(--color-text-muted); }
-.program-card ul { margin-top: var(--space-5); }
-.program-card li { font-size: 13.5px; padding: 9px 0; border-top: 1px solid rgba(0,0,0,0.08); display: flex; gap: 9px; }
-.program-card--edu li { border-top: 1px solid rgba(255,255,255,0.12); }
-.program-card li::before { content: '—'; opacity: 0.5; flex-shrink: 0; }
-.journey { margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px dashed rgba(0,0,0,0.15); }
-.program-card--edu .journey { border-top: 1px dashed rgba(255,255,255,0.2); }
-.journey__label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: var(--space-3); opacity: 0.75; }
-.journey__steps { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
-
-/* --- Foundations --- */
-.foundations { background: var(--color-indigo-deep); color: var(--color-white); }
-.found-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #3A4562;
-  border: var(--border-width) solid #3A4562; border-radius: var(--radius-md); overflow: hidden; margin-top: var(--space-2); }
-.found-card { background: #242E45; padding: var(--space-6); }
-.found-card__label { font-family: var(--font-mono); font-size: 11px; color: #C9A15A; text-transform: uppercase; letter-spacing: 0.06em; }
-.found-card h4 { font-size: 15.5px; margin: var(--space-3) 0 8px; }
-.found-card p { font-size: 13px; color: #B7BFD1; }
-
-/* --- Involve --- */
-.involve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
-.involve-card { background: var(--color-surface); border: var(--border-width) solid var(--color-line);
-  border-radius: var(--radius-md); padding: var(--space-6); }
-.involve-card__icon { width: 38px; height: 38px; border-radius: 50%; background: var(--color-pine-soft);
-  display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-5);
-  color: var(--color-pine); font-family: var(--font-display); font-size: 16px; }
-.involve-card h4 { font-size: 16.5px; margin-bottom: var(--space-3); }
-.involve-card p { font-size: 13.5px; color: var(--color-text-muted); margin-bottom: var(--space-5); }
-.involve-card__link { font-size: 13px; font-weight: 600; color: var(--color-indigo-deep);
-  border-bottom: 1.5px solid var(--color-accent); padding-bottom: 2px; }
-
-/* --- Trust --- */
-.trust { background: var(--color-surface); border-top: var(--border-width) solid var(--color-line); }
-.trust-grid--single { max-width: 720px; margin: 0 auto; }
-.trust h2 { font-size: var(--text-2xl); margin-bottom: var(--space-5); }
-.trust p { color: var(--color-text-muted); font-size: 15.5px; margin-bottom: var(--space-4); }
-.trust-list { margin-top: var(--space-6); }
-.trust-item { display: flex; gap: 13px; padding: var(--space-4) 0; border-top: var(--border-width) solid var(--color-line); }
-.trust-item:last-child { border-bottom: var(--border-width) solid var(--color-line); }
-.trust-item__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-deep); margin-top: 8px; flex-shrink: 0; }
-.trust-item p { color: var(--color-text-muted); font-size: 14px; margin: 0; }
-
-/* --- FAQ (accessible accordion) --- */
-.faq-list { max-width: 760px; }
-.faq-item { border-bottom: var(--border-width) solid var(--color-line); }
-.faq-item__question { width: 100%; text-align: left; padding: var(--space-5) 0; font-size: 15.5px; font-weight: 600;
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.faq-item__question .icon { transition: transform var(--duration-fast) var(--ease-standard); flex-shrink: 0; }
-.faq-item[open] .faq-item__question .icon { transform: rotate(45deg); }
-.faq-item__answer { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; padding-bottom: var(--space-5); }
-
-/* --- Split CTA --- */
-.split { display: grid; grid-template-columns: 1fr 1fr; }
-.split-panel { padding: 64px 46px; }
-.split-panel--families { background: #F3DFB8; color: var(--color-indigo-deep); }
-.split-panel--partners { background: var(--color-pine-soft); color: var(--color-indigo-deep); }
-.split-panel h3 { font-size: 23px; margin-bottom: var(--space-3); }
-.split-panel p { font-size: 14.5px; color: var(--color-text-muted); margin-bottom: var(--space-6); max-width: 400px; }
-.split-btn { background: var(--color-indigo-deep); color: var(--color-white); padding: 12px 20px;
-  border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600; display: inline-block; }
-
-/* --- Social icons --- */
-.social-icons { display: flex; gap: 10px; margin-top: var(--space-5); }
-.social-icons__link { width: 34px; height: 34px; border-radius: 50%; background: var(--color-paper);
-  border: var(--border-width) solid var(--color-line); display: flex; align-items: center; justify-content: center;
-  color: var(--color-ink-soft); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
-.social-icons__link:hover, .social-icons__link:focus-visible { background: var(--color-indigo-deep); color: var(--color-white); }
-
-/* --- Embedded content cards --- */
-.embed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-6); }
-.embed-card { background: var(--color-surface); border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
-.embed-card__frame { position: relative; width: 100%; aspect-ratio: 16 / 9; }
-.embed-card__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.embed-card__frame--tall { aspect-ratio: 4 / 5; }
-.embed-card__caption { font-size: 13px; color: var(--color-text-muted); padding: var(--space-4); }
-.embed-card__error { font-size: 13px; color: #B23A3A; padding: var(--space-4); }
-.embed-card__fallback { display: block; padding: var(--space-6); text-align: center; font-weight: 600; font-size: 14px; color: var(--color-indigo-deep); }
-
-
-/* --- Critical Alerts --- */
-.official-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
-.official-link { font-size: 12.5px; font-weight: 600; color: var(--color-indigo-deep); border-bottom: 1.5px solid var(--color-marigold); padding-bottom: 2px; }
-.alerts-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; }
-.alerts-list { display: flex; flex-direction: column; gap: 14px; }
-.alert-card { border-radius: 8px; padding: 20px 22px; border: 1px solid var(--color-line); background: var(--color-white); border-left: 5px solid var(--color-ink-soft); }
-.alert-card--flood { border-left-color: #2E6FA3; }
-.alert-card--landslide { border-left-color: #8A5A2E; }
-.alert-card--rain { border-left-color: #4F6B4E; }
-.alert-card--other { border-left-color: var(--color-marigold-deep); }
-.alert-card--none { border-left-color: var(--color-line); color: var(--color-ink-soft); font-size: 14px; font-style: italic; }
-.alert-card__tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--color-ink-soft); margin-bottom: 8px; }
-.alert-card h4 { font-size: 16.5px; margin-bottom: 6px; }
-.alert-card__meta { font-size: 12px; color: var(--color-ink-soft); margin-bottom: 10px; }
-.alert-card p { font-size: 13.5px; color: var(--color-ink-soft); }
-.emergency-panel { background: var(--color-indigo-deep); border-radius: 8px; padding: 22px; color: #fff; position: sticky; top: 16px; }
-.emergency-panel__label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: #C9A15A; font-weight: 700; margin-bottom: 14px; }
-.mini-hotline { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #3A4562; font-size: 13.5px; }
-.mini-hotline:first-of-type { border-top: none; }
-.mini-hotline strong { font-family: var(--font-mono); }
-.emergency-panel__more { display: block; margin-top: 14px; font-size: 12.5px; color: #E4B15F; font-weight: 600; }
-
-/* --- Emergency Hotlines directory --- */
-.hotline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-.hotline-card { background: var(--color-white); border: 1px solid var(--color-line); border-radius: 8px; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; }
-.hotline-card__label { font-size: 13.5px; font-weight: 600; }
-.hotline-card__number { font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--color-indigo-deep); }
-.hotline-subhead { font-family: var(--font-display); font-size: 18px; margin: 32px 0 16px; }
-.hotline-source { font-size: 12px; color: var(--color-ink-soft); margin-top: 20px; font-style: italic; }
-
-/* --- Verified contacts directory --- */
-.contact-directory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.contact-directory-card { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 8px; padding: 18px; }
-.contact-directory-card__type { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-marigold-deep); margin-bottom: 8px; }
-.contact-directory-card h4 { font-size: 15.5px; margin-bottom: 4px; }
-.contact-directory-card__district { font-size: 12.5px; color: var(--color-ink-soft); margin-bottom: 8px; }
-.contact-directory-card__phone { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--color-indigo-deep); margin-bottom: 6px; }
-.contact-directory-card p { font-size: 13px; color: var(--color-ink-soft); }
-
-/* --- Community events --- */
-.events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.event-card { background: var(--color-white); border: 1px solid var(--color-line); border-radius: 8px; padding: 20px; }
-.event-card__date { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-marigold-deep); text-transform: uppercase; margin-bottom: 8px; }
-.event-card h4 { font-size: 16px; margin-bottom: 4px; }
-.event-card__location { font-size: 12.5px; color: var(--color-ink-soft); margin-bottom: 10px; }
-.event-card p { font-size: 13.5px; color: var(--color-ink-soft); }
-
-/* --- Contact section --- */
-.contact-section { background: var(--color-indigo-deep); padding: 88px 32px; }
-.contact-grid { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-.contact-pill { background: #242E45; border: 1px solid #3A4562; border-radius: 10px; padding: 18px 28px; text-align: center; min-width: 200px; }
-.contact-pill strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #C9A15A; margin-bottom: 6px; }
-.contact-pill span { font-size: 16px; color: #fff; font-weight: 600; }
-.contact-social { display: flex; justify-content: center; margin-top: 24px; }
-.contact-social .social-icons { margin-top: 0; }
-
-/* --- About Dobato Nepal --- */
-.about-section { background: var(--color-white); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
-.about-story { max-width: 720px; margin: 0 auto 56px; text-align: center; font-family: var(--font-display); font-size: 19px;
-  line-height: 1.6; color: var(--color-ink); }
-.about-block { max-width: 900px; margin: 0 auto 48px; }
-.about-block .kicker { text-align: center; margin-bottom: 12px; }
-.about-block__intro { text-align: center; max-width: 640px; margin: 0 auto 32px; color: var(--color-text-muted); font-size: 15px; }
-.pathway-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--color-line); border: 1px solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
-.pathway-card { background: var(--color-white); padding: 26px 22px; }
-.pathway-card h4 { font-family: var(--font-display); font-size: 16.5px; margin-bottom: 10px; color: var(--color-indigo-deep); }
-.pathway-card p { font-size: 13px; color: var(--color-text-muted); line-height: 1.55; }
-
-.belief-panel { max-width: 780px; margin: 0 auto 56px; background: var(--color-pine-soft); border-left: 4px solid var(--color-pine);
-  border-radius: 0 8px 8px 0; padding: 28px 32px; }
-.belief-panel p { font-size: 15.5px; color: var(--color-ink); line-height: 1.65; margin-top: 4px; }
-
-.process-strip { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; }
-.process-step { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 90px; }
-.process-step__num { width: 40px; height: 40px; border-radius: 50%; background: var(--color-indigo-deep); color: #fff;
-  display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; }
-.process-step__label { font-size: 13px; font-weight: 600; text-align: center; }
-.process-connector { width: 40px; flex-shrink: 0; }
-.process-connector svg { width: 100%; }
-
-.vision-block { max-width: 680px; margin: 0 auto; text-align: center; background: var(--color-indigo-deep); border-radius: 10px; padding: 40px 36px; }
-.vision-block .kicker { text-align: center; }
-.vision-block p { color: #C7CCD8; font-size: 15px; line-height: 1.65; }
-.vision-block__quote { font-family: var(--font-display); font-style: italic; font-size: 19px; color: #fff; margin-top: 18px; }
-
-@media (max-width: 820px) {
-  .pathway-grid { grid-template-columns: 1fr 1fr; }
-  .process-strip { flex-direction: column; }
-  .process-connector { transform: rotate(90deg); width: 30px; margin: 4px 0; }
-}
+/* --- Company facts strip --- */
+.facts-strip{background:var(--indigo);border-top:1px solid #3A4562;padding:26px 28px;}
+.facts-grid{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.facts-grid dt{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#98A1B8;margin-bottom:6px;}
+.facts-grid dd{font-size:14px;color:#fff;line-height:1.4;}
+.facts-name-note{max-width:var(--max-width);margin:16px auto 0;font-size:12px;color:#98A1B8;}
+@media (max-width:900px){.facts-grid{grid-template-columns:1fr 1fr;}}
 
 /* --- Services --- */
-.services-section { background: var(--color-paper); }
-.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 32px; }
-.service-card { background: var(--color-white); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 24px 22px; }
-.service-card h4 { font-family: var(--font-display); font-size: 16px; margin-bottom: 10px; color: var(--color-indigo-deep); }
-.service-card p { font-size: 13px; color: var(--color-text-muted); line-height: 1.55; }
-.services-closing { text-align: center; max-width: 620px; margin: 0 auto; font-size: 13.5px; color: var(--color-text-muted); font-style: italic; }
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.service-card{background:var(--white);padding:26px 24px;}
+.service-card h4{font-size:15.5px;margin-bottom:8px;color:var(--indigo-deep);}
+.service-card p{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.services-closing{margin-top:24px;font-size:13.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:20px;}
+@media (max-width:820px){.service-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.service-grid{grid-template-columns:1fr;}}
 
-/* --- About image (optional) --- */
-.about-image { max-width: 780px; margin: 0 auto 48px; border-radius: 10px; overflow: hidden; }
-.about-image img, .about-image video { width: 100%; display: block; max-height: 420px; object-fit: cover; }
+/* --- Programs --- */
+.status-badge{display:inline-block;background:#F3DFB8;color:var(--accent-deep);font-size:12px;font-weight:600;padding:8px 14px;border-radius:3px;margin-bottom:20px;}
+.program-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
+.program-card{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:26px 24px;}
+.program-card h3{font-size:19px;margin-bottom:10px;}
+.program-card__desc{font-size:13.5px;color:var(--ink-soft);margin-bottom:16px;}
+.program-card ul{margin-bottom:18px;}
+.program-card li{font-size:13px;padding:8px 0;border-top:1px solid var(--line);color:var(--ink-soft);}
+.program-card li:first-child{border-top:none;}
+.program-journey{border-top:1px dashed var(--line);padding-top:14px;}
+.program-journey__label{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;color:var(--ink-soft);margin-bottom:8px;}
+.program-journey ol{display:flex;flex-direction:column;gap:6px;}
+.program-journey li{font-size:12.5px;color:var(--ink-soft);border:none;padding:0;}
+.programs-ask{font-size:13.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:20px;}
+.programs-ask a{font-weight:600;color:var(--indigo-deep);border-bottom:1px solid var(--accent);}
+@media (max-width:820px){.program-grid{grid-template-columns:1fr;}}
 
-/* --- Our Work (portfolio gallery) --- */
-.work-section { background: var(--color-white); border-top: 1px solid var(--color-line); }
-.work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-.work-card { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; margin: 0; }
-.work-card img, .work-card video { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
-.work-card figcaption { padding: 16px 18px; }
-.work-card h4 { font-family: var(--font-display); font-size: 15.5px; margin-bottom: 6px; color: var(--color-indigo-deep); }
-.work-card p { font-size: 12.5px; color: var(--color-text-muted); line-height: 1.5; }
+/* --- Method / legal boundary --- */
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:28px;}
+.method-col{background:var(--white);padding:24px 26px;}
+.method-col h4{font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent-deep);margin-bottom:14px;}
+.method-col li{font-size:13.5px;padding:9px 0;border-top:1px solid var(--line);color:var(--ink-soft);}
+.method-col li:first-child{border-top:none;}
+.legal-boundary{background:var(--indigo-deep);color:#fff;border-radius:4px;padding:26px 28px;}
+.legal-boundary h4{font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:#C9A15A;margin-bottom:12px;}
+.legal-boundary p{font-size:13.5px;color:#DDE1EB;line-height:1.6;}
+@media (max-width:820px){.method-grid{grid-template-columns:1fr;}}
+
+/* --- Why this design (stats) --- */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.stat-card{background:var(--white);padding:22px 20px;}
+.stat-card .big{font-family:var(--font-display);font-size:26px;color:var(--indigo-deep);}
+.stat-card .caption{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+.stat-card .source{font-size:11px;color:var(--ink-soft);margin-top:8px;font-family:var(--font-mono);}
+@media (max-width:820px){.stat-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.stat-grid{grid-template-columns:1fr;}}
+
+/* --- Workflow --- */
+.workflow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.workflow-card{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:22px 22px;}
+.workflow-card .num{font-family:var(--font-mono);font-size:12px;color:var(--accent-deep);margin-bottom:8px;}
+.workflow-card h4{font-size:15px;margin-bottom:8px;}
+.workflow-card p{font-size:13px;color:var(--ink-soft);}
+@media (max-width:820px){.workflow-grid{grid-template-columns:1fr;}}
+
+/* --- Legal --- */
+.legal-list{max-width:760px;}
+.legal-list li{font-size:13.5px;padding:12px 0;border-top:1px solid var(--line);color:var(--ink);line-height:1.5;}
+.legal-list li:first-child{border-top:none;}
+
+/* --- FAQ --- */
+.faq-list{max-width:760px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-item__q{width:100%;text-align:left;padding:16px 0;font-size:14.5px;font-weight:600;display:flex;justify-content:space-between;gap:12px;}
+.faq-item__a{font-size:13.5px;color:var(--ink-soft);line-height:1.6;padding-bottom:16px;}
+
+/* --- Contact --- */
+.contact-section{background:var(--white);border-top:1px solid var(--line);}
+.contact-categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+.contact-categories li{font-size:12.5px;background:var(--paper);border:1px solid var(--line);padding:7px 12px;border-radius:20px;color:var(--ink-soft);}
+.contact-form{max-width:560px;display:grid;gap:14px;}
+.contact-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.contact-form label{font-size:12.5px;font-weight:600;display:block;margin-bottom:5px;}
+.contact-form input,.contact-form select,.contact-form textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:3px;font:inherit;font-size:13.5px;background:var(--white);}
+.contact-form textarea{min-height:70px;resize:vertical;}
+.contact-note{font-size:12.5px;color:var(--accent-deep);background:#FBEFD9;border:1px solid #E4C98C;border-radius:3px;padding:10px 14px;}
+.contact-submit{margin-top:6px;}
+.contact-submit:disabled{opacity:0.5;cursor:not-allowed;}
 
 /* --- Footer --- */
-.site-footer { padding: 52px var(--space-6) 40px; border-top: var(--border-width) solid var(--color-line); background: var(--color-surface); }
-.site-footer__inner { max-width: var(--max-width); margin: 0 auto; }
-.site-footer__top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-8); margin-bottom: var(--space-8); }
-.site-footer__tagline { font-size: 13px; color: var(--color-text-muted); max-width: 380px; }
-.site-footer__cols { display: flex; gap: 56px; flex-wrap: wrap; }
-.site-footer__cols h5 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: var(--space-4); }
-.site-footer__cols a { display: block; font-size: 13.5px; padding: 5px 0; color: var(--color-text); }
-.site-footer__cols a:hover { color: var(--color-accent-deep); }
-.site-footer__bottom { padding-top: var(--space-5); border-top: var(--border-width) solid var(--color-line); font-size: 12px; color: var(--color-text-muted); }
+.site-footer{padding:40px 28px;border-top:1px solid var(--line);background:var(--white);}
+.site-footer__inner{max-width:var(--max-width);margin:0 auto;}
+.site-footer__top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:20px;}
+.site-footer__legal{font-size:14px;font-weight:600;}
+.site-footer__base{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
+.site-footer__tagline{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
+.site-footer__nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;}
+.site-footer__nav a{color:var(--ink-soft);}
+.site-footer__nav a:hover{color:var(--ink);}
+.site-footer__bottom{border-top:1px solid var(--line);padding-top:16px;font-size:11.5px;color:var(--ink-soft);}
 
-@media (max-width: 820px) {
-  .problem-grid, .programs-grid, .split, .glocal-grid, .found-grid, .involve-grid { grid-template-columns: 1fr; }
-  .model__row { flex-direction: column; gap: 22px; }
-  .model__connector { display: none; }
-  .statstrip__grid { grid-template-columns: 1fr; gap: 14px; }
-  .site-footer__cols { gap: 32px; }
-}
-
-/* --- Updates / Articles --- */
-.updates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); }
-.update-card { background: var(--color-white); border: var(--border-width) solid var(--color-line); border-radius: var(--radius-md); overflow: hidden; }
-.update-card__image { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
-.update-card__body { padding: var(--space-5); }
-.update-card__date { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-accent-deep); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-.update-card__title { font-size: 17px; margin-bottom: 8px; }
-.update-card__content { font-size: 13.5px; color: var(--color-text-muted); line-height: 1.6; }
-.update-card__content p { margin-bottom: 8px; }
+/* --- Social icons (reused) --- */
+.social-icons{display:flex;gap:8px;margin-top:10px;}
+.social-icons__link{width:30px;height:30px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);}
+.social-icons__link:hover{background:var(--indigo-deep);color:#fff;}
 `;
-const INLINE_JS = `/**
- * Dobato — public site behaviour.
- * Zero dependencies, progressive enhancement only: every feature here
- * degrades gracefully if JS fails to load (nav links still work, FAQ
- * items are native <details>, content is visible without animation).
- */
-(function () {
-  'use strict';
 
-  // Flag JS as available so CSS can opt in to reveal animations.
+const INLINE_JS = `(function(){
   document.documentElement.classList.add('js-enabled');
-
-  // --- Mobile nav toggle ---------------------------------------------
   var toggle = document.querySelector('[data-nav-toggle]');
   var links = document.querySelector('[data-nav-links]');
   if (toggle && links) {
@@ -1950,364 +946,252 @@ const INLINE_JS = `/**
       });
     });
   }
-
-  // --- Scroll-reveal ----------------------------------------------------
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    revealEls.forEach(function (el) { observer.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-  }
 })();
 `;
 
-/**
- * templates.js — reusable HTML component functions.
- *
- * Every function takes plain JS objects (parsed straight from content/*.json)
- * and returns an HTML string. Keeping these as small, named, single-purpose
- * functions (rather than one giant template) is what makes the site
- * maintainable: adding a new section to the homepage means writing one new
- * function here and one new line in build.js, not editing a monolith.
- *
- * All user-supplied text goes through esc()/inlineMd() before it reaches
- * the page — content is admin-edited via the CMS, but we still never trust
- * it blindly, the same way you wouldn't trust unescaped input in any app.
- */
-
-function socialIcons(socialLinks) {
-  const enabled = (socialLinks || []).filter((s) => s.enabled && s.url);
-  if (enabled.length === 0) return '';
-  const items = enabled
-    .map(
-      (s) =>
-        `<a href="${esc(s.url)}" class="social-icons__link" target="_blank" rel="noopener" aria-label="${esc(s.platform)}">${iconSvg(s.platform, 18)}</a>`
-    )
-    .join('');
-  return `<div class="social-icons">${items}</div>`;
-}
-
-function embeds(e) {
-  const enabledItems = (e.items || []).filter((i) => i.enabled !== false && i.url);
-  if (enabledItems.length === 0) return '';
-  const cards = enabledItems.map(renderEmbed).join('');
-  return `
-<section class="section" id="media" style="background:var(--color-white);border-top:1px solid var(--color-line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(e.kicker)}</div>
-      <h2>${esc(e.title)}</h2>
-      <p>${esc(e.intro)}</p>
-    </div>
-    <div class="embed-grid reveal">${cards}</div>
-  </div>
-</section>`;
-}
-
-function nav(navData) {
-  const links = navData.links
-    .map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`)
-    .join('');
+function nav(navData, site) {
+  const links = navData.links.map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`).join('');
   return `
 <nav class="nav">
-  <a class="nav__logo" href="#top">
-    <svg class="nav__logo-mark" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 L13 24 M2 13 L24 13" stroke="#D98B24" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="13" r="4" fill="#D98B24"/></svg>
-    <span>${esc(navData.logoText || 'Dobato Nepal')}</span>
+  <a class="nav__brand" href="#top">
+    <span class="nav__brand-name">${esc(site.siteName)}</span>
+    <span class="nav__brand-suffix">${esc(site.siteNameSuffix)}</span>
   </a>
   <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>
   <ul class="nav__links" id="primary-nav" data-nav-links>${links}</ul>
-  <a href="${esc(navData.cta.href)}" class="nav__cta">${esc(navData.cta.label)}</a>
+  <div class="nav__actions">
+    <a href="${esc(navData.secondaryLink.href)}" class="nav__secondary">${esc(navData.secondaryLink.label)}</a>
+    <a href="${esc(navData.cta.href)}" class="nav__cta">${esc(navData.cta.label)}</a>
+  </div>
 </nav>`;
 }
 
-function hero(hero, stats) {
-  const statHtml = stats
-    .map(
-      (s) => `<div><div class="stat__num">${esc(s.number)}</div><div class="stat__label">${esc(s.label)}</div></div>`
-    )
-    .join('');
+function hero(h) {
   return `
 <section class="hero" id="top">
   <div class="hero__inner">
-    <div class="eyebrow">${esc(hero.eyebrow)}</div>
-    <h1 class="hero__title">${esc(hero.headlineLine1)}<br><em>${esc(hero.headlineLine2)}</em></h1>
-    <p class="hero__subhead">${esc(hero.subhead)}</p>
+    <div class="kicker">${esc(h.eyebrow)}</div>
+    <h1>${esc(h.headline)}</h1>
+    <p>${esc(h.subhead)}</p>
     <div class="hero__ctas">
-      <a href="${esc(hero.ctaPrimary.href)}" class="btn btn--primary">${esc(hero.ctaPrimary.label)}</a>
-      <a href="${esc(hero.ctaSecondary.href)}" class="btn btn--ghost">${esc(hero.ctaSecondary.label)}</a>
+      <a href="${esc(h.ctaPrimary.href)}" class="btn btn--primary">${esc(h.ctaPrimary.label)}</a>
+      <a href="${esc(h.ctaSecondary.href)}" class="btn btn--ghost">${esc(h.ctaSecondary.label)}</a>
     </div>
-  </div>
-  <svg class="hero__terrace" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,150 L0,95 L120,80 L240,100 L360,70 L480,90 L600,55 L720,85 L840,60 L960,95 L1080,75 L1200,100 L1200,150 Z" fill="#252F47"/>
-    <path d="M0,150 L0,120 L150,110 L300,125 L450,105 L600,118 L750,100 L900,122 L1050,108 L1200,120 L1200,150 Z" fill="#1D263A"/>
-  </svg>
-  <div class="statstrip"><div class="statstrip__grid">${statHtml}</div></div>
-</section>`;
-}
-
-function approach(a) {
-  const list = (items) => items.map((i) => `<li>${esc(i)}</li>`).join('');
-  return `
-<section class="philosophy section" id="approach">
-  <div class="wrap">
-    <div class="section-head section-head--center reveal">
-      <div class="kicker">${esc(a.kicker)}</div>
-      <h2>${esc(a.title)}</h2>
-      <p>${esc(a.intro)}</p>
-    </div>
-    <div class="glocal-grid reveal">
-      <div class="glocal-col">
-        <div class="glocal-col__sub">${esc(a.global.label)}</div>
-        <h3>${esc(a.global.title)}</h3>
-        <ul>${list(a.global.items)}</ul>
-      </div>
-      <div class="glocal-col glocal-col--local">
-        <div class="glocal-col__sub">${esc(a.local.label)}</div>
-        <h3>${esc(a.local.title)}</h3>
-        <ul>${list(a.local.items)}</ul>
-      </div>
-    </div>
-    <p class="glocal-quote reveal">&ldquo;${esc(a.quote)}&rdquo;</p>
   </div>
 </section>`;
 }
 
-function problem(p) {
-  const cards = p.cards
-    .map(
-      (c) => `
-    <div class="problem-card">
-      <span class="problem-card__label">${esc(c.label)}</span>
-      <div class="problem-card__big">${esc(c.big)}</div>
-      <div class="problem-card__caption">${esc(c.caption)}</div>
-    </div>`
-    )
-    .join('');
+function companyFactsStrip(f) {
   return `
-<section class="section" id="problem">
+<section class="facts-strip">
+  <dl class="facts-grid">
+    <div><dt>Entity</dt><dd>${esc(f.entity)}</dd></div>
+    <div><dt>Registrations</dt><dd>${esc(f.registrations)}</dd></div>
+    <div><dt>Base</dt><dd>${esc(f.base)}</dd></div>
+    <div><dt>Model</dt><dd>${esc(f.model)}</dd></div>
+  </dl>
+  ${f.nameNote ? `<p class="facts-name-note">${esc(f.nameNote)}</p>` : ''}
+</section>`;
+}
+
+function servicesSection(s) {
+  const cards = s.items.map((item) => `
+    <div class="service-card">
+      <h4>${esc(item.title)}</h4>
+      <p>${esc(item.description)}</p>
+    </div>`).join('');
+  return `
+<section class="section" id="services" style="background:var(--paper);">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
+      <div class="kicker">${esc(s.kicker)}</div>
+      <h2>${esc(s.title)}</h2>
+      <p>${esc(s.intro)}</p>
+    </div>
+    <div class="service-grid">${cards}</div>
+    <p class="services-closing">${esc(s.closing)}</p>
+  </div>
+</section>`;
+}
+
+function programsSection(p) {
+  const cards = p.items.map((item) => `
+    <div class="program-card">
+      <h3>${esc(item.title)}</h3>
+      <p class="program-card__desc">${esc(item.description)}</p>
+      <ul>${item.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+      <div class="program-journey">
+        <div class="program-journey__label">Typical flow (design)</div>
+        <ol>${item.journey.map((j, i) => `<li>${i + 1}. ${esc(j)}</li>`).join('')}</ol>
+      </div>
+    </div>`).join('');
+  return `
+<section class="section" id="programs" style="background:var(--white);border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
       <div class="kicker">${esc(p.kicker)}</div>
       <h2>${esc(p.title)}</h2>
       <p>${esc(p.intro)}</p>
     </div>
-    <div class="problem-grid reveal">${cards}</div>
+    <div class="status-badge">${esc(p.statusBadge)}</div>
+    <div class="program-grid">${cards}</div>
+    <p class="programs-ask">${esc(p.partnershipAsk)} <a href="#contact">Request an MoU conversation \u2192</a></p>
   </div>
 </section>`;
 }
 
-const MODEL_NODE_ICONS = {
-  D: '<path d="M13 2 L13 24 M2 13 L24 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="13" r="4.2" fill="currentColor"/>',
-  P: '<rect x="1" y="10.5" width="7.5" height="5" rx="1.6" fill="currentColor"/><rect x="17.5" y="10.5" width="7.5" height="5" rx="1.6" fill="currentColor"/><polygon points="9,13 13,8.6 17,13 13,17.4" fill="currentColor"/>',
-  F: '<circle cx="6.5" cy="7.3" r="2.5" fill="currentColor"/><path d="M2 19v-2.8a4.3 4.3 0 0 1 4.5-4.3 4.3 4.3 0 0 1 4.5 4.3V19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="17.5" cy="7.3" r="2.5" fill="currentColor"/><path d="M13 19v-2.8a4.3 4.3 0 0 1 4.5-4.3 4.3 4.3 0 0 1 4.5 4.3V19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12.5" r="2" fill="currentColor"/><path d="M8.5 21v-2.3a3.5 3.5 0 0 1 3.5-3.5 3.5 3.5 0 0 1 3.5 3.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
-};
-function modelNodeIcon(letter) {
-  const inner = MODEL_NODE_ICONS[letter];
-  if (!inner) return esc(letter);
-  return `<svg width="28" height="28" viewBox="0 0 26 26" aria-hidden="true">${inner}</svg>`;
-}
-
-function model(m) {
-  const arrow = `<div class="model__connector"><svg viewBox="0 0 60 20" aria-hidden="true"><line x1="0" y1="10" x2="52" y2="10" stroke="#B7B09A" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M46,4 L54,10 L46,16" fill="none" stroke="#B7B09A" stroke-width="1.5"/></svg></div>`;
-  const nodes = m.nodes
-    .map(
-      (n, i) => `
-    <div class="model-node">
-      <div class="model-node__circle">${modelNodeIcon(n.letter)}</div>
-      <h4>${esc(n.title)}</h4>
-      <p>${esc(n.description)}</p>
-    </div>${i < m.nodes.length - 1 ? arrow : ''}`
-    )
-    .join('');
+function methodSection(m) {
   return `
-<section class="section" id="model" style="background:var(--color-surface);border-top:1px solid var(--color-line);border-bottom:1px solid var(--color-line);">
+<section class="section" id="approach" style="background:var(--paper);">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div class="kicker">${esc(m.kicker)}</div>
       <h2>${esc(m.title)}</h2>
-      <p>${esc(m.intro)}</p>
     </div>
-    <div class="model reveal">
-      <div class="model__row">${nodes}</div>
-      <div class="model__footnote"><b>${esc(m.footnote.split(':')[0])}:</b>${esc(m.footnote.split(':').slice(1).join(':'))}</div>
-    </div>
-  </div>
-</section>`;
-}
-
-function programs(p) {
-  const items = p.items
-    .map(
-      (prog) => `
-    <div class="program-card program-card--${esc(prog.style)}">
-      <div class="program-card__tag">${esc(prog.tag)}</div>
-      <h3>${esc(prog.title)}</h3>
-      <p class="program-card__desc">${esc(prog.description)}</p>
-      <ul>${prog.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
-      <div class="journey">
-        <div class="journey__label">A typical journey</div>
-        <div class="journey__steps">${prog.journey.map((s, i) => `<span>${i + 1}. ${esc(s)}</span>`).join('')}</div>
+    <div class="method-grid">
+      <div class="method-col">
+        <h4>${esc(m.companyProvidesLabel)}</h4>
+        <ul>${m.companyProvides.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
       </div>
-    </div>`
-    )
-    .join('');
-  return `
-<section class="section" id="programs">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(p.kicker)}</div>
-      <h2>${esc(p.title)}</h2>
-      <p>${esc(p.intro)}</p>
+      <div class="method-col">
+        <h4>${esc(m.alwaysLocalLabel)}</h4>
+        <ul>${m.alwaysLocal.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+      </div>
     </div>
-    <div class="programs-grid reveal">${items}</div>
+    <div class="legal-boundary">
+      <h4>${esc(m.legalBoundaryTitle)}</h4>
+      <p>${esc(m.legalBoundary)}</p>
+    </div>
   </div>
 </section>`;
 }
 
-function foundations(f) {
-  const cards = f.cards
-    .map(
-      (c) => `
-    <div class="found-card">
-      <span class="found-card__label">${esc(c.label)}</span>
+function whyDesignSection(w) {
+  const cards = w.stats.map((s) => `
+    <div class="stat-card">
+      <div class="big">${esc(s.big)}</div>
+      <div class="caption">${esc(s.caption)}</div>
+      <div class="source">${esc(s.source)}</div>
+    </div>`).join('');
+  return `
+<section class="section" id="why" style="background:var(--white);border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">${esc(w.kicker)}</div>
+      <h2>${esc(w.title)}</h2>
+      <p>${esc(w.intro)}</p>
+    </div>
+    <div class="stat-grid">${cards}</div>
+  </div>
+</section>`;
+}
+
+function workflowSection(wf) {
+  const cols = wf.columns.map((c, i) => `
+    <div class="workflow-card">
+      <div class="num">0${i + 1}</div>
       <h4>${esc(c.title)}</h4>
       <p>${esc(c.description)}</p>
-    </div>`
-    )
-    .join('');
+    </div>`).join('');
   return `
-<section class="foundations section" id="network">
+<section class="section" id="workflow" style="background:var(--paper);">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker" style="color:#C9A15A;">${esc(f.kicker)}</div>
-      <h2>${esc(f.title)}</h2>
-      <p style="color:#C7CCD8;">${esc(f.intro)}</p>
+    <div class="section-head">
+      <div class="kicker">${esc(wf.kicker)}</div>
+      <h2>${esc(wf.title)}</h2>
     </div>
-    <div class="found-grid reveal">${cards}</div>
+    <div class="workflow-grid">${cols}</div>
   </div>
 </section>`;
 }
 
-function involve(inv) {
-  const cards = inv.cards
-    .map(
-      (c) => `
-    <div class="involve-card">
-      <div class="involve-card__icon">${esc(c.number)}</div>
-      <h4>${esc(c.title)}</h4>
-      <p>${esc(c.description)}</p>
-      <a href="${esc(c.linkHref)}" class="involve-card__link">${esc(c.linkLabel)}</a>
-    </div>`
-    )
-    .join('');
+function legalSection(l) {
   return `
-<section class="section" id="involve">
+<section class="section" id="legal" style="background:var(--white);border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="section-head section-head--center reveal">
-      <div class="kicker">${esc(inv.kicker)}</div>
-      <h2>${esc(inv.title)}</h2>
+    <div class="section-head">
+      <div class="kicker">${esc(l.kicker)}</div>
+      <h2>${esc(l.title)}</h2>
     </div>
-    <div class="involve-grid reveal">${cards}</div>
+    <ul class="legal-list">${l.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
   </div>
 </section>`;
 }
 
-function trust(t) {
-  const points = t.points.map((p) => `<div class="trust-item"><div class="trust-item__dot"></div><p>${esc(p)}</p></div>`).join('');
+function faqSection(f) {
+  const items = f.items.map((item) => `
+    <details class="faq-item">
+      <summary class="faq-item__q">${esc(item.question)}</summary>
+      <div class="faq-item__a">${esc(item.answer)}</div>
+    </details>`).join('');
   return `
-<section class="trust section" id="trust">
-  <div class="wrap trust-grid--single">
-    <div class="reveal">
-      <div class="kicker">${esc(t.kicker)}</div>
-      <h2>${esc(t.title)}</h2>
-      <p>${esc(t.intro)}</p>
-      <div class="trust-list">${points}</div>
-    </div>
-  </div>
-</section>`;
-}
-
-function faq(f) {
-  const items = f.items
-    .map(
-      (item, i) => `
-    <details class="faq-item" ${i === 0 ? 'open' : ''}>
-      <summary class="faq-item__question">${esc(item.question)}<span class="icon" aria-hidden="true">+</span></summary>
-      <div class="faq-item__answer">${inlineMd(item.answer)}</div>
-    </details>`
-    )
-    .join('');
-  return `
-<section class="section" id="faq" style="background:var(--color-paper);">
+<section class="section" id="faq" style="background:var(--paper);">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div class="kicker">${esc(f.kicker)}</div>
       <h2>${esc(f.title)}</h2>
     </div>
-    <div class="faq-list reveal">${items}</div>
+    <div class="faq-list">${items}</div>
   </div>
 </section>`;
 }
 
-function splitCta(s) {
+function contactSection(c, site) {
+  const categories = c.categories.map((cat) => `<li>${esc(cat)}</li>`).join('');
+  const needOptions = c.needOptions.map((n) => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
+  const hasEmail = site.contactEmail && site.contactEmail.includes('@');
+  const socialHtml = socialIcons(site.socialLinks);
   return `
-<section class="split" style="padding:0;">
-  <div class="split-panel split-panel--families">
-    <h3>${esc(s.families.title)}</h3>
-    <p>${esc(s.families.description)}</p>
-    <a href="${esc(s.families.buttonHref)}" class="split-btn">${esc(s.families.buttonLabel)}</a>
-  </div>
-  <div class="split-panel split-panel--partners">
-    <h3>${esc(s.partners.title)}</h3>
-    <p>${esc(s.partners.description)}</p>
-    <a href="${esc(s.partners.buttonHref)}" class="split-btn">${esc(s.partners.buttonLabel)}</a>
+<section class="contact-section section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">${esc(c.kicker)}</div>
+      <h2>${esc(c.title)}</h2>
+    </div>
+    <ul class="contact-categories">${categories}</ul>
+    ${!hasEmail ? `<p class="contact-note">${esc(c.noEmailNote)}</p>` : ''}
+    <form class="contact-form" id="contact-form" onsubmit="return false;">
+      <div class="row2">
+        <div><label for="cf-name">Name</label><input type="text" id="cf-name" required></div>
+        <div><label for="cf-org">Organisation</label><input type="text" id="cf-org"></div>
+      </div>
+      <div class="row2">
+        <div><label for="cf-role">Role</label><input type="text" id="cf-role"></div>
+        <div><label for="cf-need">What do you need?</label><select id="cf-need">${needOptions}</select></div>
+      </div>
+      <div class="row2">
+        <div><label for="cf-email">Email</label><input type="email" id="cf-email" required></div>
+        <div><label for="cf-phone">Phone</label><input type="tel" id="cf-phone"></div>
+      </div>
+      <div><label for="cf-message">Message</label><textarea id="cf-message"></textarea></div>
+      <button type="submit" class="btn btn--primary contact-submit" id="cf-submit" ${!hasEmail ? 'disabled title="Company email not yet set"' : `onclick="window.location.href=buildContactMailto('${esc(site.contactEmail)}')"`}>Send</button>
+    </form>
+    ${socialHtml}
   </div>
 </section>`;
 }
 
-function footer(f, siteData) {
-  const cols = f.columns
-    .map(
-      (col) => `
-    <div class="footer-col">
-      <h5>${esc(col.heading)}</h5>
-      ${col.links.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('')}
-    </div>`
-    )
-    .join('');
+function footer(f, site) {
+  const navLinks = f.navRepeat.map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('');
   return `
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__top">
       <div>
-        <a class="nav__logo" href="#top" style="margin-bottom:14px;">
-          <svg class="nav__logo-mark" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 L13 24 M2 13 L24 13" stroke="#B5701A" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="13" r="4" fill="#B5701A"/></svg>
-          <span>${esc(siteData.siteName)}</span>
-        </a>
-        <p class="site-footer__tagline">${esc(f.tagline)}</p>
-        ${socialIcons(siteData.socialLinks)}
+        <div class="site-footer__legal">${esc(f.legalName)}</div>
+        <div class="site-footer__base">${esc(f.base)}</div>
+        <div class="site-footer__tagline">${esc(site.tagline)}</div>
       </div>
-      <div class="site-footer__cols">${cols}</div>
+      <nav class="site-footer__nav">${navLinks}</nav>
     </div>
-    <div class="site-footer__bottom">&copy; ${esc(siteData.siteName)}. ${esc(f.bottomText)}</div>
+    <div class="site-footer__bottom">
+      &copy; ${new Date().getFullYear()} ${esc(f.legalName)}. ${esc(f.statsSourceLine)}
+    </div>
   </div>
 </footer>`;
 }
 
-/** Full HTML document shell: head, meta/SEO, and the assembled body. */
-function layout({ site, bodyHtml, embedScripts = [] }) {
-  const embedScriptTags = embedScripts.map((src) => `<script async src="${esc(src)}"><\/script>`).join('\n');
+function layout({ site, bodyHtml }) {
   return `<!DOCTYPE html>
 <html lang="${esc(site.language || 'en')}">
 <head>
@@ -2316,350 +1200,55 @@ function layout({ site, bodyHtml, embedScripts = [] }) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="${esc(site.seo.defaultDescription)}">
 <meta name="theme-color" content="${esc(site.themeColor)}">
-<link rel="canonical" href="${esc(site.url)}">
-<meta property="og:type" content="website">
-<meta property="og:title" content="${esc(site.seo.defaultTitle)}">
-<meta property="og:description" content="${esc(site.seo.defaultDescription)}">
-<meta property="og:image" content="${esc(site.seo.ogImage)}">
-<meta property="og:url" content="${esc(site.url)}">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 26 26\'%3E%3Cpath d=\'M13 2 L13 24 M2 13 L24 13\' stroke=\'%23D98B24\' stroke-width=\'2.4\' stroke-linecap=\'round\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'4.5\' fill=\'%231D263A\'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 ${INLINE_CSS}
 </style>
-${embedScriptTags}
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 ${bodyHtml}
-<script>${INLINE_JS}<\/script>
+<script>
+${INLINE_JS}
+
+function buildContactMailto(email) {
+  const name = document.getElementById('cf-name').value;
+  const org = document.getElementById('cf-org').value;
+  const role = document.getElementById('cf-role').value;
+  const need = document.getElementById('cf-need').value;
+  const phone = document.getElementById('cf-phone').value;
+  const message = document.getElementById('cf-message').value;
+  const subject = encodeURIComponent('Enquiry: ' + need + ' \u2014 ' + name);
+  const bodyLines = [
+    'Name: ' + name, 'Organisation: ' + org, 'Role: ' + role,
+    'Phone: ' + phone, 'Need: ' + need, '', message
+  ];
+  const body = encodeURIComponent(bodyLines.join('\\n'));
+  return 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+}
+<\/script>
 </body>
 </html>`;
 }
 
-
-function updatesSection(u) {
-  const enabledItems = (u.items || []).filter((i) => i.enabled !== false && i.title);
-  if (enabledItems.length === 0) return '';
-  const cards = enabledItems
-    .map(
-      (item) => `
-    <article class="update-card">
-      ${item.imageUrl ? `<img class="update-card__image" src="${esc(item.imageUrl)}" alt="" loading="lazy">` : ''}
-      <div class="update-card__body">
-        ${item.date ? `<div class="update-card__date">${esc(item.date)}</div>` : ''}
-        <h3 class="update-card__title">${esc(item.title)}</h3>
-        <div class="update-card__content">${toHtml(item.content || '')}</div>
-      </div>
-    </article>`
-    )
-    .join('');
-  return `
-<section class="section" id="updates" style="background:var(--color-paper);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(u.kicker)}</div>
-      <h2>${esc(u.title)}</h2>
-      <p>${esc(u.intro)}</p>
-    </div>
-    <div class="updates-grid reveal">${cards}</div>
-  </div>
-</section>`;
-}
-
-/* --- Critical Alerts (manually curated, honestly labeled — not a live feed) --- */
-function alertsSection(a, hotlines) {
-  const active = (a.items || []).filter((i) => i.enabled !== false && i.title);
-  const officialLinks = (a.officialLinks || [])
-    .map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener" class="official-link">${esc(l.label)} ↗</a>`)
-    .join('');
-  const emergencyNums = (hotlines.national || [])
-    .slice(0, 4)
-    .map((n) => `<div class="mini-hotline"><span>${esc(n.label)}</span><strong>${esc(n.number)}</strong></div>`)
-    .join('');
-
-  const alertCards = active.length
-    ? active.map((item) => `
-      <div class="alert-card alert-card--${esc(item.severity || 'other')}">
-        <div class="alert-card__tag">${esc((item.severity || 'other').toUpperCase())}</div>
-        <h4>${esc(item.title)}</h4>
-        <div class="alert-card__meta">${esc(item.region || '')}${item.date ? ' · ' + esc(item.date) : ''}</div>
-        <p>${esc(item.description || '')}</p>
-      </div>`).join('')
-    : `<div class="alert-card alert-card--none">No active alerts posted by our team right now. This is not a guarantee nothing is happening — check the official links for live monitoring.</div>`;
-
-  return `
-<section class="section" id="alerts" style="background:var(--color-white);border-top:1px solid var(--color-line);border-bottom:1px solid var(--color-line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(a.kicker)}</div>
-      <h2>${esc(a.title)}</h2>
-      <p>${esc(a.intro)}</p>
-      <div class="official-links">${officialLinks}</div>
-    </div>
-    <div class="alerts-layout reveal">
-      <div class="alerts-list">${alertCards}</div>
-      <aside class="emergency-panel">
-        <div class="emergency-panel__label">Emergency Contacts</div>
-        ${emergencyNums}
-        <a href="#hotlines" class="emergency-panel__more">See all hotlines ↓</a>
-      </aside>
-    </div>
-  </div>
-</section>`;
-}
-
-/* --- Emergency Hotlines directory --- */
-function hotlinesSection(h) {
-  const nationalCards = (h.national || [])
-    .map((n) => `<div class="hotline-card"><span class="hotline-card__label">${esc(n.label)}</span><span class="hotline-card__number">${esc(n.number)}</span></div>`)
-    .join('');
-  const districtItems = (h.district || []).filter((d) => d.enabled !== false && d.label);
-  const districtCards = districtItems
-    .map((n) => `<div class="hotline-card hotline-card--district"><span class="hotline-card__label">${esc(n.label)}${n.district ? ' — ' + esc(n.district) : ''}</span><span class="hotline-card__number">${esc(n.number)}</span></div>`)
-    .join('');
-
-  return `
-<section class="section" id="hotlines">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(h.kicker)}</div>
-      <h2>${esc(h.title)}</h2>
-      <p>${esc(h.intro)}</p>
-    </div>
-    <div class="hotline-grid reveal">${nationalCards}</div>
-    ${districtItems.length ? `<h3 class="hotline-subhead">District &amp; Local Numbers</h3><div class="hotline-grid reveal">${districtCards}</div>` : ''}
-    <p class="hotline-source">${esc(h.sourceNote)}</p>
-  </div>
-</section>`;
-}
-
-/* --- Verified Local Contacts directory --- */
-function verifiedContactsSection(v) {
-  const active = (v.items || []).filter((i) => i.enabled !== false && i.name);
-  if (active.length === 0) return '';
-  const cards = active.map((c) => `
-    <div class="contact-directory-card">
-      <div class="contact-directory-card__type">${esc(c.type || 'Contact')}</div>
-      <h4>${esc(c.name)}</h4>
-      <div class="contact-directory-card__district">${esc(c.district || '')}</div>
-      ${c.phone ? `<div class="contact-directory-card__phone">${esc(c.phone)}</div>` : ''}
-      ${c.notes ? `<p>${esc(c.notes)}</p>` : ''}
-    </div>`).join('');
-  return `
-<section class="section" id="directory" style="background:var(--color-white);border-top:1px solid var(--color-line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(v.kicker)}</div>
-      <h2>${esc(v.title)}</h2>
-      <p>${esc(v.intro)}</p>
-    </div>
-    <div class="contact-directory-grid reveal">${cards}</div>
-  </div>
-</section>`;
-}
-
-/* --- Community Events --- */
-function eventsSection(e) {
-  const active = (e.items || []).filter((i) => i.enabled !== false && i.title);
-  if (active.length === 0) return '';
-  const cards = active.map((ev) => `
-    <div class="event-card">
-      <div class="event-card__date">${esc(ev.date || '')}</div>
-      <h4>${esc(ev.title)}</h4>
-      <div class="event-card__location">${esc(ev.location || '')}</div>
-      <p>${esc(ev.description || '')}</p>
-    </div>`).join('');
-  return `
-<section class="section" id="events">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(e.kicker)}</div>
-      <h2>${esc(e.title)}</h2>
-      <p>${esc(e.intro)}</p>
-    </div>
-    <div class="events-grid reveal">${cards}</div>
-  </div>
-</section>`;
-}
-
-/* --- Contact section (donate/volunteer/partner, all via direct contact) --- */
-function contactSection(site) {
-  const enabledSocial = (site.socialLinks || []).filter((s) => s.enabled && s.url);
-  const socialHtml = enabledSocial.length ? socialIcons(site.socialLinks) : '';
-  return `
-<section class="contact-section" id="contact">
-  <div class="wrap">
-    <div class="section-head section-head--center reveal" style="margin-bottom:32px;">
-      <div class="kicker" style="color:#C9A15A;">Get In Touch</div>
-      <h2 style="color:#fff;">Want to donate, volunteer, or partner with us?</h2>
-      <p style="color:#C7CCD8;">We keep this simple and direct. Reach out below, tell us what you have in mind, and we'll respond honestly — including exactly where any contribution goes.</p>
-    </div>
-    <div class="contact-grid reveal">
-      ${site.contactPhone ? `<a href="tel:${esc(site.contactPhone)}" class="contact-pill"><strong>Call</strong><span>${esc(site.contactPhone)}</span></a>` : ''}
-      ${site.contactEmail ? `<a href="mailto:${esc(site.contactEmail)}" class="contact-pill"><strong>Email</strong><span>${esc(site.contactEmail)}</span></a>` : ''}
-    </div>
-    ${socialHtml ? `<div class="contact-social">${socialHtml}</div>` : ''}
-  </div>
-</section>`;
-}
-
-/* --- About Dobato Nepal --- */
-/** Detects whether a media value (data URI or URL) is a video, so the
- *  right tag (<video> vs <img>) gets used. Works for both uploaded
- *  data: URIs and pasted links ending in a common video extension. */
-function isVideoMedia(src) {
-  if (!src) return false;
-  if (src.startsWith('data:video')) return true;
-  return /\.(mp4|webm|mov|ogg|m4v)(\?|#|$)/i.test(src);
-}
-
-function aboutSection(a) {
-  const pathwayCards = (a.pathways || [])
-    .map((p) => `
-    <div class="pathway-card">
-      <h4>${esc(p.title)}</h4>
-      <p>${esc(p.description)}</p>
-    </div>`)
-    .join('');
-
-  const steps = a.processSteps || [];
-  const connector = `<div class="process-connector" aria-hidden="true"><svg viewBox="0 0 40 16"><line x1="0" y1="8" x2="34" y2="8" stroke="#B7B09A" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M29,3 L36,8 L29,13" fill="none" stroke="#B7B09A" stroke-width="1.5"/></svg></div>`;
-  const processSteps = steps
-    .map((s, i) => `
-    <div class="process-step">
-      <div class="process-step__num">${i + 1}</div>
-      <div class="process-step__label">${esc(s)}</div>
-    </div>${i < steps.length - 1 ? connector : ''}`)
-    .join('');
-
-  const aboutImage = a.image
-    ? isVideoMedia(a.image)
-      ? `<div class="about-image reveal"><video src="${esc(a.image)}" controls playsinline preload="metadata"></video></div>`
-      : `<div class="about-image reveal"><img src="${esc(a.image)}" alt="" loading="lazy"></div>`
-    : '';
-
-  return `
-<section class="about-section section" id="about">
-  <div class="wrap">
-    <div class="section-head section-head--center reveal">
-      <div class="kicker">${esc(a.kicker)}</div>
-      <h2>${esc(a.title)}</h2>
-      <p>${esc(a.intro)}</p>
-    </div>
-    ${aboutImage}
-
-    <p class="about-story reveal">${esc(a.story)}</p>
-
-    <div class="about-block reveal">
-      <div class="kicker">${esc(a.pathwaysKicker)}</div>
-      <p class="about-block__intro">${esc(a.pathwaysIntro)}</p>
-      <div class="pathway-grid">${pathwayCards}</div>
-    </div>
-
-    <div class="belief-panel reveal">
-      <div class="kicker" style="color:var(--color-pine);">${esc(a.beliefKicker)}</div>
-      <p>${esc(a.belief)}</p>
-    </div>
-
-    <div class="about-block reveal">
-      <div class="kicker" style="text-align:center;">${esc(a.processKicker)}</div>
-      <div class="process-strip">${processSteps}</div>
-    </div>
-
-    <div class="vision-block reveal">
-      <div class="kicker" style="color:#C9A15A;">${esc(a.visionKicker)}</div>
-      <p>${esc(a.vision)}</p>
-      <p class="vision-block__quote">${esc(a.visionQuote)}</p>
-    </div>
-  </div>
-</section>`;
-}
-
-/* --- Services (how the free programs are funded) --- */
-function servicesSection(s) {
-  const cards = (s.items || [])
-    .map((item) => `
-    <div class="service-card">
-      <h4>${esc(item.title)}</h4>
-      <p>${esc(item.description)}</p>
-    </div>`)
-    .join('');
-  return `
-<section class="services-section section" id="services">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(s.kicker)}</div>
-      <h2>${esc(s.title)}</h2>
-      <p>${esc(s.intro)}</p>
-    </div>
-    <div class="service-grid reveal">${cards}</div>
-    <p class="services-closing reveal">${esc(s.closing)}</p>
-  </div>
-</section>`;
-}
-
-/* --- Our Work (portfolio gallery: image + title) --- */
-function workSection(w) {
-  const active = (w.items || []).filter((i) => i.enabled !== false && i.image && i.title);
-  if (active.length === 0) return '';
-  const cards = active
-    .map((item) => {
-      const media = isVideoMedia(item.image)
-        ? `<video src="${esc(item.image)}" controls playsinline preload="metadata"></video>`
-        : `<img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy">`;
-      return `
-    <figure class="work-card">
-      ${media}
-      <figcaption>
-        <h4>${esc(item.title)}</h4>
-        ${item.description ? `<p>${esc(item.description)}</p>` : ''}
-      </figcaption>
-    </figure>`;
-    })
-    .join('');
-  return `
-<section class="work-section section" id="work">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="kicker">${esc(w.kicker)}</div>
-      <h2>${esc(w.title)}</h2>
-      <p>${esc(w.intro)}</p>
-    </div>
-    <div class="work-grid reveal">${cards}</div>
-  </div>
-</section>`;
-}
-
 function buildFullSite(content) {
   const bodyHtml = [
-    nav({ ...content.nav, logoText: content.site.logoText }),
+    nav(content.nav, content.site),
     '<main id="main">',
-    hero(content.home.hero, content.home.stats),
-    aboutSection(content.about),
-    updatesSection(content.updates),
-    approach(content.home.approach),
-    problem(content.home.problem),
-    model(content.home.model),
-    programs(content.programs),
-    workSection(content.work),
-    foundations(content.foundations),
+    hero(content.hero),
+    companyFactsStrip(content.companyFacts),
     servicesSection(content.services),
-    verifiedContactsSection(content.verifiedContacts),
-    eventsSection(content.events),
-    involve(content.involve),
-    embeds(content.embeds),
-    trust(content.trust),
-    faq(content.faq),
-    contactSection(content.site),
-    splitCta(content.involve.splitCta),
+    programsSection(content.programs),
+    methodSection(content.method),
+    whyDesignSection(content.whyDesign),
+    workflowSection(content.workflow),
+    legalSection(content.legal),
+    faqSection(content.faq),
+    contactSection(content.contactSection, content.site),
     '</main>',
-    footer(content.footer, content.site),
+    footer({ ...content.footer, navRepeat: content.nav.links }, content.site),
   ].join('\n');
-  const embedScripts = requiredScripts(content.embeds.items || []);
-  return layout({ site: content.site, bodyHtml, embedScripts });
+  return layout({ site: content.site, bodyHtml });
 }
 
 </script>
