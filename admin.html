@@ -112,15 +112,14 @@
   <!-- 02: COMPANY FACTS -->
   <div class="card">
     <div class="card-head"><span class="num">02</span><h2>Company Facts Strip</h2></div>
-    <p class="help">Update "Registrations" the day a certificate status changes — e.g. from "in process" to "issued".</p>
+    <p class="help">Appears at the bottom of the page, just above the footer. Registration status is no longer shown here — it lives in the Legal section only.</p>
     <label for="cf-entity">Entity</label>
     <input type="text" id="cf-entity">
-    <label for="cf-registrations">Registrations</label>
-    <input type="text" id="cf-registrations">
     <label for="cf-base">Base</label>
     <input type="text" id="cf-base">
-    <label for="cf-model">Model</label>
-    <input type="text" id="cf-model">
+    <label>Model (business lines)</label>
+    <div id="model-list"></div>
+    <button class="add-btn" type="button" onclick="addModelItem()" style="margin-bottom:18px;">+ Add a business line</button>
     <label for="cf-namenote">Name meaning note</label>
     <input type="text" id="cf-namenote">
   </div>
@@ -136,22 +135,9 @@
     <input type="text" id="sv-closing">
   </div>
 
-  <!-- 04: PROGRAMS -->
-  <div class="card">
-    <div class="card-head"><span class="num">04</span><h2>Community Programs</h2></div>
-    <p class="help">Keep the status badge honest — only remove "Not active in a ward yet" once delivery has actually started under a signed MoU.</p>
-    <label for="pr-status">Status badge</label>
-    <input type="text" id="pr-status">
-    <label for="pr-intro">Intro</label>
-    <textarea id="pr-intro"></textarea>
-    <div id="programs-list"></div>
-    <label for="pr-ask">Partnership ask</label>
-    <textarea id="pr-ask"></textarea>
-  </div>
-
   <!-- 05: METHOD / LEGAL BOUNDARY -->
   <div class="card">
-    <div class="card-head"><span class="num">05</span><h2>Approach (Method &amp; Legal Boundary)</h2></div>
+    <div class="card-head"><span class="num">04</span><h2>Approach (Method &amp; Legal Boundary)</h2></div>
     <label>"Company provides" list</label>
     <div id="provides-list"></div>
     <button class="add-btn" type="button" onclick="addListItem('method.companyProvides','provides-list')" style="margin-bottom:18px;">+ Add item</button>
@@ -164,7 +150,7 @@
 
   <!-- 06: WHY THIS DESIGN -->
   <div class="card">
-    <div class="card-head"><span class="num">06</span><h2>Why This Design (Stats)</h2></div>
+    <div class="card-head"><span class="num">05</span><h2>Why This Design (Stats)</h2></div>
     <p class="help">Every stat needs a named government source. Do not add a figure you can't attribute.</p>
     <label for="wd-intro">Intro</label>
     <textarea id="wd-intro"></textarea>
@@ -174,14 +160,14 @@
 
   <!-- 07: WORKING WITH US -->
   <div class="card">
-    <div class="card-head"><span class="num">07</span><h2>Working With Us</h2></div>
+    <div class="card-head"><span class="num">06</span><h2>Working With Us</h2></div>
     <div id="workflow-list"></div>
     <button class="add-btn" type="button" onclick="addWorkflowStep()">+ Add a step</button>
   </div>
 
   <!-- 08: LEGAL -->
   <div class="card">
-    <div class="card-head"><span class="num">08</span><h2>Legal</h2></div>
+    <div class="card-head"><span class="num">07</span><h2>Legal</h2></div>
     <p class="help">Factual bullets only. Do not add promotional language here.</p>
     <div id="legal-list"></div>
     <button class="add-btn" type="button" onclick="addLegalBullet()">+ Add a bullet</button>
@@ -189,14 +175,14 @@
 
   <!-- 09: FAQ -->
   <div class="card">
-    <div class="card-head"><span class="num">09</span><h2>FAQ</h2></div>
+    <div class="card-head"><span class="num">08</span><h2>FAQ</h2></div>
     <div id="faq-list"></div>
     <button class="add-btn" type="button" onclick="addFaq()">+ Add a question</button>
   </div>
 
   <!-- 10: CONTACT -->
   <div class="card">
-    <div class="card-head"><span class="num">10</span><h2>Contact</h2></div>
+    <div class="card-head"><span class="num">09</span><h2>Contact</h2></div>
     <label>Contact categories</label>
     <div id="categories-list"></div>
     <button class="add-btn" type="button" onclick="addCategory()" style="margin-bottom:18px;">+ Add a category</button>
@@ -208,7 +194,7 @@
 
   <!-- 11: SOCIAL MEDIA -->
   <div class="card">
-    <div class="card-head"><span class="num">11</span><h2>Social Media</h2></div>
+    <div class="card-head"><span class="num">10</span><h2>Social Media</h2></div>
     <p class="help">Only X, Facebook, Instagram, YouTube, and TikTok appear on the site, per policy.</p>
     <div id="social-list"></div>
     <button class="add-btn" type="button" onclick="addSocial()">+ Add a social link</button>
@@ -216,7 +202,7 @@
 
   <!-- 12: FOOTER -->
   <div class="card">
-    <div class="card-head"><span class="num">12</span><h2>Footer</h2></div>
+    <div class="card-head"><span class="num">11</span><h2>Footer</h2></div>
     <label for="ft-base">Base (city, country)</label>
     <input type="text" id="ft-base">
     <label for="ft-stats">Statistics attribution line</label>
@@ -284,10 +270,6 @@ const CONTENT = {
         "href": "#services"
       },
       {
-        "label": "Programs",
-        "href": "#programs"
-      },
-      {
         "label": "Approach",
         "href": "#approach"
       },
@@ -318,15 +300,18 @@ const CONTENT = {
       "href": "#contact"
     },
     "ctaSecondary": {
-      "label": "Read program design",
-      "href": "#programs"
+      "label": "See our services",
+      "href": "#services"
     }
   },
   "companyFacts": {
     "entity": "Dobato Nepal Private Limited",
-    "registrations": "Company registered · PAN issued · Corporate bank account · Ward registration issued",
     "base": "Kathmandu, Nepal",
-    "model": "Professional services + company-funded community programs",
+    "model": [
+      "Professional Services",
+      "AI & Digital Innovation",
+      "Company-Funded Community Programs"
+    ],
     "nameNote": "‘Dobato’ (दोबाटो) is Nepali for crossroads."
   },
   "services": {
@@ -549,10 +534,25 @@ document.getElementById('h-cta2').value = CONTENT.hero.ctaSecondary.label;
 
 /* ---------- Company Facts ---------- */
 document.getElementById('cf-entity').value = CONTENT.companyFacts.entity;
-document.getElementById('cf-registrations').value = CONTENT.companyFacts.registrations;
 document.getElementById('cf-base').value = CONTENT.companyFacts.base;
-document.getElementById('cf-model').value = CONTENT.companyFacts.model;
 document.getElementById('cf-namenote').value = CONTENT.companyFacts.nameNote;
+if (!Array.isArray(CONTENT.companyFacts.model)) {
+  CONTENT.companyFacts.model = CONTENT.companyFacts.model ? [CONTENT.companyFacts.model] : [];
+}
+function renderModelList() {
+  const wrap = document.getElementById('model-list');
+  wrap.innerHTML = '';
+  CONTENT.companyFacts.model.forEach((val, i) => {
+    const row = document.createElement('div');
+    row.className = 'list-editor__row';
+    row.innerHTML = `<input type="text" value="${escAttr(val)}" oninput="CONTENT.companyFacts.model[${i}]=this.value">
+      <button type="button" class="btn-icon" onclick="removeModelItem(${i})">X</button>`;
+    wrap.appendChild(row);
+  });
+}
+function addModelItem(){ CONTENT.companyFacts.model.push(''); renderModelList(); }
+function removeModelItem(i){ CONTENT.companyFacts.model.splice(i,1); renderModelList(); }
+renderModelList();
 
 /* ---------- Services ---------- */
 document.getElementById('sv-intro').value = CONTENT.services.intro;
@@ -577,27 +577,6 @@ function addService(){ if(CONTENT.services.items.length>=6){alert('Policy caps t
 function removeService(i){ CONTENT.services.items.splice(i,1); renderServices(); }
 function moveService(i,d){ const a=CONTENT.services.items; [a[i],a[i+d]]=[a[i+d],a[i]]; renderServices(); }
 renderServices();
-
-/* ---------- Programs ---------- */
-document.getElementById('pr-status').value = CONTENT.programs.statusBadge;
-document.getElementById('pr-intro').value = CONTENT.programs.intro;
-document.getElementById('pr-ask').value = CONTENT.programs.partnershipAsk;
-function renderPrograms() {
-  const wrap = document.getElementById('programs-list');
-  wrap.innerHTML = '';
-  CONTENT.programs.items.forEach((p, i) => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      <div class="item-top"><span>Program ${i+1}</span></div>
-      <label>Title</label><input type="text" value="${escAttr(p.title)}" oninput="CONTENT.programs.items[${i}].title=this.value">
-      <label>Description</label><textarea oninput="CONTENT.programs.items[${i}].description=this.value">${(p.description||'').replace(/</g,'&lt;')}</textarea>
-      <label>Bullets (one per line)</label><textarea style="min-height:90px;" oninput="CONTENT.programs.items[${i}].bullets=this.value.split('\\n').filter(Boolean)">${(p.bullets||[]).join('\\n')}</textarea>
-      <label>Typical flow steps (one per line)</label><textarea style="min-height:70px;" oninput="CONTENT.programs.items[${i}].journey=this.value.split('\\n').filter(Boolean)">${(p.journey||[]).join('\\n')}</textarea>`;
-    wrap.appendChild(div);
-  });
-}
-renderPrograms();
 
 /* ---------- Method ---------- */
 document.getElementById('m-legal').value = CONTENT.method.legalBoundary;
@@ -747,17 +726,11 @@ function downloadSite() {
   CONTENT.hero.ctaSecondary.label = document.getElementById('h-cta2').value;
 
   CONTENT.companyFacts.entity = document.getElementById('cf-entity').value;
-  CONTENT.companyFacts.registrations = document.getElementById('cf-registrations').value;
   CONTENT.companyFacts.base = document.getElementById('cf-base').value;
-  CONTENT.companyFacts.model = document.getElementById('cf-model').value;
   CONTENT.companyFacts.nameNote = document.getElementById('cf-namenote').value;
 
   CONTENT.services.intro = document.getElementById('sv-intro').value;
   CONTENT.services.closing = document.getElementById('sv-closing').value;
-
-  CONTENT.programs.statusBadge = document.getElementById('pr-status').value;
-  CONTENT.programs.intro = document.getElementById('pr-intro').value;
-  CONTENT.programs.partnershipAsk = document.getElementById('pr-ask').value;
 
   CONTENT.method.legalBoundary = document.getElementById('m-legal').value;
   CONTENT.whyDesign.intro = document.getElementById('wd-intro').value;
@@ -949,10 +922,13 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
 /* --- Company facts strip --- */
 .facts-strip{background:var(--indigo);border-top:1px solid #3A4562;padding:26px 28px;}
 .facts-grid{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.facts-grid--three{grid-template-columns:repeat(3,1fr);}
 .facts-grid dt{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#98A1B8;margin-bottom:6px;}
 .facts-grid dd{font-size:14px;color:#fff;line-height:1.4;}
+.facts-model-list{list-style:none;margin:0;padding:0;}
+.facts-model-list li{font-size:14px;color:#fff;line-height:1.5;}
 .facts-name-note{max-width:var(--max-width);margin:16px auto 0;font-size:12px;color:#98A1B8;}
-@media (max-width:900px){.facts-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:900px){.facts-grid,.facts-grid--three{grid-template-columns:1fr 1fr;}}
 
 /* --- Services --- */
 .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -1102,13 +1078,14 @@ function hero(h) {
 }
 
 function companyFactsStrip(f) {
+  const modelItems = Array.isArray(f.model) ? f.model : [f.model];
+  const modelHtml = modelItems.map((m) => `<li>${esc(m)}</li>`).join('');
   return `
 <section class="facts-strip">
-  <dl class="facts-grid">
+  <dl class="facts-grid facts-grid--three">
     <div><dt>Entity</dt><dd>${esc(f.entity)}</dd></div>
-    <div><dt>Registrations</dt><dd>${esc(f.registrations)}</dd></div>
     <div><dt>Base</dt><dd>${esc(f.base)}</dd></div>
-    <div><dt>Model</dt><dd>${esc(f.model)}</dd></div>
+    <div><dt>Model</dt><dd><ul class="facts-model-list">${modelHtml}</ul></dd></div>
   </dl>
   ${f.nameNote ? `<p class="facts-name-note">${esc(f.nameNote)}</p>` : ''}
 </section>`;
@@ -1270,7 +1247,7 @@ function contactSection(c, site) {
     </div>
     <ul class="contact-categories">${categories}</ul>
     ${!hasEmail ? `<p class="contact-note">${esc(c.noEmailNote)}</p>` : ''}
-    <form class="contact-form" id="contact-form" onsubmit="return false;">
+    <form class="contact-form" id="contact-form" onsubmit="${hasEmail ? `submitContactForm('${esc(site.contactEmail)}'); return false;` : 'return false;'}">
       <div class="row2">
         <div><label for="cf-name">Name</label><input type="text" id="cf-name" required></div>
         <div><label for="cf-org">Organisation</label><input type="text" id="cf-org"></div>
@@ -1284,7 +1261,7 @@ function contactSection(c, site) {
         <div><label for="cf-phone">Phone</label><input type="tel" id="cf-phone"></div>
       </div>
       <div><label for="cf-message">Message</label><textarea id="cf-message"></textarea></div>
-      <button type="submit" class="btn btn--primary contact-submit" id="cf-submit" ${!hasEmail ? 'disabled title="Company email not yet set"' : `onclick="window.location.href=buildContactMailto('${esc(site.contactEmail)}')"`}>Send</button>
+      <button type="button" class="btn btn--primary contact-submit" id="cf-submit" ${!hasEmail ? 'disabled title="Company email not yet set"' : `onclick="submitContactForm('${esc(site.contactEmail)}')"`}>Send</button>
     </form>
     ${socialHtml}
   </div>
@@ -1331,8 +1308,13 @@ ${bodyHtml}
 <script>
 ${INLINE_JS}
 
-function buildContactMailto(email) {
-  const name = document.getElementById('cf-name').value;
+function submitContactForm(email) {
+  const name = document.getElementById('cf-name').value.trim();
+  const cfEmail = document.getElementById('cf-email').value.trim();
+  if (!name || !cfEmail) {
+    alert('Please fill in your name and email before sending.');
+    return;
+  }
   const org = document.getElementById('cf-org').value;
   const role = document.getElementById('cf-role').value;
   const need = document.getElementById('cf-need').value;
@@ -1340,11 +1322,11 @@ function buildContactMailto(email) {
   const message = document.getElementById('cf-message').value;
   const subject = encodeURIComponent('Enquiry: ' + need + ' \u2014 ' + name);
   const bodyLines = [
-    'Name: ' + name, 'Organisation: ' + org, 'Role: ' + role,
+    'Name: ' + name, 'Reply-to email: ' + cfEmail, 'Organisation: ' + org, 'Role: ' + role,
     'Phone: ' + phone, 'Need: ' + need, '', message
   ];
   const body = encodeURIComponent(bodyLines.join('\\n'));
-  return 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+  window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
 }
 <\/script>
 </body>
@@ -1356,15 +1338,14 @@ function buildFullSite(content) {
     nav(content.nav, content.site),
     '<main id="main">',
     hero(content.hero),
-    companyFactsStrip(content.companyFacts),
     servicesSection(content.services),
-    programsSection(content.programs),
     methodSection(content.method),
     whyDesignSection(content.whyDesign),
     workflowSection(content.workflow),
     legalSection(content.legal),
     faqSection(content.faq),
     contactSection(content.contactSection, content.site),
+    companyFactsStrip(content.companyFacts),
     '</main>',
     footer({ ...content.footer, navRepeat: content.nav.links }, content.site),
   ].join('\n');
