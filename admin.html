@@ -33,7 +33,7 @@
   .card h2{font-size:17px;margin:0;}
   .card > p.help{color:var(--ink-soft);font-size:13px;margin:6px 0 18px;line-height:1.5;}
   label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px;color:var(--ink);}
-  input[type=text],input[type=url],input[type=email],textarea,select{
+  input[type=text],input[type=url],input[type=email],input[type=date],input[type=file],textarea,select{
     width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:5px;
     font:inherit;font-size:13.5px;background:var(--white);margin-bottom:16px;color:var(--ink);
   }
@@ -57,6 +57,7 @@
   .download-hint{color:#98A1B8;font-size:12px;margin-top:8px;}
   .status{font-size:12.5px;margin-top:9px;padding:9px 13px;border-radius:5px;display:none;max-width:420px;margin-left:auto;margin-right:auto;}
   .status.ok{display:block;background:#DCE6D4;color:#4F6B4E;}
+  .img-preview{max-height:80px;border-radius:5px;margin-bottom:12px;display:block;border:1px solid var(--line);}
 </style>
 </head>
 <body>
@@ -175,6 +176,20 @@
     <label for="ft-copy">Copyright Notice</label>
     <input type="text" id="ft-copy">
   </div>
+
+  <!-- 09: WORKS, ACHIEVEMENTS & DAILY UPDATES -->
+  <div class="card">
+    <div class="card-head"><span class="num">09</span><h2>Works, Achievements &amp; Daily Updates</h2></div>
+    <p class="help">Upload image files directly from your computer, share recent milestones, project developments, YouTube video embeds, and social media post links.</p>
+    <label for="wk-kicker">Section Kicker</label>
+    <input type="text" id="wk-kicker">
+    <label for="wk-title">Section Title</label>
+    <input type="text" id="wk-title">
+    <label for="wk-intro">Intro Text</label>
+    <textarea id="wk-intro"></textarea>
+    <div id="works-list"></div>
+    <button class="add-btn" type="button" onclick="addWorkItem()">+ Add a Work, Achievement, or Update</button>
+  </div>
 </div>
 
 <div class="publish-bar">
@@ -256,6 +271,22 @@ var CONTENT = {
     "legalName": "Dobato Nepal Private Limited",
     "tagline": "Think globally. Work locally.",
     "copy": "© 2026 Dobato Nepal Private Limited. All rights reserved. Registered under the Companies Act, 2063 of Nepal."
+  },
+  "works": {
+    "kicker": "Portfolio & Updates",
+    "title": "Works, Achievements & Daily Updates",
+    "intro": "Explore our latest tech research projects, media productions, innovation milestones, and community updates.",
+    "items": [
+      {
+        "title": "Dobato Nepal Official Media & AI Research Hub",
+        "category": "Achievement",
+        "date": "2026-10-01",
+        "description": "Expanding our digital media ecosystem and hosting specialized workshops on Artificial Intelligence, startup incubation, and community research.",
+        "imageData": "",
+        "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "socialUrl": "https://x.com/DobatoNepal"
+      }
+    ]
   }
 };
 
@@ -290,6 +321,10 @@ document.getElementById('cf-namenote').value = CONTENT.companyFacts.nameNote;
 document.getElementById('ft-legalname').value = CONTENT.footer.legalName;
 document.getElementById('ft-tagline').value = CONTENT.footer.tagline;
 document.getElementById('ft-copy').value = CONTENT.footer.copy;
+
+document.getElementById('wk-kicker').value = CONTENT.works.kicker;
+document.getElementById('wk-title').value = CONTENT.works.title;
+document.getElementById('wk-intro').value = CONTENT.works.intro;
 
 function renderServices() {
   var wrap = document.getElementById('services-list');
@@ -356,6 +391,36 @@ function addSocial() { CONTENT.socialLinks.push({platform: 'x', url: ''}); rende
 function removeSocial(i) { CONTENT.socialLinks.splice(i, 1); renderSocial(); }
 renderSocial();
 
+function handleImageUpload(input, index) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      CONTENT.works.items[index].imageData = e.target.result;
+      renderWorksList();
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function renderWorksList() {
+  var wrap = document.getElementById('works-list');
+  wrap.innerHTML = '';
+  CONTENT.works.items.forEach(function(w, i) {
+    var imgPrev = w.imageData ? '<img src="' + w.imageData + '" class="img-preview" alt="Preview">' : '';
+    wrap.innerHTML += '<div class="item"><div class="item-top"><span>Item ' + (i+1) + '</span><div class="item-actions"><button type="button" onclick="removeWorkItem(' + i + ')">X</button></div></div>' +
+      '<div class="row"><div><label>Title</label><input type="text" value="' + escAttr(w.title) + '" oninput="CONTENT.works.items[' + i + '].title=this.value"></div>' +
+      '<div><label>Category / Tag</label><input type="text" placeholder="e.g. Achievement, Work, Update" value="' + escAttr(w.category) + '" oninput="CONTENT.works.items[' + i + '].category=this.value"></div></div>' +
+      '<div class="row"><div><label>Date</label><input type="date" value="' + escAttr(w.date) + '" onchange="CONTENT.works.items[' + i + '].date=this.value"></div>' +
+      '<div><label>Upload Direct Image</label>' + imgPrev + '<input type="file" accept="image/*" onchange="handleImageUpload(this, ' + i + ')"></div></div>' +
+      '<div class="row"><div><label>YouTube Video Link</label><input type="url" placeholder="https://www.youtube.com/watch?v=..." value="' + escAttr(w.youtubeUrl) + '" oninput="CONTENT.works.items[' + i + '].youtubeUrl=this.value"></div>' +
+      '<div><label>Social Post Link</label><input type="url" placeholder="https://facebook.com/... or https://x.com/..." value="' + escAttr(w.socialUrl) + '" oninput="CONTENT.works.items[' + i + '].socialUrl=this.value"></div></div>' +
+      '<label>Description</label><textarea oninput="CONTENT.works.items[' + i + '].description=this.value">' + (w.description || '') + '</textarea></div>';
+  });
+}
+function addWorkItem() { CONTENT.works.items.push({title:'', category:'Achievement', date:'', description:'', imageData:'', youtubeUrl:'', socialUrl:''}); renderWorksList(); }
+function removeWorkItem(i) { CONTENT.works.items.splice(i, 1); renderWorksList(); }
+renderWorksList();
+
 var ICONS = {
   facebook: '<path d="M14.5 8.5h2V5.7c-.35-.05-1.54-.15-2.94-.15-2.9 0-4.9 1.8-4.9 5.1v2.6H6.3v3.3h2.86V21h3.4v-4.45h2.75l.43-3.3h-3.18V11c0-.96.27-1.5 1.94-1.5z"/>',
   instagram: '<rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16.6" cy="7.4" r="1.1"/>',
@@ -363,6 +428,13 @@ var ICONS = {
   youtube: '<rect x="3.5" y="6.5" width="17" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10.5 9.7l4.5 2.3-4.5 2.3z"/>',
   tiktok: '<path d="M13.5 4v9.6a2.6 2.6 0 1 1-2.2-2.57v-2.1a4.7 4.7 0 1 0 4.2 4.67V9.4a5.6 5.6 0 0 0 3.3 1.06V8.4a3.6 3.6 0 0 1-3.3-3.6V4h-2z"/>'
 };
+
+function getYouTubeEmbedUrl(url) {
+  if (!url) return '';
+  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  var match = url.match(regExp);
+  return (match && match[2].length === 11) ? 'https://www.youtube.com/embed/' + match[2] : '';
+}
 
 function downloadSite() {
   CONTENT.hero.eyebrow = document.getElementById('h-eyebrow').value;
@@ -394,6 +466,10 @@ function downloadSite() {
   CONTENT.footer.tagline = document.getElementById('ft-tagline').value;
   CONTENT.footer.copy = document.getElementById('ft-copy').value;
 
+  CONTENT.works.kicker = document.getElementById('wk-kicker').value;
+  CONTENT.works.title = document.getElementById('wk-title').value;
+  CONTENT.works.intro = document.getElementById('wk-intro').value;
+
   var esc = function(str) { return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
 
   var serviceCards = CONTENT.services.items.map(function(i) {
@@ -420,6 +496,25 @@ function downloadSite() {
 
   var socialHtml = CONTENT.socialLinks.map(function(s) {
     return '      <a href="' + esc(s.url) + '" class="social-icons__link" target="_blank" rel="noopener" aria-label="' + esc(s.platform) + '"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + (ICONS[s.platform] || ICONS.x) + '</svg></a>';
+  }).join('\n');
+
+  var worksCards = CONTENT.works.items.map(function(w) {
+    var imgHtml = w.imageData ? '<img src="' + w.imageData + '" alt="' + esc(w.title) + '" style="width:100%;height:200px;object-fit:cover;border-radius:6px;margin-bottom:14px;">' : '';
+    var ytEmbed = getYouTubeEmbedUrl(w.youtubeUrl);
+    var ytHtml = ytEmbed ? '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:6px;margin-bottom:14px;"><iframe src="' + esc(ytEmbed) + '" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>' : '';
+    var socialBtn = w.socialUrl ? '<a href="' + esc(w.socialUrl) + '" target="_blank" rel="noopener" class="btn btn--ghost" style="padding:6px 12px;font-size:12px;color:var(--indigo-deep);border-color:var(--line);margin-top:10px;">View Post &rarr;</a>' : '';
+    var tagHtml = w.category ? '<span style="font-size:11px;font-weight:700;color:var(--accent-deep);background:#F3DFB8;padding:3px 8px;border-radius:4px;text-transform:uppercase;">' + esc(w.category) + '</span>' : '';
+    var dateHtml = w.date ? '<span style="font-size:12px;color:var(--ink-soft);float:right;">' + esc(w.date) + '</span>' : '';
+
+    return '      <div class="service-card" style="display:flex;flex-direction:column;justify-content:space-between;">\n' +
+           '        <div>\n' +
+                      imgHtml + ytHtml +
+           '          <div style="margin-bottom:8px;">' + tagHtml + dateHtml + '</div>\n' +
+           '          <h4 style="margin-top:6px;">' + esc(w.title) + '</h4>\n' +
+           '          <p>' + esc(w.description) + '</p>\n' +
+           '        </div>\n' +
+                    socialBtn + '\n' +
+           '      </div>';
   }).join('\n');
 
   var fullHtml = '<!DOCTYPE html>\n' +
@@ -547,6 +642,7 @@ function downloadSite() {
 '  <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>\n' +
 '  <ul class="nav__links" id="primary-nav" data-nav-links>\n' +
 '    <li><a href="#services">Services</a></li>\n' +
+'    <li><a href="#updates">Works &amp; Updates</a></li>\n' +
 '    <li><a href="#focus">Focus</a></li>\n' +
 '    <li><a href="#faq">FAQ</a></li>\n' +
 '    <li><a href="#contact">Contact</a></li>\n' +
@@ -580,6 +676,19 @@ function downloadSite() {
 serviceCards + '\n' +
 '    </div>\n' +
 '    <p class="services-closing">' + esc(CONTENT.services.closing) + '</p>\n' +
+'  </div>\n' +
+'</section>\n' +
+'\n' +
+'<section class="section" id="updates" style="background:var(--white);border-top:1px solid var(--line);">\n' +
+'  <div class="wrap">\n' +
+'    <div class="section-head">\n' +
+'      <div class="kicker">' + esc(CONTENT.works.kicker) + '</div>\n' +
+'      <h2>' + esc(CONTENT.works.title) + '</h2>\n' +
+'      <p>' + esc(CONTENT.works.intro) + '</p>\n' +
+'    </div>\n' +
+'    <div class="service-grid">\n' +
+worksCards + '\n' +
+'    </div>\n' +
 '  </div>\n' +
 '</section>\n' +
 '\n' +
@@ -669,6 +778,7 @@ socialHtml + '\n' +
 '          <div class="site-footer__nav-title">Navigation</div>\n' +
 '          <div class="site-footer__nav-links">\n' +
 '            <a href="#services">Services</a>\n' +
+'            <a href="#updates">Works &amp; Updates</a>\n' +
 '            <a href="#focus">Focus</a>\n' +
 '            <a href="#contact">Partnerships</a>\n' +
 '          </div>\n' +
