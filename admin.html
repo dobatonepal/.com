@@ -80,9 +80,9 @@
     </ol>
   </div>
 
-  <!-- 01: HERO -->
+  <!-- 01: HERO / HOME -->
   <div class="card">
-    <div class="card-head"><span class="num">01</span><h2>Hero Section</h2></div>
+    <div class="card-head"><span class="num">01</span><h2>Home Section (Landing Page & Theme)</h2></div>
     <label for="h-eyebrow">Eyebrow Kicker</label>
     <input type="text" id="h-eyebrow">
     <label for="h-headline">Headline</label>
@@ -97,7 +97,7 @@
 
   <!-- 02: SERVICES -->
   <div class="card">
-    <div class="card-head"><span class="num">02</span><h2>Core Operations &amp; Services</h2></div>
+    <div class="card-head"><span class="num">02</span><h2>Core Operations &amp; Services Page</h2></div>
     <label for="sv-kicker">Section Kicker</label>
     <input type="text" id="sv-kicker">
     <label for="sv-title">Section Title</label>
@@ -112,7 +112,7 @@
 
   <!-- 03: FOCUS -->
   <div class="card">
-    <div class="card-head"><span class="num">03</span><h2>Strategic Domains (Focus)</h2></div>
+    <div class="card-head"><span class="num">03</span><h2>Strategic Domains Page (Focus)</h2></div>
     <label for="fc-kicker">Section Kicker</label>
     <input type="text" id="fc-kicker">
     <label for="fc-title">Section Title</label>
@@ -126,7 +126,7 @@
 
   <!-- 04: FAQ -->
   <div class="card">
-    <div class="card-head"><span class="num">04</span><h2>Frequently Asked Questions (FAQ)</h2></div>
+    <div class="card-head"><span class="num">04</span><h2>Frequently Asked Questions Page (FAQ)</h2></div>
     <label for="faq-kicker">Section Kicker</label>
     <input type="text" id="faq-kicker">
     <label for="faq-title">Section Title</label>
@@ -137,7 +137,7 @@
 
   <!-- 05: CONTACT -->
   <div class="card">
-    <div class="card-head"><span class="num">05</span><h2>Contact Section &amp; Receiving Email</h2></div>
+    <div class="card-head"><span class="num">05</span><h2>Contact Page &amp; Receiving Email</h2></div>
     <label for="ct-kicker">Section Kicker</label>
     <input type="text" id="ct-kicker">
     <label for="ct-title">Section Title</label>
@@ -179,8 +179,8 @@
 
   <!-- 09: WORKS, ACHIEVEMENTS & DAILY UPDATES -->
   <div class="card">
-    <div class="card-head"><span class="num">09</span><h2>Works, Achievements &amp; Daily Updates</h2></div>
-    <p class="help">Upload image files directly from your computer, share recent milestones, project developments, YouTube video embeds, and social media post links.</p>
+    <div class="card-head"><span class="num">09</span><h2>Works, Achievements &amp; Daily Updates Page</h2></div>
+    <p class="help">Upload images directly from your computer, share recent milestones, project developments, YouTube videos, and social posts.</p>
     <label for="wk-kicker">Section Kicker</label>
     <input type="text" id="wk-kicker">
     <label for="wk-title">Section Title</label>
@@ -548,18 +548,23 @@ function downloadSite() {
 '.skip-link:focus{left:0;}\n' +
 '.wrap{max-width:var(--max-width);margin:0 auto;padding:0 28px;}\n' +
 '.section{padding:64px 28px;}\n' +
+'.page-view{display:none;}\n' +
+'.page-view.active-view{display:block;}\n' +
 '.section-head{max-width:680px;margin-bottom:40px;}\n' +
 '.kicker{font-size:12px;color:var(--accent-deep);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:10px;}\n' +
 '.section-head h2{font-size:clamp(26px,3vw,34px);}\n' +
 '.section-head p{margin-top:12px;color:var(--ink-soft);font-size:15px;max-width:640px;}\n' +
-'.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;max-width:var(--max-width);margin:0 auto;flex-wrap:wrap;gap:14px;background:var(--paper);border-bottom:1px solid var(--line);}\n' +
-'.nav__brand{display:flex;flex-direction:column;line-height:1.15;}\n' +
+'.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:var(--max-width);margin:0 auto;flex-wrap:wrap;gap:14px;background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:90;}\n' +
+'.nav__brand{display:flex;align-items:center;gap:12px;cursor:pointer;}\n' +
+'.nav__logo{width:32px;height:32px;flex-shrink:0;mix-blend-mode:multiply;}\n' +
+'.nav__brand-text{display:flex;flex-direction:column;line-height:1.15;}\n' +
 '.nav__brand-name{font-family:var(--font-display);font-size:19px;font-weight:600;}\n' +
 '.nav__brand-suffix{font-size:11px;color:var(--ink-soft);letter-spacing:0.03em;}\n' +
-'.nav__links{display:flex;gap:28px;font-size:14px;color:var(--ink-soft);align-items:center;}\n' +
-'.nav__links a:hover{color:var(--ink);}\n' +
+'.nav__links{display:flex;gap:24px;font-size:14px;color:var(--ink-soft);align-items:center;}\n' +
+'.nav__links a{cursor:pointer;padding:6px 0;transition:color 0.2s;font-weight:500;}\n' +
+'.nav__links a:hover,.nav__links a.active{color:var(--indigo-deep);font-weight:600;border-bottom:2px solid var(--accent);}\n' +
 '.nav__actions{display:flex;align-items:center;gap:16px;}\n' +
-'.nav__cta{background:var(--indigo-deep);color:#fff;padding:10px 20px;border-radius:4px;font-size:14px;font-weight:600;transition:background 0.2s;}\n' +
+'.nav__cta{background:var(--indigo-deep);color:#fff;padding:10px 20px;border-radius:4px;font-size:14px;font-weight:600;transition:background 0.2s;cursor:pointer;}\n' +
 '.nav__cta:hover{background:#3d4c70;}\n' +
 '.nav__toggle{display:none;}\n' +
 '@media (max-width:820px){\n' +
@@ -573,7 +578,7 @@ function downloadSite() {
 '.hero h1{font-size:clamp(30px,4.5vw,46px);max-width:800px;margin-bottom:20px;color:#fff;font-style:normal;}\n' +
 '.hero p{font-size:16.5px;color:#C7CCD8;max-width:680px;margin-bottom:36px;line-height:1.6;}\n' +
 '.hero__ctas{display:flex;gap:14px;flex-wrap:wrap;}\n' +
-'.btn{padding:13px 24px;border-radius:4px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}\n' +
+'.btn{padding:13px 24px;border-radius:4px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;cursor:pointer;}\n' +
 '.btn--primary{background:var(--accent);color:#221701;}\n' +
 '.btn--primary:hover{background:#c47a1f;}\n' +
 '.btn--ghost{border:1px solid #4B5670;color:#fff;}\n' +
@@ -618,7 +623,7 @@ function downloadSite() {
 '.site-footer__nav-group{display:flex;flex-direction:column;gap:10px;}\n' +
 '.site-footer__nav-title{font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);font-weight:600;}\n' +
 '.site-footer__nav-links{display:flex;flex-direction:column;gap:8px;font-size:13.5px;}\n' +
-'.site-footer__nav-links a{color:var(--ink-soft);transition:color 0.2s;}\n' +
+'.site-footer__nav-links a{color:var(--ink-soft);transition:color 0.2s;cursor:pointer;}\n' +
 '.site-footer__nav-links a:hover{color:var(--indigo-deep);text-decoration:underline;}\n' +
 '.site-footer__bottom{padding-top:24px;font-size:12px;color:var(--ink-soft);text-align:center;}\n' +
 '.modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(29,32,25,0.6);padding:40px 20px;}\n' +
@@ -635,126 +640,161 @@ function downloadSite() {
 '<a class="skip-link" href="#main">Skip to main content</a>\n' +
 '\n' +
 '<nav class="nav">\n' +
-'  <a class="nav__brand" href="#top">\n' +
-'    <span class="nav__brand-name">Dobato Nepal</span>\n' +
-'    <span class="nav__brand-suffix">Private Limited</span>\n' +
+'  <a class="nav__brand" onclick="showView(\'home\')">\n' +
+'    <svg class="nav__logo" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">\n' +
+'      <rect x="210" y="40" width="80" height="420" rx="40" fill="#B5701A"/>\n' +
+'      <rect x="40" y="210" width="420" height="80" rx="40" fill="#B5701A"/>\n' +
+'      <circle cx="250" cy="250" r="105" fill="#1D263A"/>\n' +
+'    </svg>\n' +
+'    <div class="nav__brand-text">\n' +
+'      <span class="nav__brand-name">Dobato Nepal</span>\n' +
+'      <span class="nav__brand-suffix">Private Limited</span>\n' +
+'    </div>\n' +
 '  </a>\n' +
 '  <button class="nav__toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-nav">Menu</button>\n' +
 '  <ul class="nav__links" id="primary-nav" data-nav-links>\n' +
-'    <li><a href="#services">Services</a></li>\n' +
-'    <li><a href="#updates">Works &amp; Updates</a></li>\n' +
-'    <li><a href="#focus">Focus</a></li>\n' +
-'    <li><a href="#faq">FAQ</a></li>\n' +
-'    <li><a href="#contact">Contact</a></li>\n' +
+'    <li><a id="nav-home" class="active" onclick="showView(\'home\')">Home</a></li>\n' +
+'    <li><a id="nav-services" onclick="showView(\'services\')">Services</a></li>\n' +
+'    <li><a id="nav-updates" onclick="showView(\'updates\')">Works &amp; Updates</a></li>\n' +
+'    <li><a id="nav-focus" onclick="showView(\'focus\')">Focus</a></li>\n' +
+'    <li><a id="nav-faq" onclick="showView(\'faq\')">FAQ</a></li>\n' +
+'    <li><a id="nav-contact" onclick="showView(\'contact\')">Contact</a></li>\n' +
 '  </ul>\n' +
 '  <div class="nav__actions">\n' +
-'    <a href="#contact" class="nav__cta">Partnerships</a>\n' +
+'    <a onclick="showView(\'contact\')" class="nav__cta">Partnerships</a>\n' +
 '  </div>\n' +
 '</nav>\n' +
 '\n' +
 '<main id="main">\n' +
-'<section class="hero" id="top">\n' +
-'  <div class="hero__inner">\n' +
-'    <div class="kicker">' + esc(CONTENT.hero.eyebrow) + '</div>\n' +
-'    <h1>' + esc(CONTENT.hero.headline) + '</h1>\n' +
-'    <p>' + esc(CONTENT.hero.subhead) + '</p>\n' +
-'    <div class="hero__ctas">\n' +
-'      <a href="#contact" class="btn btn--primary">' + esc(CONTENT.hero.ctaPrimary) + '</a>\n' +
-'      <a href="#services" class="btn btn--ghost">' + esc(CONTENT.hero.ctaSecondary) + '</a>\n' +
-'    </div>\n' +
-'  </div>\n' +
-'</section>\n' +
-'\n' +
-'<section class="section" id="services" style="background:var(--paper);">\n' +
-'  <div class="wrap">\n' +
-'    <div class="section-head">\n' +
-'      <div class="kicker">' + esc(CONTENT.services.kicker) + '</div>\n' +
-'      <h2>' + esc(CONTENT.services.title) + '</h2>\n' +
-'      <p>' + esc(CONTENT.services.intro) + '</p>\n' +
-'    </div>\n' +
-'    <div class="service-grid">\n' +
-serviceCards + '\n' +
-'    </div>\n' +
-'    <p class="services-closing">' + esc(CONTENT.services.closing) + '</p>\n' +
-'  </div>\n' +
-'</section>\n' +
-'\n' +
-'<section class="section" id="updates" style="background:var(--white);border-top:1px solid var(--line);">\n' +
-'  <div class="wrap">\n' +
-'    <div class="section-head">\n' +
-'      <div class="kicker">' + esc(CONTENT.works.kicker) + '</div>\n' +
-'      <h2>' + esc(CONTENT.works.title) + '</h2>\n' +
-'      <p>' + esc(CONTENT.works.intro) + '</p>\n' +
-'    </div>\n' +
-'    <div class="service-grid">\n' +
-worksCards + '\n' +
-'    </div>\n' +
-'  </div>\n' +
-'</section>\n' +
-'\n' +
-'<section class="section" id="focus" style="background:var(--paper);">\n' +
-'  <div class="wrap">\n' +
-'    <div class="section-head">\n' +
-'      <div class="kicker">' + esc(CONTENT.focus.kicker) + '</div>\n' +
-'      <h2>' + esc(CONTENT.focus.title) + '</h2>\n' +
-'      <p>' + esc(CONTENT.focus.intro) + '</p>\n' +
-'    </div>\n' +
-'    <ul class="focus-tags">\n' +
-focusTags + '\n' +
-'    </ul>\n' +
-'  </div>\n' +
-'</section>\n' +
-'\n' +
-'<section class="section" id="faq" style="background:var(--paper);">\n' +
-'  <div class="wrap">\n' +
-'    <div class="section-head">\n' +
-'      <div class="kicker">' + esc(CONTENT.faq.kicker) + '</div>\n' +
-'      <h2>' + esc(CONTENT.faq.title) + '</h2>\n' +
-'    </div>\n' +
-'    <div class="faq-list">\n' +
-faqItems + '\n' +
-'    </div>\n' +
-'  </div>\n' +
-'</section>\n' +
-'\n' +
-'<section class="contact-section section" id="contact">\n' +
-'  <div class="wrap">\n' +
-'    <div class="section-head">\n' +
-'      <div class="kicker">' + esc(CONTENT.contact.kicker) + '</div>\n' +
-'      <h2>' + esc(CONTENT.contact.title) + '</h2>\n' +
-'      <p>Submit your inquiry below to connect directly with our corporate team.</p>\n' +
-'    </div>\n' +
-'    <form class="contact-form" id="contact-form" onsubmit="submitContactForm(); return false;">\n' +
-'      <div>\n' +
-'        <label for="cf-name">Your Name</label>\n' +
-'        <input type="text" id="cf-name" required placeholder="Full Name or Organization">\n' +
+'<!-- PAGE 1: HOME (LANDING PAGE & THEME) -->\n' +
+'<div id="view-home" class="page-view active-view">\n' +
+'  <section class="hero">\n' +
+'    <div class="hero__inner">\n' +
+'      <div class="kicker">' + esc(CONTENT.hero.eyebrow) + '</div>\n' +
+'      <h1>' + esc(CONTENT.hero.headline) + '</h1>\n' +
+'      <p>' + esc(CONTENT.hero.subhead) + '</p>\n' +
+'      <div class="hero__ctas">\n' +
+'        <a onclick="showView(\'contact\')" class="btn btn--primary">' + esc(CONTENT.hero.ctaPrimary) + '</a>\n' +
+'        <a onclick="showView(\'services\')" class="btn btn--ghost">' + esc(CONTENT.hero.ctaSecondary) + '</a>\n' +
 '      </div>\n' +
-'      <div>\n' +
-'        <label for="cf-email">Email Address</label>\n' +
-'        <input type="email" id="cf-email" required placeholder="name@example.com">\n' +
-'      </div>\n' +
-'      <div>\n' +
-'        <label for="cf-need">Inquiry Type</label>\n' +
-'        <select id="cf-need">\n' +
-'          <option value="Scientific Research Partnership">Scientific Research Partnership</option>\n' +
-'          <option value="AI & Tech Consultancy">AI &amp; Tech Consultancy</option>\n' +
-'          <option value="Media Production">Media Production</option>\n' +
-'          <option value="Tenders & Contracts">Tenders &amp; Contracts</option>\n' +
-'          <option value="General Inquiry">General Inquiry</option>\n' +
-'        </select>\n' +
-'      </div>\n' +
-'      <div>\n' +
-'        <label for="cf-message">Message</label>\n' +
-'        <textarea id="cf-message" placeholder="Type your message here..."></textarea>\n' +
-'      </div>\n' +
-'      <button type="submit" class="btn btn--primary contact-submit">Send Inquiry</button>\n' +
-'    </form>\n' +
-'    \n' +
-'    <div class="social-icons">\n' +
-socialHtml + '\n' +
 '    </div>\n' +
-'  </div>\n' +
-'</section>\n' +
+'  </section>\n' +
+'  <section class="section" style="background:var(--paper);">\n' +
+'    <div class="wrap">\n' +
+'      <div class="section-head">\n' +
+'        <div class="kicker">Corporate Pillars</div>\n' +
+'        <h2>Bridging Technology &amp; Scientific Progress</h2>\n' +
+'        <p>Use the top header links to explore our specialized services, strategic domain focus, project portfolios, and enterprise contact forms.</p>\n' +
+'      </div>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>\n' +
+'\n' +
+'<!-- PAGE 2: SERVICES -->\n' +
+'<div id="view-services" class="page-view">\n' +
+'  <section class="section" style="background:var(--paper);">\n' +
+'    <div class="wrap">\n' +
+'      <div class="section-head">\n' +
+'        <div class="kicker">' + esc(CONTENT.services.kicker) + '</div>\n' +
+'        <h2>' + esc(CONTENT.services.title) + '</h2>\n' +
+'        <p>' + esc(CONTENT.services.intro) + '</p>\n' +
+'      </div>\n' +
+'      <div class="service-grid">\n' +
+  serviceCards + '\n' +
+'      </div>\n' +
+'      <p class="services-closing">' + esc(CONTENT.services.closing) + '</p>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>\n' +
+'\n' +
+'<!-- PAGE 3: WORKS & UPDATES -->\n' +
+'<div id="view-updates" class="page-view">\n' +
+'  <section class="section" style="background:var(--white);">\n' +
+'    <div class="wrap">\n' +
+'      <div class="section-head">\n' +
+'        <div class="kicker">' + esc(CONTENT.works.kicker) + '</div>\n' +
+'        <h2>' + esc(CONTENT.works.title) + '</h2>\n' +
+'        <p>' + esc(CONTENT.works.intro) + '</p>\n' +
+'      </div>\n' +
+'      <div class="service-grid">\n' +
+  worksCards + '\n' +
+'      </div>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>\n' +
+'\n' +
+'<!-- PAGE 4: FOCUS -->\n' +
+'<div id="view-focus" class="page-view">\n' +
+'  <section class="section" style="background:var(--paper);">\n' +
+'    <div class="wrap">\n' +
+'      <div class="section-head">\n' +
+'        <div class="kicker">' + esc(CONTENT.focus.kicker) + '</div>\n' +
+'        <h2>' + esc(CONTENT.focus.title) + '</h2>\n' +
+'        <p>' + esc(CONTENT.focus.intro) + '</p>\n' +
+'      </div>\n' +
+'      <ul class="focus-tags">\n' +
+  focusTags + '\n' +
+'      </ul>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>\n' +
+'\n' +
+'<!-- PAGE 5: FAQ -->\n' +
+'<div id="view-faq" class="page-view">\n' +
+'  <section class="section" style="background:var(--paper);">\n' +
+'    <div class="wrap">\n' +
+'      <div class="section-head">\n' +
+'        <div class="kicker">' + esc(CONTENT.faq.kicker) + '</div>\n' +
+'        <h2>' + esc(CONTENT.faq.title) + '</h2>\n' +
+'      </div>\n' +
+'      <div class="faq-list">\n' +
+  faqItems + '\n' +
+'      </div>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>\n' +
+'\n' +
+'<!-- PAGE 6: CONTACT -->\n' +
+'<div id="view-contact" class="page-view">\n' +
+'  <section class="contact-section section">\n' +
+'    <div class="wrap">\n' +
+'      <div class="section-head">\n' +
+'        <div class="kicker">' + esc(CONTENT.contact.kicker) + '</div>\n' +
+'        <h2>' + esc(CONTENT.contact.title) + '</h2>\n' +
+'        <p>Submit your inquiry below to connect directly with our corporate team.</p>\n' +
+'      </div>\n' +
+'      <form class="contact-form" id="contact-form" onsubmit="submitContactForm(); return false;">\n' +
+'        <div>\n' +
+'          <label for="cf-name">Your Name</label>\n' +
+'          <input type="text" id="cf-name" required placeholder="Full Name or Organization">\n' +
+'        </div>\n' +
+'        <div>\n' +
+'          <label for="cf-email">Email Address</label>\n' +
+'          <input type="email" id="cf-email" required placeholder="name@example.com">\n' +
+'        </div>\n' +
+'        <div>\n' +
+'          <label for="cf-need">Inquiry Type</label>\n' +
+'          <select id="cf-need">\n' +
+'            <option value="Scientific Research Partnership">Scientific Research Partnership</option>\n' +
+'            <option value="AI & Tech Consultancy">AI &amp; Tech Consultancy</option>\n' +
+'            <option value="Media Production">Media Production</option>\n' +
+'            <option value="Tenders & Contracts">Tenders &amp; Contracts</option>\n' +
+'            <option value="General Inquiry">General Inquiry</option>\n' +
+'          </select>\n' +
+'        </div>\n' +
+'        <div>\n' +
+'          <label for="cf-message">Message</label>\n' +
+'          <textarea id="cf-message" placeholder="Type your message here..."></textarea>\n' +
+'        </div>\n' +
+'        <button type="submit" class="btn btn--primary contact-submit">Send Inquiry</button>\n' +
+'      </form>\n' +
+'      \n' +
+'      <div class="social-icons">\n' +
+  socialHtml + '\n' +
+'      </div>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>\n' +
 '\n' +
 '<section class="facts-strip">\n' +
 '  <dl class="facts-grid">\n' +
@@ -777,10 +817,11 @@ socialHtml + '\n' +
 '        <div class="site-footer__nav-group">\n' +
 '          <div class="site-footer__nav-title">Navigation</div>\n' +
 '          <div class="site-footer__nav-links">\n' +
-'            <a href="#services">Services</a>\n' +
-'            <a href="#updates">Works &amp; Updates</a>\n' +
-'            <a href="#focus">Focus</a>\n' +
-'            <a href="#contact">Partnerships</a>\n' +
+'            <a onclick="showView(\'home\')">Home</a>\n' +
+'            <a onclick="showView(\'services\')">Services</a>\n' +
+'            <a onclick="showView(\'updates\')">Works &amp; Updates</a>\n' +
+'            <a onclick="showView(\'focus\')">Focus</a>\n' +
+'            <a onclick="showView(\'contact\')">Partnerships</a>\n' +
 '          </div>\n' +
 '        </div>\n' +
 '        <div class="site-footer__nav-group">\n' +
@@ -841,6 +882,19 @@ socialHtml + '\n' +
 '</div>\n' +
 '\n' +
 '<script>\n' +
+'function showView(viewId) {\n' +
+'  var views = document.querySelectorAll(\'.page-view\');\n' +
+'  views.forEach(function(v) { v.classList.remove(\'active-view\'); });\n' +
+'  var active = document.getElementById(\'view-\' + viewId);\n' +
+'  if(active) active.classList.add(\'active-view\');\n' +
+'  \n' +
+'  var navLinks = document.querySelectorAll(\'.nav__links a\');\n' +
+'  navLinks.forEach(function(l) { l.classList.remove(\'active\'); });\n' +
+'  var activeNav = document.getElementById(\'nav-\' + viewId);\n' +
+'  if(activeNav) activeNav.classList.add(\'active\');\n' +
+'  window.scrollTo({top: 0, behavior: \'smooth\'});\n' +
+'}\n' +
+'\n' +
 '(function(){\n' +
 '  document.documentElement.classList.add(\'js-enabled\');\n' +
 '  var toggle = document.querySelector(\'[data-nav-toggle]\');\n' +
