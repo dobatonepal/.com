@@ -82,7 +82,7 @@
 
   <!-- 01: HERO / HOME -->
   <div class="card">
-    <div class="card-head"><span class="num">01</span><h2>Home Section (Landing Page & Theme)</h2></div>
+    <div class="card-head"><span class="num">01</span><h2>Home Section (Landing Page &amp; Theme)</h2></div>
     <label for="h-eyebrow">Eyebrow Kicker</label>
     <input type="text" id="h-eyebrow">
     <label for="h-headline">Headline</label>
@@ -93,6 +93,9 @@
       <div><label for="h-cta1">Primary Button Text</label><input type="text" id="h-cta1"></div>
       <div><label for="h-cta2">Secondary Button Text</label><input type="text" id="h-cta2"></div>
     </div>
+    <label>Hero Full-Bleed Background Image</label>
+    <div id="hero-img-preview-wrap"></div>
+    <input type="file" accept="image/*" onchange="handleSectionBgUpload(this, 'hero')">
   </div>
 
   <!-- 02: SERVICES -->
@@ -104,7 +107,12 @@
     <input type="text" id="sv-title">
     <label for="sv-intro">Intro Text</label>
     <textarea id="sv-intro"></textarea>
-    <div id="services-list"></div>
+    
+    <label>Services Section Background Image</label>
+    <div id="services-img-preview-wrap"></div>
+    <input type="file" accept="image/*" onchange="handleSectionBgUpload(this, 'services')">
+
+    <div id="services-list" style="margin-top:16px;"></div>
     <button class="add-btn" type="button" onclick="addService()" style="margin-bottom:18px;">+ Add a Service Card</button>
     <label for="sv-closing">Closing Note</label>
     <input type="text" id="sv-closing">
@@ -119,7 +127,12 @@
     <input type="text" id="fc-title">
     <label for="fc-intro">Intro Text</label>
     <textarea id="fc-intro"></textarea>
-    <label>Domain Tags</label>
+    
+    <label>Focus Section Background Image</label>
+    <div id="focus-img-preview-wrap"></div>
+    <input type="file" accept="image/*" onchange="handleSectionBgUpload(this, 'focus')">
+
+    <label style="margin-top:16px;">Domain Tags</label>
     <div id="focus-tags-list"></div>
     <button class="add-btn" type="button" onclick="addFocusTag()">+ Add a domain tag</button>
   </div>
@@ -131,7 +144,12 @@
     <input type="text" id="faq-kicker">
     <label for="faq-title">Section Title</label>
     <input type="text" id="faq-title">
-    <div id="faq-list"></div>
+
+    <label>FAQ Section Background Image</label>
+    <div id="faq-img-preview-wrap"></div>
+    <input type="file" accept="image/*" onchange="handleSectionBgUpload(this, 'faq')">
+
+    <div id="faq-list" style="margin-top:16px;"></div>
     <button class="add-btn" type="button" onclick="addFaq()">+ Add a question</button>
   </div>
 
@@ -144,6 +162,10 @@
     <input type="text" id="ct-title">
     <label for="ct-email">Hidden Target Email Address (Inquiries send here)</label>
     <input type="email" id="ct-email">
+
+    <label>Contact Section Background Image</label>
+    <div id="contact-img-preview-wrap"></div>
+    <input type="file" accept="image/*" onchange="handleSectionBgUpload(this, 'contact')">
   </div>
 
   <!-- 06: FACTS STRIP -->
@@ -187,7 +209,12 @@
     <input type="text" id="wk-title">
     <label for="wk-intro">Intro Text</label>
     <textarea id="wk-intro"></textarea>
-    <div id="works-list"></div>
+
+    <label>Works Section Background Image</label>
+    <div id="works-img-preview-wrap"></div>
+    <input type="file" accept="image/*" onchange="handleSectionBgUpload(this, 'works')">
+
+    <div id="works-list" style="margin-top:16px;"></div>
     <button class="add-btn" type="button" onclick="addWorkItem()">+ Add a Work, Achievement, or Update</button>
   </div>
 </div>
@@ -199,20 +226,21 @@
 </div>
 
 <script>
-// Complete pre-filled dataset matching your index.html[cite: 7, 9]
 var CONTENT = {
   "hero": {
     "eyebrow": "Dobato Nepal Private Limited",
     "headline": "Pioneering Scientific Research, Artificial Intelligence, and Digital Innovation in Nepal.",
     "subhead": "Dobato Nepal Private Limited is a multi-disciplinary service and trading enterprise. We prioritize rigorous scientific research and specialized studies, cutting-edge AI consultancy, digital media production, and institutional innovation hubs under a structured private limited framework.",
     "ctaPrimary": "Initiate Partnership",
-    "ctaSecondary": "Explore Our Capabilities"
+    "ctaSecondary": "Explore Our Capabilities",
+    "bgImage": ""
   },
   "services": {
     "kicker": "Core Operations",
     "title": "Our Services & Capabilities",
     "intro": "Structured by our corporate charter, our operations follow a priority focus: starting with scientific research and AI technology, extending into media production, institutional incubation, and public-private contracting.",
     "closing": "All institutional services are executed via formal contracts, statements of work, and company invoices.",
+    "bgImage": "",
     "items": [
       { "title": "1. Scientific Research & Studies", "description": "Conducting specialized research across education, health, society, culture, and science to connect communities with reliable local resources." },
       { "title": "2. AI & Emerging Tech Consultancy", "description": "Providing expert consulting, technical assistance, training, and capacity-building programs in Artificial Intelligence and next-generation technologies." },
@@ -226,6 +254,7 @@ var CONTENT = {
     "kicker": "Strategic Domains",
     "title": "Where We Focus",
     "intro": "Our multidisciplinary mandate covers foundational science, emerging intelligence frameworks, and structured digital communication.",
+    "bgImage": "",
     "tags": [
       "Scientific Research",
       "Artificial Intelligence (AI)",
@@ -239,6 +268,7 @@ var CONTENT = {
   "faq": {
     "kicker": "FAQ",
     "title": "Frequently Asked Questions",
+    "bgImage": "",
     "items": [
       { "question": "What are your primary areas of focus?", "answer": "We prioritize scientific research and specialized studies first, followed by Artificial Intelligence and emerging technology consultancy, startup incubation, digital media production, and public-private contracting." },
       { "question": "Are you an NGO or charity?", "answer": "No. Dobato Nepal Private Limited is a registered private trading and service-oriented company." },
@@ -249,7 +279,8 @@ var CONTENT = {
   "contact": {
     "kicker": "Contact",
     "title": "Get in Touch",
-    "email": "dobatonepal@gmail.com"
+    "email": "dobatonepal@gmail.com",
+    "bgImage": ""
   },
   "companyFacts": {
     "entity": "Dobato Nepal Private Limited",
@@ -276,6 +307,7 @@ var CONTENT = {
     "kicker": "Portfolio & Updates",
     "title": "Works, Achievements & Daily Updates",
     "intro": "Explore our latest tech research projects, media productions, innovation milestones, and community updates.",
+    "bgImage": "",
     "items": [
       {
         "title": "Dobato Nepal Official Media & AI Research Hub",
@@ -292,12 +324,32 @@ var CONTENT = {
 
 function escAttr(s) { return (s || "").replace(/"/g, "&quot;"); }
 
-// Pre-fill input elements
 document.getElementById('h-eyebrow').value = CONTENT.hero.eyebrow;
 document.getElementById('h-headline').value = CONTENT.hero.headline;
 document.getElementById('h-subhead').value = CONTENT.hero.subhead;
 document.getElementById('h-cta1').value = CONTENT.hero.ctaPrimary;
 document.getElementById('h-cta2').value = CONTENT.hero.ctaSecondary;
+
+function renderPreviews() {
+  ['hero', 'services', 'focus', 'faq', 'contact', 'works'].forEach(function(sec) {
+    var wrap = document.getElementById(sec + '-img-preview-wrap');
+    if (wrap) {
+      wrap.innerHTML = CONTENT[sec].bgImage ? '<img src="' + CONTENT[sec].bgImage + '" class="img-preview" alt="Preview">' : '<p style="font-size:12px;color:var(--ink-soft);margin-bottom:8px;">No background image uploaded yet.</p>';
+    }
+  });
+}
+renderPreviews();
+
+function handleSectionBgUpload(input, sectionKey) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      CONTENT[sectionKey].bgImage = e.target.result;
+      renderPreviews();
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
 document.getElementById('sv-kicker').value = CONTENT.services.kicker;
 document.getElementById('sv-title').value = CONTENT.services.title;
@@ -517,6 +569,13 @@ function downloadSite() {
            '      </div>';
   }).join('\n');
 
+  var darkSectionStyle = function(img, defaultBg) {
+    if (img) {
+      return 'background: linear-gradient(rgba(29,38,58,0.88), rgba(29,38,58,0.88)), url(\'' + img + '\') center/cover no-repeat;';
+    }
+    return 'background:' + defaultBg + ';';
+  };
+
   var fullHtml = '<!DOCTYPE html>\n' +
 '<html lang="en">\n' +
 '<head>\n' +
@@ -533,25 +592,28 @@ function downloadSite() {
 '  --indigo:#2E3A55; --indigo-deep:#1D263A;\n' +
 '  --line:#D8D3C4; --white:#FBFAF6;\n' +
 '  --font-display:Fraunces,Georgia,serif; --font-body:\'Work Sans\',-apple-system,sans-serif; --font-mono:\'IBM Plex Mono\',monospace;\n' +
-'  --max-width:1080px;\n' +
+'  --max-width:1160px;\n' +
 '}\n' +
 '*,*::before,*::after{box-sizing:border-box;}\n' +
 '*{margin:0;padding:0;}\n' +
 'html{scroll-behavior:smooth;}\n' +
 'body{background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased;}\n' +
-'h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;line-height:1.18;}\n' +
+'h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;line-height:1.15;}\n' +
 'a{color:inherit;text-decoration:none;}\n' +
 'ul,ol{list-style:none;}\n' +
 'button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}\n' +
 ':focus-visible{outline:3px solid #2E7DD1;outline-offset:2px;}\n' +
 '.skip-link{position:absolute;left:-999px;top:0;background:var(--indigo-deep);color:#fff;padding:12px 18px;z-index:100;}\n' +
 '.skip-link:focus{left:0;}\n' +
-'.wrap{max-width:var(--max-width);margin:0 auto;padding:0 28px;}\n' +
-'.section{padding:64px 28px;}\n' +
+'.wrap{max-width:var(--max-width);margin:0 auto;padding:0 28px; position:relative; z-index:2;}\n' +
+'.section{padding:64px 28px; position:relative; overflow:hidden;}\n' +
 '.page-view{display:none;}\n' +
 '.page-view.active-view{display:block;}\n' +
 '.section-head{max-width:680px;margin-bottom:40px;}\n' +
 '.kicker{font-size:12px;color:var(--accent-deep);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:10px;}\n' +
+'.has-dark-bg .kicker{color:#C9A15A;}\n' +
+'.has-dark-bg .section-head h2{color:#ffffff !important;}\n' +
+'.has-dark-bg .section-head p{color:#D1D6E2 !important;}\n' +
 '.section-head h2{font-size:clamp(26px,3vw,34px);}\n' +
 '.section-head p{margin-top:12px;color:var(--ink-soft);font-size:15px;max-width:640px;}\n' +
 '.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:var(--max-width);margin:0 auto;flex-wrap:wrap;gap:14px;background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:90;}\n' +
@@ -572,12 +634,40 @@ function downloadSite() {
 '  .nav__toggle{display:block;background:var(--indigo-deep);color:#fff;padding:8px 12px;border-radius:3px;font-size:13px;}\n' +
 '  .nav__links.is-open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:var(--white);padding:20px 28px;gap:14px;box-shadow:0 8px 20px rgba(0,0,0,0.1);z-index:30;}\n' +
 '}\n' +
-'.hero{background:var(--indigo-deep);color:#fff;padding:80px 28px 90px;}\n' +
-'.hero__inner{max-width:var(--max-width);margin:0 auto;}\n' +
-'.hero .kicker{color:#C9A15A;}\n' +
-'.hero h1{font-size:clamp(30px,4.5vw,46px);max-width:800px;margin-bottom:20px;color:#fff;font-style:normal;}\n' +
-'.hero p{font-size:16.5px;color:#C7CCD8;max-width:680px;margin-bottom:36px;line-height:1.6;}\n' +
-'.hero__ctas{display:flex;gap:14px;flex-wrap:wrap;}\n' +
+'.hero{\n' +
+'  background: var(--indigo-deep);\n' +
+'  color: #fff;\n' +
+'  padding: 90px 28px 100px;\n' +
+'  position: relative;\n' +
+'  overflow: hidden;\n' +
+'}\n' +
+(CONTENT.hero.bgImage ? '.hero::before { content: ""; position: absolute; inset: 0; background: url(\'' + CONTENT.hero.bgImage + '\') center/cover no-repeat; opacity: 0.28; mix-blend-mode: luminosity; z-index: 1; }' : '') + '\n' +
+'.hero__inner {\n' +
+'  max-width: var(--max-width);\n' +
+'  margin: 0 auto;\n' +
+'  position: relative;\n' +
+'  z-index: 2;\n' +
+'  max-width: 960px;\n' +
+'}\n' +
+'.hero .kicker { color: #C9A15A; }\n' +
+'.hero h1 {\n' +
+'  font-size: clamp(34px, 4.2vw, 52px);\n' +
+'  width: 100%;\n' +
+'  max-width: 900px;\n' +
+'  margin-bottom: 20px;\n' +
+'  color: #fff;\n' +
+'  line-height: 1.15;\n' +
+'  letter-spacing: -0.02em;\n' +
+'}\n' +
+'.hero p {\n' +
+'  font-size: 16.5px;\n' +
+'  color: #D1D6E2;\n' +
+'  max-width: 720px;\n' +
+'  margin-bottom: 36px;\n' +
+'  line-height: 1.6;\n' +
+'}\n' +
+'.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; }\n' +
+'@media (max-width: 850px) { .hero h1 { font-size: 32px; } }\n' +
 '.btn{padding:13px 24px;border-radius:4px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;cursor:pointer;}\n' +
 '.btn--primary{background:var(--accent);color:#221701;}\n' +
 '.btn--primary:hover{background:#c47a1f;}\n' +
@@ -585,18 +675,21 @@ function downloadSite() {
 '.btn--ghost:hover{background:rgba(255,255,255,0.05);}\n' +
 '.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}\n' +
 '.service-card{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:30px 26px;box-shadow:0 2px 8px rgba(0,0,0,0.02);}\n' +
-'.service-card h4{font-size:16.5px;margin-bottom:10px;color:var(--indigo-deep);}\n' +
-'.service-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}\n' +
+'.service-card h4{font-size:16.5px;margin-bottom:10px;color:var(--indigo-deep) !important;}\n' +
+'.service-card p{font-size:13.5px;color:var(--ink-soft) !important;line-height:1.6;}\n' +
 '.services-closing{margin-top:24px;font-size:14px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:20px;}\n' +
+'.has-dark-bg .services-closing{color:#D1D6E2;border-top-color:rgba(255,255,255,0.2);}\n' +
 '@media (max-width:900px){.service-grid{grid-template-columns:1fr 1fr;}}\n' +
 '@media (max-width:600px){.service-grid{grid-template-columns:1fr;}}\n' +
 '.focus-tags{display:flex;flex-wrap:wrap;gap:12px;list-style:none;margin:0;padding:0;}\n' +
 '.focus-tags li{font-size:13.5px;font-weight:600;color:var(--indigo-deep);background:var(--white);border:1px solid var(--line);padding:10px 18px;border-radius:24px;box-shadow:0 1px 3px rgba(0,0,0,0.02);}\n' +
 '.faq-list{max-width:800px;}\n' +
 '.faq-item{border-bottom:1px solid var(--line);}\n' +
+'.has-dark-bg .faq-item{border-bottom-color:rgba(255,255,255,0.2);}\n' +
 '.faq-item__q{width:100%;text-align:left;padding:18px 0;font-size:15px;font-weight:600;display:flex;justify-content:space-between;gap:12px;cursor:pointer;}\n' +
+'.has-dark-bg .faq-item__q{color:#fff;}\n' +
 '.faq-item__a{font-size:14px;color:var(--ink-soft);line-height:1.6;padding-bottom:18px;}\n' +
-'.contact-section{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}\n' +
+'.has-dark-bg .faq-item__a{color:#D1D6E2;}\n' +
 '.contact-form{max-width:600px;display:grid;gap:18px;background:var(--paper);padding:36px;border:1px solid var(--line);border-radius:8px;}\n' +
 '.contact-form label{font-size:13px;font-weight:600;display:block;margin-bottom:6px;color:var(--indigo-deep);}\n' +
 '.contact-form input,.contact-form select,.contact-form textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;font:inherit;font-size:14px;background:var(--white);}\n' +
@@ -692,7 +785,7 @@ function downloadSite() {
 '\n' +
 '<!-- PAGE 2: SERVICES -->\n' +
 '<div id="view-services" class="page-view">\n' +
-'  <section class="section" style="background:var(--paper);">\n' +
+'  <section class="section ' + (CONTENT.services.bgImage ? 'has-dark-bg' : '') + '" style="' + darkSectionStyle(CONTENT.services.bgImage, 'var(--paper)') + '">\n' +
 '    <div class="wrap">\n' +
 '      <div class="section-head">\n' +
 '        <div class="kicker">' + esc(CONTENT.services.kicker) + '</div>\n' +
@@ -700,7 +793,7 @@ function downloadSite() {
 '        <p>' + esc(CONTENT.services.intro) + '</p>\n' +
 '      </div>\n' +
 '      <div class="service-grid">\n' +
-  serviceCards + '\n' +
+        serviceCards + '\n' +
 '      </div>\n' +
 '      <p class="services-closing">' + esc(CONTENT.services.closing) + '</p>\n' +
 '    </div>\n' +
@@ -709,7 +802,7 @@ function downloadSite() {
 '\n' +
 '<!-- PAGE 3: WORKS & UPDATES -->\n' +
 '<div id="view-updates" class="page-view">\n' +
-'  <section class="section" style="background:var(--white);">\n' +
+'  <section class="section ' + (CONTENT.works.bgImage ? 'has-dark-bg' : '') + '" style="' + darkSectionStyle(CONTENT.works.bgImage, 'var(--white)') + '">\n' +
 '    <div class="wrap">\n' +
 '      <div class="section-head">\n' +
 '        <div class="kicker">' + esc(CONTENT.works.kicker) + '</div>\n' +
@@ -717,7 +810,7 @@ function downloadSite() {
 '        <p>' + esc(CONTENT.works.intro) + '</p>\n' +
 '      </div>\n' +
 '      <div class="service-grid">\n' +
-  worksCards + '\n' +
+        worksCards + '\n' +
 '      </div>\n' +
 '    </div>\n' +
 '  </section>\n' +
@@ -725,7 +818,7 @@ function downloadSite() {
 '\n' +
 '<!-- PAGE 4: FOCUS -->\n' +
 '<div id="view-focus" class="page-view">\n' +
-'  <section class="section" style="background:var(--paper);">\n' +
+'  <section class="section ' + (CONTENT.focus.bgImage ? 'has-dark-bg' : '') + '" style="' + darkSectionStyle(CONTENT.focus.bgImage, 'var(--paper)') + '">\n' +
 '    <div class="wrap">\n' +
 '      <div class="section-head">\n' +
 '        <div class="kicker">' + esc(CONTENT.focus.kicker) + '</div>\n' +
@@ -733,7 +826,7 @@ function downloadSite() {
 '        <p>' + esc(CONTENT.focus.intro) + '</p>\n' +
 '      </div>\n' +
 '      <ul class="focus-tags">\n' +
-  focusTags + '\n' +
+        focusTags + '\n' +
 '      </ul>\n' +
 '    </div>\n' +
 '  </section>\n' +
@@ -741,14 +834,14 @@ function downloadSite() {
 '\n' +
 '<!-- PAGE 5: FAQ -->\n' +
 '<div id="view-faq" class="page-view">\n' +
-'  <section class="section" style="background:var(--paper);">\n' +
+'  <section class="section ' + (CONTENT.faq.bgImage ? 'has-dark-bg' : '') + '" style="' + darkSectionStyle(CONTENT.faq.bgImage, 'var(--paper)') + '">\n' +
 '    <div class="wrap">\n' +
 '      <div class="section-head">\n' +
 '        <div class="kicker">' + esc(CONTENT.faq.kicker) + '</div>\n' +
 '        <h2>' + esc(CONTENT.faq.title) + '</h2>\n' +
 '      </div>\n' +
 '      <div class="faq-list">\n' +
-  faqItems + '\n' +
+        faqItems + '\n' +
 '      </div>\n' +
 '    </div>\n' +
 '  </section>\n' +
@@ -756,7 +849,7 @@ function downloadSite() {
 '\n' +
 '<!-- PAGE 6: CONTACT -->\n' +
 '<div id="view-contact" class="page-view">\n' +
-'  <section class="contact-section section">\n' +
+'  <section class="section ' + (CONTENT.contact.bgImage ? 'has-dark-bg' : '') + '" style="' + darkSectionStyle(CONTENT.contact.bgImage, 'var(--white)') + '; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">\n' +
 '    <div class="wrap">\n' +
 '      <div class="section-head">\n' +
 '        <div class="kicker">' + esc(CONTENT.contact.kicker) + '</div>\n' +
@@ -790,7 +883,7 @@ function downloadSite() {
 '      </form>\n' +
 '      \n' +
 '      <div class="social-icons">\n' +
-  socialHtml + '\n' +
+        socialHtml + '\n' +
 '      </div>\n' +
 '    </div>\n' +
 '  </section>\n' +
